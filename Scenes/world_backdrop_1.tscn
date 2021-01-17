@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/fundo.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/level_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/level__set.tscn" type="PackedScene" id=3]
+
+[node name="world_backdrop" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelSet" parent="." instance=ExtResource( 3 )]
+
+[node name="Level1" parent="LevelSet" index="0"]
+level = 1
+level_to_load = "Scenes/levels/level_1.tscn"
+enabled = true
+
+[node name="Level2" parent="LevelSet" index="1"]
+level = 2
+
+[node name="Level3" parent="LevelSet" index="2"]
+level = 3
+
+[node name="Level4" parent="LevelSet" index="3"]
+level = 4
+
+[node name="level_1" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 170, 300 )
+scale = Vector2( 0.8, 0.8 )
+level = 1
+level_to_load = "Scenes/levels/level_1.tscn"
+enabled = true
+
+[node name="level_2" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 512, 300 )
+scale = Vector2( 0.8, 0.8 )
+level = 2
+level_to_load = "a2"
+
+[node name="level_3" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 853, 300 )
+scale = Vector2( 0.8, 0.8 )
+level = 3
+level_to_load = "a3"
+
+[editable path="LevelSet"]

@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Sprites/pad.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Global.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/textotraco.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/criar.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/mover.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/ColorRect.gd" type="Script" id=9]
+[ext_resource path="res://Textures/vd_am_vm.tres" type="StyleBox" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 52
+outline_color = Color( 1, 1, 1, 0 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 27
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+border_blend = true
+
+[node name="PCB Game root node" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+margin_right = 1024.0
+margin_bottom = 576.0
+color = Color( 0.0666667, 0.0745098, 0.101961, 1 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="titulo" type="Label" parent="UI"]
+margin_left = 9.0
+margin_top = 5.0
+margin_right = 500.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "Protótipo Jogo PCB"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nivel 1" type="Label" parent="UI"]
+margin_left = 14.0
+margin_top = 74.6934
+margin_right = 378.0
+margin_bottom = 114.693
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "Nível 1 - ligue as três ilhas"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="textotraco" type="Label" parent="UI"]
+margin_left = 12.0
+margin_top = 533.0
+margin_right = 376.0
+margin_bottom = 570.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "Tamanho do traço: "
+valign = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContinuar" type="Button" parent="UI"]
+margin_left = 899.0
+margin_top = 468.0
+margin_right = 1001.0
+margin_bottom = 558.0
+disabled = true
+text = "Continuar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonCriar" type="Button" parent="UI"]
+margin_left = 22.0
+margin_top = 164.0
+margin_right = 106.0
+margin_bottom = 248.0
+icon = ExtResource( 7 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonMover" type="Button" parent="UI"]
+margin_left = 22.0
+margin_top = 257.453
+margin_right = 106.0
+margin_bottom = 341.453
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+margin_left = 245.1
+margin_top = 542.1
+margin_right = 508.1
+margin_bottom = 567.1
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = ExtResource( 10 )
+step = 1.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjetosJogo" type="Node2D" parent="."]
+
+[node name="Ilha1" type="Sprite" parent="ObjetosJogo"]
+position = Vector2( 315.302, 262.704 )
+scale = Vector2( 0.447518, 0.447518 )
+texture = ExtResource( 3 )
+
+[node name="Ilha2" type="Sprite" parent="ObjetosJogo"]
+position = Vector2( 751.085, 252.494 )
+scale = Vector2( 0.447518, 0.447518 )
+texture = ExtResource( 3 )
+
+[node name="Ilha3" type="Sprite" parent="ObjetosJogo"]
+position = Vector2( 538.686, 352.91 )
+scale = Vector2( 0.447518, 0.447518 )
+texture = ExtResource( 3 )
+
+[node name="Tracos" type="Node2D" parent="ObjetosJogo"]
+
+[node name="Global" type="Node2D" parent="."]
+script = ExtResource( 4 )
+[connection signal="pressed" from="UI/ButtonCriar" to="Global" method="_on_ButtonCriar_pressed"]
+[connection signal="pressed" from="UI/ButtonMover" to="Global" method="_on_ButtonMover_pressed"]
