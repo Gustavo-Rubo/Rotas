@@ -19,6 +19,10 @@ config/name="Rotas"
 run/main_scene="res://Scenes/level__select_scene.tscn"
 config/icon="res://Sprites/criar.png"
 
+[autoload]
+
+ConfigManager="*res://Scripts/config_manager.gd"
+
 [display]
 
 window/size/height=576

@@ -1,0 +1,33 @@
+extends Node
+
+onready var path = "user://config.ini"
+var audio_on = true
+var text_size = 1
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	load_config()
+
+func save_config():
+	var config = ConfigFile.new()
+	config.set_value("cfg", "audio", audio_on)
+	config.set_value("cfg", "text_size", text_size)
+	
+	var err = config.save(path)
+	if err != OK:
+		print("Config save failed")
+
+func load_config():
+	var config = ConfigFile.new()
+	var default_options = {
+		"audio": true,
+		"text_size": 1
+	}
+	
+	var err = config.load(path)
+	if err != OK:
+		return default_options
+	
+	var options = {}
+	audio_on = config.get_value("cfg", "audio")
+	text_size = config.get_value("cfg", "text_size")
