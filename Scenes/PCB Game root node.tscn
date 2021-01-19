@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Sprites/pad.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Global.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/textotraco.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/UI.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/criar.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/mover.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/ColorRect.gd" type="Script" id=9]
@@ -43,7 +41,6 @@ __meta__ = {
 }
 
 [node name="UI" type="Node2D" parent="."]
-script = ExtResource( 6 )
 
 [node name="titulo" type="Label" parent="UI"]
 margin_left = 9.0
@@ -78,7 +75,6 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 text = "Tamanho do traço: "
 valign = 2
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

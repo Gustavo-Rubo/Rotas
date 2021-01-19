@@ -16,7 +16,7 @@ func _draw():
 		for i in (tracos.size() - 1):
 			draw_line(Vector2(tracos[i][0], tracos[i][1]),
 					Vector2(tracos[i+1][0], tracos[i+1][1]),
-					Color(0, 255, 0), 10)
+					Color(0, 255, 0), 10, true)
 
 # Gerenciar inputs
 func _input(event):

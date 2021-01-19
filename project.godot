@@ -16,12 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Rotas"
-run/main_scene="res://Scenes/level__select_scene.tscn"
+run/main_scene="res://Scenes/level_select_scene.tscn"
 config/icon="res://Sprites/criar.png"
 
 [autoload]
 
 ConfigManager="*res://Scripts/config_manager.gd"
+GameDataManager="*res://Scripts/game_data_manager.gd"
 
 [display]
 

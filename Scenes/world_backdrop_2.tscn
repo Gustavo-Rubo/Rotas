@@ -6,27 +6,19 @@
 
 [node name="Level1" parent="LevelSet" index="0"]
 level = 5
-level_to_load = "Scenes/levels/level.tscn"
+level_to_load = "Scenes/levels/level_5.tscn"
 enabled = false
 
 [node name="Level2" parent="LevelSet" index="1"]
 level = 6
+level_to_load = "Scenes/levels/level_6.tscn"
 
 [node name="Level3" parent="LevelSet" index="2"]
 level = 7
+level_to_load = "Scenes/levels/level_7.tscn"
 
 [node name="Level4" parent="LevelSet" index="3"]
 level = 8
-
-[node name="level_1" parent="." index="1"]
-level = 4
-enabled = false
-
-[node name="level_2" parent="." index="2"]
-position = Vector2( 495.343, 302.642 )
-level = 5
-
-[node name="level_3" parent="." index="3"]
-level = 6
+level_to_load = "Scenes/levels/level_8.tscn"
 
 [editable path="LevelSet"]
