@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Sprites/star_blank.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scripts/level_button.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/unlocked_level.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/star_filled.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/path.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/rat.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 42
@@ -17,6 +19,8 @@ blocked_texture = ExtResource( 3 )
 open_texture = ExtResource( 5 )
 goal_met = ExtResource( 6 )
 goal_not_met = ExtResource( 2 )
+previous_rat = ExtResource( 8 )
+previous_trace = ExtResource( 7 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
 margin_left = -70.0
@@ -45,4 +49,8 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PreviousPath" type="Sprite" parent="."]
+position = Vector2( -160, 0 )
+texture = ExtResource( 8 )
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -14,6 +14,7 @@ onready var path = "user://save.dat"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level_info = load_data()
+	reset_save_data()
 	pass # Replace with function body.
 
 func save_data():

@@ -9,11 +9,15 @@ export (bool) var enabled
 export (bool) var score_goal_met
 export (Texture) var goal_met
 export (Texture) var goal_not_met
-export (String) var connection_previous
+
+export (Texture) var previous_clear
+export (Texture) var previous_rat
+export (Texture) var previous_trace
 
 onready var level_label = $Label
 onready var button = $TextureButton
 onready var star = $Sprite
+onready var previous_path = $PreviousPath
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +25,14 @@ func _ready():
 		enabled = GameDataManager.level_info[level].unlocked
 	else:
 		enabled = false
+	
+	if level == 1:
+		previous_path.texture = previous_clear
+	elif enabled:
+		previous_path.texture = previous_trace
+	else:
+		previous_path.texture = previous_rat
+		
 	setup()
 
 func setup():

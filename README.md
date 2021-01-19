@@ -9,4 +9,4 @@ In this game, your traces can't cross one another, and you get bonus points for 
 
 [Mister Taft Creates](https://www.youtube.com/playlist?list=PL4vbr3u7UKWqwQlvwvgNcgDL1p_3hcNn2) - YouTube tutorials
 
-[KiCad](https://gitlab.com/kicad/code/kicad/) - Reference for CAD-like trace editing
+[Fritzing](https://github.com/fritzing/fritzing-app) - Reference for CAD-like trace editing

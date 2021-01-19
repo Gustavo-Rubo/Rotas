@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/Consolas.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Sprites/trás.svg" type="Texture" id=2]
 [ext_resource path="res://Scripts/options_panel.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Sprites/country-flags/png_64/brazil-flag-country-nation-union-empire-32937.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/country-flags/png_64/united-kingdom-flag-country-nation-union-empire-33115.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.176471, 0.176471, 0.176471, 1 )
@@ -17,13 +19,13 @@ corner_radius_bottom_left = 10
 size = 32
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.4
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:offset:x")
@@ -76,14 +78,14 @@ margin_bottom = 556.0
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/CenterContainer"]
 margin_left = 341.0
-margin_top = 14.0
+margin_top = 21.0
 margin_right = 642.0
-margin_bottom = 522.0
+margin_bottom = 515.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/CenterContainer/PanelContainer"]
 margin_right = 301.0
-margin_bottom = 508.0
+margin_bottom = 494.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -96,7 +98,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 281.0
-margin_bottom = 488.0
+margin_bottom = 474.0
 custom_constants/separation = 10
 alignment = 1
 __meta__ = {
@@ -107,22 +109,75 @@ __meta__ = {
 margin_right = 261.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 2 )
-text = "Menu"
+text = "options_title"
 
-[node name="Tam Texto" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
 margin_top = 48.0
 margin_right = 261.0
-margin_bottom = 67.0
+margin_bottom = 90.0
+custom_constants/separation = 15
 
-[node name="Texto" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Tam Texto"]
-margin_right = 134.0
+[node name="Container" type="Container" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
+margin_right = 147.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Language" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/Container"]
+margin_left = 7.0
+margin_top = 11.0
+margin_right = 140.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 3 )
+text = "language"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
+margin_left = 162.0
+margin_right = 261.0
+margin_bottom = 42.0
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="en_GB" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer"]
+margin_right = 42.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 42, 42 )
+texture_normal = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pt_BR" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer"]
+margin_left = 57.0
+margin_right = 99.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 42, 42 )
+texture_normal = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextSize" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 100.0
+margin_right = 261.0
+margin_bottom = 119.0
+custom_constants/separation = 15
+
+[node name="Text" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize"]
+margin_right = 61.0
 margin_bottom = 19.0
-custom_fonts/font = SubResource( 5 )
-text = "Tamanho do texto:"
+custom_fonts/font = SubResource( 3 )
+text = "text_size"
 
-[node name="SliderText" type="HSlider" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Tam Texto"]
-margin_left = 138.0
-margin_right = 238.0
+[node name="SliderText" type="HSlider" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize"]
+margin_left = 76.0
+margin_right = 176.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 100, 0 )
 min_value = 1.0
@@ -134,28 +189,29 @@ __meta__ = {
 }
 
 [node name="Audio" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 77.0
+margin_top = 129.0
 margin_right = 261.0
-margin_bottom = 117.0
+margin_bottom = 169.0
+custom_constants/separation = 15
 
-[node name="Texto" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
+[node name="Text" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
 margin_top = 10.0
-margin_right = 45.0
+margin_right = 40.0
 margin_bottom = 29.0
-custom_fonts/font = SubResource( 5 )
-text = "Áudio:"
+custom_fonts/font = SubResource( 3 )
+text = "audio"
 
 [node name="ToggleAudio" type="CheckButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
-margin_left = 49.0
-margin_right = 125.0
+margin_left = 55.0
+margin_right = 131.0
 margin_bottom = 40.0
 pressed = true
 
-[node name="Tubarao" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 127.0
+[node name="Tutu" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 179.0
 margin_right = 261.0
-margin_bottom = 284.0
-custom_fonts/font = SubResource( 3 )
+margin_bottom = 336.0
+custom_fonts/font = SubResource( 4 )
 text = "            .                
             |\\               
 .           | \\              
@@ -168,32 +224,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 294.0
+[node name="Github" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 346.0
 margin_right = 261.0
-margin_bottom = 335.0
-custom_fonts/font = SubResource( 5 )
-text = "Este jogo está no github: github.com/Gustavo-Rubo/Rotas"
+margin_bottom = 365.0
+custom_fonts/font = SubResource( 3 )
+text = "github"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 345.0
+[node name="Support" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 375.0
 margin_right = 261.0
-margin_bottom = 408.0
-custom_fonts/font = SubResource( 5 )
-text = "Se você quiser apoiar o projeto, pode fazer uma doação via paypal para: gustavo.rubo@hotmail.com"
+margin_bottom = 394.0
+custom_fonts/font = SubResource( 3 )
+text = "support"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 418.0
+[node name="BackButton" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 404.0
 margin_right = 261.0
-margin_bottom = 468.0
+margin_bottom = 454.0
 rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 2 )
 expand = true
@@ -203,7 +259,10 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in_options = SubResource( 4 )
-[connection signal="value_changed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Tam Texto/SliderText" to="." method="_on_HSlider_value_changed"]
+anims/slide_in_options = SubResource( 5 )
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/en_GB" to="." method="_on_en_GB_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/en_GB" to="." method="_on_en_UK_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/pt_BR" to="." method="_on_pt_BR_pressed"]
+[connection signal="value_changed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize/SliderText" to="." method="_on_HSlider_value_changed"]
 [connection signal="toggled" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio/ToggleAudio" to="." method="_on_HSlider_toggled"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/BackButton" to="." method="_on_TextureButton_pressed"]
