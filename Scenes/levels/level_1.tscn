@@ -1,32 +1,38 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/level_scene.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Net.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Pad.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/net.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=3]
 
 [node name="LevelNode" instance=ExtResource( 1 )]
 level_number = 1
+goal_trace_length = 500.0
+max_trace_length = 1000.0
 nets = [ NodePath("Net1"), NodePath("Net2") ]
 
 [node name="Net1" parent="." index="2" instance=ExtResource( 2 )]
-z_index = 1
+z_index = 2
 pads = [ NodePath("../Pad1"), NodePath("../Pad2") ]
 
 [node name="Net2" parent="." index="3" instance=ExtResource( 2 )]
-z_index = 1
+z_index = 2
 pads = [ NodePath("../Pad3"), NodePath("../Pad4") ]
 
 [node name="Pad1" parent="." index="4" instance=ExtResource( 3 )]
 position = Vector2( 300, 300 )
+z_index = 1
 
 [node name="Pad2" parent="." index="5" instance=ExtResource( 3 )]
-position = Vector2( 600, 300 )
+position = Vector2( 580, 300 )
+z_index = 1
 
 [node name="Pad3" parent="." index="6" instance=ExtResource( 3 )]
-position = Vector2( 450, 150 )
+position = Vector2( 440, 160 )
+z_index = 1
 
 [node name="Pad4" parent="." index="7" instance=ExtResource( 3 )]
-position = Vector2( 450, 450 )
+position = Vector2( 440, 440 )
+z_index = 1
 
-[node name="Hint" parent="." index="10"]
+[node name="Hint" parent="." index="11"]
 text = "Connect the dots"

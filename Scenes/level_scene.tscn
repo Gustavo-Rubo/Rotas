@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sprites/fundo.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sprites/apaga.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/mover.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/criar.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -32,11 +33,40 @@ font_data = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 1.41418
-margin_top = 1.41418
-margin_right = 1025.41
-margin_bottom = 577.414
+margin_right = 1024.0
+margin_bottom = 576.0
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GuideLines" parent="." instance=ExtResource( 7 )]
+z_index = 1
+
+[node name="TraceEditButtons" type="HBoxContainer" parent="."]
+margin_left = 750.0
+margin_top = 50.0
+margin_right = 933.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 0, 80 )
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmButton" type="Button" parent="TraceEditButtons"]
+margin_right = 86.0
+margin_bottom = 80.0
+text = "Finish trace"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EraseButton" type="Button" parent="TraceEditButtons"]
+margin_left = 101.0
+margin_right = 183.0
+margin_bottom = 80.0
+text = "Erase trace"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -61,6 +91,7 @@ __meta__ = {
 }
 
 [node name="AddButton" type="Button" parent="EditorButtons"]
+visible = false
 margin_top = 96.0
 margin_right = 80.0
 margin_bottom = 176.0
@@ -69,6 +100,7 @@ icon = ExtResource( 6 )
 expand_icon = true
 
 [node name="MoveButton" type="Button" parent="EditorButtons"]
+visible = false
 margin_top = 196.0
 margin_right = 80.0
 margin_bottom = 276.0
@@ -77,6 +109,7 @@ icon = ExtResource( 5 )
 expand_icon = true
 
 [node name="DeleteButton" type="Button" parent="EditorButtons"]
+visible = false
 margin_top = 296.0
 margin_right = 80.0
 margin_bottom = 376.0
@@ -86,9 +119,9 @@ expand_icon = true
 
 [node name="CheatButtons" type="VBoxContainer" parent="."]
 margin_left = 850.0
-margin_top = 50.0
+margin_top = 150.0
 margin_right = 970.0
-margin_bottom = 350.0
+margin_bottom = 450.0
 custom_constants/separation = 30
 __meta__ = {
 "_edit_use_anchors_": false
@@ -148,6 +181,9 @@ custom_colors/font_color = Color( 0, 0.756863, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="gui_input" from="TextureRect" to="." method="_on_TextureRect_gui_input"]
+[connection signal="pressed" from="TraceEditButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
+[connection signal="pressed" from="TraceEditButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
 [connection signal="pressed" from="EditorButtons/AddButton" to="." method="_on_AddButton_pressed"]
 [connection signal="pressed" from="EditorButtons/MoveButton" to="." method="_on_MoveButton_pressed"]
 [connection signal="pressed" from="EditorButtons/DeleteButton" to="." method="_on_DeleteButton_pressed"]

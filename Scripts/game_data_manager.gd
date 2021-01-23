@@ -6,6 +6,7 @@ var default_level_info = {
 		"unlocked": true,
 		"low_score": INF,
 		"star": false
+#		"traces": []
 	}
 }
 
@@ -15,7 +16,6 @@ onready var path = "user://save.dat"
 func _ready():
 	level_info = load_data()
 	reset_save_data()
-	pass # Replace with function body.
 
 func save_data():
 	var file = File.new()

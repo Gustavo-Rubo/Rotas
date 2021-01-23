@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,26 +7,6 @@
 [ext_resource path="res://Sprites/criar.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/mover.png" type="Texture" id=8]
 [ext_resource path="res://Textures/vd_am_vm.tres" type="StyleBox" id=10]
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends ColorRect
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-"
 
 [sub_resource type="DynamicFont" id=1]
 size = 52
@@ -54,7 +34,6 @@ border_blend = true
 margin_right = 1024.0
 margin_bottom = 576.0
 color = Color( 0.0666667, 0.0745098, 0.101961, 1 )
-script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
