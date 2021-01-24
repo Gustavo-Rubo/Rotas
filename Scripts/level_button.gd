@@ -54,4 +54,4 @@ func setup():
 
 func _on_TextureButton_pressed():
 	if enabled:
-		get_tree().change_scene(level_to_load)
+		var _scene = get_tree().change_scene(level_to_load)

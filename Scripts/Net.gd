@@ -8,8 +8,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	update()
+#func _process(delta):
+#	update()
 
 func _draw():
 	if pads.size() >= 2:
@@ -32,7 +32,7 @@ func draw_dashed_line(from, to, color, width, dash_length = 5, cap_end = false, 
 		var draw_flag = true
 		var segment_start = from
 		var steps = length/dash_length
-		for start_length in range(0, steps + 1):
+		for _start_length in range(0, steps + 1):
 			var segment_end = segment_start + dash_step
 			if draw_flag:
 				draw_line(segment_start, segment_end, color, width, antialiased)

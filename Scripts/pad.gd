@@ -1,21 +1,18 @@
 extends Node2D
 
-var pad_color : Color
-var background_color : Color
+export (int) var grid_x
+export (int) var grid_y
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pad_color = Color(0, 0.78, 0)
-	background_color = Color(0, 0, 0)
-
+	position = Globals.GRID_SIZE * Vector2(grid_x, grid_y)
+	$Area2D/CollisionShape2D.shape.set("radius", Globals.GRID_SIZE)
+	
 func _draw():
-	draw_circle(Vector2(0, 0), 20, pad_color)
-	draw_circle(Vector2(0, 0), 10, background_color)
+	draw_circle(Vector2(0, 0), Globals.GRID_SIZE, Globals.green_base)
+	draw_circle(Vector2(0, 0), Globals.GRID_SIZE / 2, Globals.blue_background)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_Area2D_input_event(viewport, event, shape_idx):
-	print("input on pad")
+func _on_Area2D_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			print("press on pad")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/Consolas.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Sprites/trás.svg" type="Texture" id=2]
+[ext_resource path="res://Sprites/x button.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/options_panel.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=5]
@@ -16,10 +16,11 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=2]
-size = 32
+size = 44
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 24
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -44,48 +45,33 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -576, -0.25, 0, 0, 325.832, 0, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -600, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 
 [node name="OptionsPanel" type="CanvasLayer"]
-offset = Vector2( 0, -576 )
-transform = Transform2D( 1, 0, 0, 1, 0, -576 )
+offset = Vector2( 0, -600 )
+transform = Transform2D( 1, 0, 0, 1, 0, -600 )
 script = ExtResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -288.0
-margin_right = 512.0
-margin_bottom = 288.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 576.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1004.0
-margin_bottom = 556.0
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/CenterContainer"]
-margin_left = 341.0
-margin_top = 21.0
-margin_right = 642.0
-margin_bottom = 515.0
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+margin_left = 262.0
+margin_top = 64.0
+margin_right = 762.0
+margin_bottom = 511.0
+rect_min_size = Vector2( 500, 0 )
 custom_styles/panel = SubResource( 1 )
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/CenterContainer/PanelContainer"]
-margin_right = 301.0
-margin_bottom = 494.0
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+margin_right = 500.0
+margin_bottom = 447.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -94,88 +80,115 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 281.0
-margin_bottom = 474.0
+margin_right = 480.0
+margin_bottom = 427.0
 custom_constants/separation = 10
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_right = 261.0
-margin_bottom = 38.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_right = 460.0
+margin_bottom = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+margin_right = 248.0
+margin_bottom = 52.0
 custom_fonts/font = SubResource( 2 )
 text = "options_title"
 
-[node name="Language" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 48.0
-margin_right = 261.0
-margin_bottom = 90.0
-custom_constants/separation = 15
-
-[node name="Container" type="Container" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
-margin_right = 147.0
-margin_bottom = 42.0
+[node name="Container" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+margin_left = 252.0
+margin_right = 406.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Language" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/Container"]
-margin_left = 7.0
-margin_top = 11.0
-margin_right = 140.0
-margin_bottom = 30.0
+[node name="BackButton" type="TextureButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+margin_left = 410.0
+margin_right = 460.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Language" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 62.0
+margin_right = 460.0
+margin_bottom = 112.0
+custom_constants/separation = 15
+
+[node name="Language" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
+margin_top = 10.0
+margin_right = 97.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 3 )
 text = "language"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
-margin_left = 162.0
-margin_right = 261.0
-margin_bottom = 42.0
+[node name="Container" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
+margin_left = 112.0
+margin_right = 302.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language"]
+margin_left = 317.0
+margin_right = 460.0
+margin_bottom = 50.0
 custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="en_GB" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer"]
-margin_right = 42.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 42, 42 )
+[node name="en_GB" type="TextureButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 7 )
-expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pt_BR" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer"]
-margin_left = 57.0
-margin_right = 99.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 42, 42 )
+[node name="pt_BR" type="TextureButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer"]
+margin_left = 79.0
+margin_right = 143.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 6 )
-expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextSize" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+[node name="TextSize" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+visible = false
 margin_top = 100.0
 margin_right = 261.0
 margin_bottom = 119.0
 custom_constants/separation = 15
 
-[node name="Text" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize"]
+[node name="Text" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize"]
 margin_right = 61.0
 margin_bottom = 19.0
 custom_fonts/font = SubResource( 3 )
 text = "text_size"
 
-[node name="SliderText" type="HSlider" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize"]
+[node name="SliderText" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize"]
 margin_left = 76.0
 margin_right = 176.0
 margin_bottom = 16.0
@@ -188,29 +201,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Audio" type="HBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 129.0
-margin_right = 261.0
-margin_bottom = 169.0
+[node name="Audio" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 122.0
+margin_right = 460.0
+margin_bottom = 162.0
 custom_constants/separation = 15
 
-[node name="Text" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
-margin_top = 10.0
-margin_right = 40.0
-margin_bottom = 29.0
+[node name="Text" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 34.0
 custom_fonts/font = SubResource( 3 )
 text = "audio"
 
-[node name="ToggleAudio" type="CheckButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
-margin_left = 55.0
-margin_right = 131.0
+[node name="Container2" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
+margin_left = 75.0
+margin_right = 369.0
+margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToggleAudio" type="CheckButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio"]
+margin_left = 384.0
+margin_right = 460.0
 margin_bottom = 40.0
 pressed = true
 
-[node name="Tutu" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 179.0
-margin_right = 261.0
-margin_bottom = 336.0
+[node name="Tutu" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 172.0
+margin_right = 460.0
+margin_bottom = 329.0
 custom_fonts/font = SubResource( 4 )
 text = "            .                
             |\\               
@@ -224,10 +248,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Github" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 346.0
-margin_right = 261.0
-margin_bottom = 365.0
+[node name="Github" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 339.0
+margin_right = 460.0
+margin_bottom = 368.0
 custom_fonts/font = SubResource( 3 )
 text = "github"
 autowrap = true
@@ -235,10 +259,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Support" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 375.0
-margin_right = 261.0
-margin_bottom = 394.0
+[node name="Support" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+margin_top = 378.0
+margin_right = 460.0
+margin_bottom = 407.0
 custom_fonts/font = SubResource( 3 )
 text = "support"
 autowrap = true
@@ -246,23 +270,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="TextureButton" parent="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 404.0
-margin_right = 261.0
-margin_bottom = 454.0
-rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 2 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/slide_in_options = SubResource( 5 )
-[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/en_GB" to="." method="_on_en_GB_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/en_GB" to="." method="_on_en_UK_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/pt_BR" to="." method="_on_pt_BR_pressed"]
-[connection signal="value_changed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize/SliderText" to="." method="_on_HSlider_value_changed"]
-[connection signal="toggled" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio/ToggleAudio" to="." method="_on_HSlider_toggled"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/BackButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="gui_input" from="CenterContainer" to="." method="_on_CenterContainer_gui_input"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/en_GB" to="." method="_on_en_GB_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Language/HBoxContainer/pt_BR" to="." method="_on_pt_BR_pressed"]
+[connection signal="value_changed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize/SliderText" to="." method="_on_HSlider_value_changed"]
+[connection signal="toggled" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio/ToggleAudio" to="." method="_on_HSlider_toggled"]

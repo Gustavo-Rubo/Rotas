@@ -28,6 +28,6 @@ func load_config():
 	if err != OK:
 		return default_options
 	
-	var options = {}
+#	var options = {}
 	audio_on = config.get_value("cfg", "audio")
 	text_size = config.get_value("cfg", "text_size")

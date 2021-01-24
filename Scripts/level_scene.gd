@@ -2,9 +2,9 @@ extends Node2D
 
 export (int) var level_number
 
-export (float) var goal_trace_length
-export (float) var max_trace_length
-var used_trace_length
+export (float) var goal_trace_length = 1
+export (float) var max_trace_length = 1
+var used_trace_length = 0
 
 export var nets = []
 var traces = []
@@ -16,15 +16,10 @@ var trace_is_selected = false
 var is_pressed = false
 var is_first_section_of_trace = false
 
-onready var level_label = $EditorButtons/LblNumber
-
-# Defining the trace editing mode.
-enum { create, move, delete }
-var mode
+onready var level_label = $LblNumber
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	mode = create
 	
 	goal_trace_length = 10
 	used_trace_length = 0
@@ -37,11 +32,11 @@ func _ready():
 #	traces = GameDataManager.level_info[level_number].traces
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if is_pressed:
 		if current_bend_point:
-			var pos = Vector2(get_global_mouse_position().x - fmod(get_global_mouse_position().x, 20),
-			get_global_mouse_position().y - fmod(get_global_mouse_position().y, 20))
+			var pos = Vector2(get_global_mouse_position().x - fmod(get_global_mouse_position().x, Globals.GRID_SIZE),
+			get_global_mouse_position().y - fmod(get_global_mouse_position().y, Globals.GRID_SIZE))
 			current_bend_point.position = pos
 			current_trace.sync_trace_to_bend_points()
 			
@@ -77,6 +72,7 @@ func complete_level():
 		
 	GameDataManager.save_data()
 	
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
 func _on_BtnPassar_pressed():
@@ -89,20 +85,8 @@ func _on_BtnGanhar_pressed():
 
 
 func _on_BtnVoltar_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
-
-
-func _on_AddButton_pressed():
-	mode = create
-
-
-func _on_MoveButton_pressed():
-	mode = move
-
-
-func _on_DeleteButton_pressed():
-	mode = delete
-
 
 # Manage inputs
 func _on_TextureRect_gui_input(event):
@@ -114,19 +98,11 @@ func _on_TextureRect_gui_input(event):
 			
 			# If pressed while trace is not selected: create new trace
 			if (!trace_is_selected):
-				is_first_section_of_trace = true
 				trace_is_selected = true
 				get_node("TraceEditButtons").visible = true
 				
 				current_trace = trace.instance()
 				add_child(current_trace)
-				
-				current_bend_point = bend_point.instance()
-				current_bend_point.position = pos
-#				add_child(current_bend_point)
-				
-				current_trace.add_point(pos)	
-				current_trace.bend_points.append(current_bend_point)
 				
 				current_bend_point = bend_point.instance()
 				current_bend_point.position = pos
@@ -149,15 +125,15 @@ func _on_TextureRect_gui_input(event):
 			
 			# If released while trace is selected: confirm position of new bend point
 			if(trace_is_selected):
-				if(is_first_section_of_trace):
-					current_bend_point = bend_point.instance()
-					current_bend_point.position = pos
-	#				add_child(current_bend_point)
-					
-					current_trace.add_point(pos)
-					current_trace.bend_points.append(current_bend_point)
-					
-					is_first_section_of_trace = false
+#				if(is_first_section_of_trace):
+#					current_bend_point = bend_point.instance()
+#					current_bend_point.position = pos
+#	#				add_child(current_bend_point)
+#
+#					current_trace.add_point(pos)
+#					current_trace.bend_points.append(current_bend_point)
+#
+#					is_first_section_of_trace = false
 				# Is confirmation really necessary?
 #				current_trace.add_point(event.position)
 				pass
@@ -171,7 +147,7 @@ func _on_TextureRect_gui_input(event):
 
 func _on_TraceButton_pressed():
 	trace_is_selected = false
-	current_trace.default_color = current_trace.un_selected_color_trace
+	current_trace.default_color = Globals.green_base
 	traces.append(current_trace)
 	current_trace = null
 	current_bend_point = null

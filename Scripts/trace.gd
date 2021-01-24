@@ -1,20 +1,13 @@
 extends Line2D
 
-export var un_selected_color_trace: Color
-export var un_selected_color_bend: Color
-export var selected_color_trace: Color
-export var selected_color_bend: Color
-
-var bend_color: Color
-
 onready var collision: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 
 var bend_points = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	default_color = selected_color_trace
-	bend_color = selected_color_bend
+	default_color = Globals.green_selected
+	width = Globals.GRID_SIZE * 0.5
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -29,15 +22,14 @@ func get_length():
 	if points.size() >= 2:
 		for i in (points.size() - 1):
 			length += points[i].distance_to(points[i+1])
-	
+
 	return length
 
-func _on_StaticBody2D_input_event(viewport, event, shape_idx):
+func _on_StaticBody2D_input_event(_viewport, event, _shape_idx):
 	if event.pressed:
 		pass
-#		print(event.position)
 
 
 func _on_Trace_draw():
 	for p in points:
-		draw_circle(p, width/2, Color(bend_color))
+		draw_circle(p, width/2, Color(Globals.green_base))

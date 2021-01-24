@@ -1,11 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Sprites/fundo.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Sprites/apaga.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/mover.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/criar.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
@@ -32,18 +29,19 @@ font_data = ExtResource( 3 )
 [node name="LevelNode" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 576.0
-texture = ExtResource( 1 )
+expand = true
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GuideLines" parent="." instance=ExtResource( 7 )]
-z_index = 1
 
 [node name="TraceEditButtons" type="HBoxContainer" parent="."]
+visible = false
 margin_left = 750.0
 margin_top = 50.0
 margin_right = 933.0
@@ -71,51 +69,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EditorButtons" type="VBoxContainer" parent="."]
+[node name="LblNumber" type="Label" parent="."]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 100.0
-margin_bottom = 396.0
-custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LblNumber" type="Label" parent="EditorButtons"]
-margin_right = 80.0
-margin_bottom = 76.0
+margin_bottom = 96.0
 custom_fonts/font = SubResource( 1 )
 text = "#"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AddButton" type="Button" parent="EditorButtons"]
-visible = false
-margin_top = 96.0
-margin_right = 80.0
-margin_bottom = 176.0
-rect_min_size = Vector2( 80, 80 )
-icon = ExtResource( 6 )
-expand_icon = true
-
-[node name="MoveButton" type="Button" parent="EditorButtons"]
-visible = false
-margin_top = 196.0
-margin_right = 80.0
-margin_bottom = 276.0
-rect_min_size = Vector2( 80, 80 )
-icon = ExtResource( 5 )
-expand_icon = true
-
-[node name="DeleteButton" type="Button" parent="EditorButtons"]
-visible = false
-margin_top = 296.0
-margin_right = 80.0
-margin_bottom = 376.0
-rect_min_size = Vector2( 80, 80 )
-icon = ExtResource( 4 )
-expand_icon = true
 
 [node name="CheatButtons" type="VBoxContainer" parent="."]
 margin_left = 850.0
@@ -181,12 +144,9 @@ custom_colors/font_color = Color( 0, 0.756863, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="gui_input" from="TextureRect" to="." method="_on_TextureRect_gui_input"]
+[connection signal="gui_input" from="Background" to="." method="_on_TextureRect_gui_input"]
 [connection signal="pressed" from="TraceEditButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
 [connection signal="pressed" from="TraceEditButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
-[connection signal="pressed" from="EditorButtons/AddButton" to="." method="_on_AddButton_pressed"]
-[connection signal="pressed" from="EditorButtons/MoveButton" to="." method="_on_MoveButton_pressed"]
-[connection signal="pressed" from="EditorButtons/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="CheatButtons/BtnPassar" to="." method="_on_BtnPassar_pressed"]
 [connection signal="pressed" from="CheatButtons/BtnGanhar" to="." method="_on_BtnGanhar_pressed"]
 [connection signal="pressed" from="CheatButtons/BtnVoltar" to="." method="_on_BtnVoltar_pressed"]

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var toggle_audio = $MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio/ToggleAudio 
-onready var slider_text = $MarginContainer/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize/SliderText
+onready var toggle_audio = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio/ToggleAudio 
+onready var slider_text = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize/SliderText
 
 func _ready():
 	toggle_audio.pressed = ConfigManager.audio_on
@@ -21,13 +21,13 @@ func _on_TextureButton_pressed():
 # https://iconscout.com/icon-pack/country-flags
 
 
-func _on_HSlider_toggled(button_pressed):
+func _on_HSlider_toggled(_button_pressed):
 	ConfigManager.audio_on = toggle_audio.pressed
 	ConfigManager.save_config()
 	pass
 
 
-func _on_HSlider_value_changed(value):
+func _on_HSlider_value_changed(_value):
 	ConfigManager.text_size = slider_text.value
 	ConfigManager.save_config()
 	pass # Replace with function body.
@@ -37,3 +37,9 @@ func _on_en_GB_pressed():
 
 func _on_pt_BR_pressed():
 	TranslationServer.set_locale("pt_BR")
+
+
+func _on_CenterContainer_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			slide_out()

@@ -4,9 +4,11 @@
 [ext_resource path="res://Scripts/bend_point.gd" type="Script" id=2]
 
 [node name="BendPoint" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
