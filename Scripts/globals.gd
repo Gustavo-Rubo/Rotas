@@ -4,7 +4,7 @@ extends Node
 var green_base = Color(0, 0.8, 0)
 var green_selected = Color(0.4, 1, 0.4)
 var red_base = Color(0.8, 0, 0)
-var red_selected = Color(0.8, 0.2, 0.2)
+var red_selected = Color(1, 0.4, 0.4)
 var blue_base = Color(0, 0, 0.8)
 var gray_menu : Color
 var gray_dots = Color(0.2, 0.2, 0.2)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/opcoes.jpeg-1299e36838c14f7fb9c38b5ac116be66.stex"
+path="res://.import/right_arrow.png-d8aa4a54bd6029fdc2359fdbe7ed809a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/opcoes.jpeg"
-dest_files=[ "res://.import/opcoes.jpeg-1299e36838c14f7fb9c38b5ac116be66.stex" ]
+source_file="res://Sprites/right_arrow.png"
+dest_files=[ "res://.import/right_arrow.png-d8aa4a54bd6029fdc2359fdbe7ed809a.stex" ]
 
 [params]
 

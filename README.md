@@ -1,7 +1,8 @@
 # Rotas
-Rotas is a puzzle-ish mobile game about connecting dots with traces, inspired by electronic circuit design.
 
-In this game, your traces can't cross one another, and you get bonus points for using the minimum length of traces you can.
+Connect the dots, don't let your traces cross one another, and try to find the shortest solution.
+
+Rotas is a puzzle mobile game inspired by electronic circuit design.
 
 ## Acknowledgements
 

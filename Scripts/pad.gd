@@ -12,7 +12,7 @@ func _draw():
 	draw_circle(Vector2(0, 0), Globals.GRID_SIZE, Globals.green_base)
 	draw_circle(Vector2(0, 0), Globals.GRID_SIZE / 2, Globals.blue_background)
 
-func _on_Area2D_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton:
-		if event.pressed:
-			print("press on pad")
+#func _on_Area2D_input_event(_viewport, event, _shape_idx):
+#	if event is InputEventMouseButton:
+#		if event.pressed:
+#			print("press on pad")

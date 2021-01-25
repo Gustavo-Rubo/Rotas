@@ -38,5 +38,5 @@ position = Vector2( 440, 440 )
 grid_x = 16
 grid_y = 14
 
-[node name="Hint" parent="." index="12"]
+[node name="Hint" parent="." index="13"]
 text = "Connect the dots"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/trace.tscn" type="PackedScene" id=1]
+
+[node name="Trace" instance=ExtResource( 1 )]
+points = PoolVector2Array( 103.914, 114.811, 302.981, 140.009, 180.769, -50.2389, 39.658, 88.3524, 182.029, 341.596, 537.327, 220.644 )
+
+[node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+position = Vector2( 0, -1.25992 )
+polygon = PoolVector2Array( 35.8782, 122.37, 292.902, 316.398, 504.569, 174.027, 383.616, 88.3524 )

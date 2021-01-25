@@ -1,10 +1,7 @@
-extends Line2D
+extends Area2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var p1 : Vector2
+var p2 : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
