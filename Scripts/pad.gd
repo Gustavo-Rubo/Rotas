@@ -3,6 +3,11 @@ extends Node2D
 export (int) var grid_x
 export (int) var grid_y
 
+var connected_to_net = false
+var net_number = null
+
+var recursive_checked = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	position = Globals.GRID_SIZE * Vector2(grid_x, grid_y)

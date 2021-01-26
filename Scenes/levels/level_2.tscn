@@ -1,24 +1,44 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/level_scene.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/net.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=3]
 
 [node name="LevelNode" instance=ExtResource( 1 )]
 level_number = 2
-goal_trace_length = 10.0
+goal_trace_length = 940.0
+max_trace_length = 1000.0
+nets = [ NodePath("Net0"), NodePath("Net1") ]
 
-[node name="Pad1" parent="." index="2" instance=ExtResource( 2 )]
-grid_x = 8
+[node name="Net0" parent="." index="2" instance=ExtResource( 2 )]
+z_index = 2
+pads = [ NodePath("../Pad1"), NodePath("../Pad2") ]
+
+[node name="Net1" parent="." index="3" instance=ExtResource( 2 )]
+z_index = 2
+pads = [ NodePath("../Pad3"), NodePath("../Pad4") ]
+
+[node name="Pad1" parent="." index="4" instance=ExtResource( 3 )]
+position = Vector2( 300, 300 )
+grid_x = 11
 grid_y = 9
 
-[node name="Pad2" parent="." index="3" instance=ExtResource( 2 )]
-grid_x = 12
+[node name="Pad2" parent="." index="5" instance=ExtResource( 3 )]
+position = Vector2( 580, 300 )
+grid_x = 21
 grid_y = 9
 
-[node name="Pad3" parent="." index="4" instance=ExtResource( 2 )]
+[node name="Pad3" parent="." index="6" instance=ExtResource( 3 )]
+position = Vector2( 440, 160 )
 grid_x = 16
-grid_y = 9
+grid_y = 4
 
-[node name="Pad4" parent="." index="5" instance=ExtResource( 2 )]
-grid_x = 20
-grid_y = 9
+[node name="Pad4" parent="." index="7" instance=ExtResource( 3 )]
+position = Vector2( 440, 440 )
+grid_x = 16
+grid_y = 14
+
+[node name="Hint" parent="." index="16"]
+text = "hint_level_2"
+
+[editable path="Net1"]

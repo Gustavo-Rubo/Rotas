@@ -17,7 +17,9 @@ _global_script_class_icons={
 
 config/name="Rotas"
 run/main_scene="res://Scenes/level_select_scene.tscn"
+boot_splash/image="res://Sprites/fundo.png"
 config/icon="res://Sprites/criar.png"
+config/auto_accept_quit=false
 
 [autoload]
 
@@ -39,7 +41,11 @@ pointing/emulate_touch_from_mouse=true
 
 [locale]
 
-translations=PoolStringArray( "res://locale/translations.en_GB.translation", "res://locale/translations.pt_BR.translation" )
+fallback="pt_BR"
+translations=PoolStringArray( "res://locale/translations.pt_BR.translation", "res://locale/translations.en_GB.translation" )
+translation_remaps={
+
+}
 
 [rendering]
 

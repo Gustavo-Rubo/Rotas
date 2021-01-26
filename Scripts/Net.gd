@@ -2,21 +2,31 @@ extends Node2D
 
 export var pads = []
 
+onready var solved
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	solved = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	update()
+#	pass
 
+func _on_net_solved(args):
+#	print("signal arrived ", args[1])
+	if name == args[0]:
+		solved = args[1]
+
+# I learned after a lot of trial and error that the _draw() function is set in stone
+# when the object loads, and will repeat the same drawing from then on.
+# The conditional statements here are useless
 func _draw():
 	if pads.size() >= 2:
 		for i in (pads.size() - 1):
-			#Check if node is not already connected to the net
-			draw_dashed_line(get_node(pads[i]).position, get_node(pads[i+1]).position, Color(0, 0, 255), 2)
-
+			if !solved:
+				draw_dashed_line(get_node(pads[i]).position, get_node(pads[i+1]).position, Globals.blue_base, 2)
+			else:
+				print("net solved")
 
 # Credits for the function: https://github.com/juddrgledhill/godot-dashed-line
 func draw_dashed_line(from, to, color, width, dash_length = 5, cap_end = false, antialiased = false):

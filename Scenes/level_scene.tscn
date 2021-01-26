@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Sprites/cancel_red.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/right_arrow.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/back.svg" type="Texture" id=8]
+[ext_resource path="res://Sprites/star_blank.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/star_filled.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -25,12 +28,18 @@ border_width_bottom = 2
 border_color = Color( 0, 0.8, 0, 1 )
 border_blend = true
 
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 3 )
 
 [node name="LevelNode" type="Node2D"]
 script = ExtResource( 2 )
+goal_met = ExtResource( 10 )
+goal_not_met = ExtResource( 9 )
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 1024.0
@@ -43,12 +52,72 @@ __meta__ = {
 
 [node name="GuideLines" parent="." instance=ExtResource( 7 )]
 
-[node name="TraceEditButtons" type="HBoxContainer" parent="."]
-visible = false
-margin_left = 799.0
+[node name="LblNumber" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 100.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 1 )
+text = "#"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="."]
+margin_left = 904.0
 margin_top = 30.0
 margin_right = 994.0
 margin_bottom = 120.0
+rect_min_size = Vector2( 90, 90 )
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 20.0
+margin_top = 520.0
+margin_right = 283.0
+margin_bottom = 545.0
+rect_min_size = Vector2( 263, 25 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+step = 1.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TraceLength" type="Label" parent="."]
+margin_left = 20.5
+margin_top = 517.5
+margin_right = 103.5
+margin_bottom = 546.5
+custom_fonts/font = SubResource( 5 )
+text = "#"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoalMet" type="TextureRect" parent="."]
+margin_left = 20.4924
+margin_top = 484.087
+margin_right = 50.4924
+margin_bottom = 514.087
+rect_min_size = Vector2( 30, 30 )
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TraceEditButtons" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 694.0
+margin_top = 456.0
+margin_right = 889.0
+margin_bottom = 546.0
 rect_min_size = Vector2( 0, 90 )
 custom_constants/separation = 15
 __meta__ = {
@@ -76,79 +145,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LblNumber" type="Label" parent="."]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 100.0
-margin_bottom = 96.0
-custom_fonts/font = SubResource( 1 )
-text = "#"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CheatButtons" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 850.0
-margin_top = 150.0
-margin_right = 970.0
-margin_bottom = 450.0
-custom_constants/separation = 30
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BtnPassar" type="Button" parent="CheatButtons"]
-margin_right = 120.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
-custom_constants/hseparation = 100
-text = "Win"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BtnGanhar" type="Button" parent="CheatButtons"]
-margin_top = 110.0
-margin_right = 120.0
-margin_bottom = 190.0
-rect_min_size = Vector2( 0, 80 )
-custom_constants/hseparation = 100
-text = "Win (max score)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BtnVoltar" type="Button" parent="CheatButtons"]
-margin_top = 220.0
-margin_right = 120.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 0, 80 )
-custom_constants/hseparation = 100
-text = "Back to main"
-expand_icon = true
-
 [node name="AdvanceButton" type="Button" parent="."]
 margin_left = 904.0
 margin_top = 456.0
 margin_right = 994.0
 margin_bottom = 546.0
+disabled = true
 icon = ExtResource( 6 )
 expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-margin_left = 20.0
-margin_top = 520.0
-margin_right = 283.0
-margin_bottom = 545.0
-rect_min_size = Vector2( 263, 25 )
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
-step = 1.0
-percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -164,8 +168,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="TraceEditButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
 [connection signal="pressed" from="TraceEditButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
-[connection signal="pressed" from="CheatButtons/BtnPassar" to="." method="_on_BtnPassar_pressed"]
-[connection signal="pressed" from="CheatButtons/BtnGanhar" to="." method="_on_BtnGanhar_pressed"]
-[connection signal="pressed" from="CheatButtons/BtnVoltar" to="." method="_on_BtnVoltar_pressed"]
+[connection signal="pressed" from="AdvanceButton" to="." method="_on_AdvanceButton_pressed"]

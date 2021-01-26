@@ -6,7 +6,7 @@ export (String) var level_to_load
 export (Texture) var blocked_texture
 export (Texture) var open_texture
 export (bool) var enabled
-export (bool) var score_goal_met
+var score_goal_met = false
 export (Texture) var goal_met
 export (Texture) var goal_not_met
 
@@ -23,6 +23,7 @@ onready var previous_path = $PreviousPath
 func _ready():
 	if GameDataManager.level_info.has(level):
 		enabled = GameDataManager.level_info[level].unlocked
+		score_goal_met = GameDataManager.level_info[level].score_goal_met
 	else:
 		enabled = false
 	
@@ -46,7 +47,6 @@ func setup():
 		star.texture = goal_met
 	else:
 		star.texture = goal_not_met
-	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

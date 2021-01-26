@@ -5,3 +5,11 @@ text_size,Text size:,Tamanho do texto:
 audio,Audio:,Áudio:
 github,This game is on github: github.com/Gustavo-Rubo/Rotas,Este jogo está no github: github.com/Gustavo-Rubo/Rotas
 support,"If you want to support the project, you can donate to: [Patreon link]","Se quiser apoiar o desenvolvimento do jogo, pode fazer uma doação para: [link Patreon]"
+level_name,Level,Nível
+hint_level_1,Connect the dots,Conecte os pontos
+hint_level_2,Don’t let the lines cross,Não deixe os traços se cruzarem
+hint_level_3,Find the shortest solution,Encontre a solução mais curta
+hint_level_4,One last challenge,Um último desafio
+text_level_5,"You’ve completed this demo!
+Please remember to answer the feedback form and stay tuned for more news.","Você completou esta demo do jogo!
+Por favor, lembre de responder o formulário de avaliação e fique atento para novidades."

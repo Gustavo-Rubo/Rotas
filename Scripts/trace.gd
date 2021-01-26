@@ -4,6 +4,8 @@ var is_selected = true
 
 var bend_color = Globals.green_base
 
+var recursive_checked = false
+
 var bend_points = []
 export onready var nets = []
 
@@ -47,7 +49,7 @@ func set_color(color):
 
 func _on_Trace_draw():
 	$Label.set_global_position(points[0])
-	$LabelNets.set_global_position(points[0] + Vector2(0, 40))
+	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
 		draw_circle(p, width/2, bend_color)
 		
@@ -57,14 +59,14 @@ func update_collision():
 		for i in $Area2D.get_child_count():
 			var poly = []
 			
-			var line = (points[1] - points[i+1]).normalized()
+			var line = (points[i+1] - points[i]).normalized()
 			var normal = Vector2(line.y, -line.x)
-#			var h_width = width
+			var h_width = width / 2
 			
-			poly.append(points[i] + normal * width)
-			poly.append(points[i] - normal * width)
-			poly.append(points[i+1] - normal * width)
-			poly.append(points[i+1] + normal * width)
+			poly.append(points[i] + normal * h_width)
+			poly.append(points[i] - normal * h_width)
+			poly.append(points[i+1] - normal * h_width)
+			poly.append(points[i+1] + normal * h_width)
 			
 			$Area2D.get_child(i).polygon = poly
 #			var collision = CollisionPolygon2D.new()

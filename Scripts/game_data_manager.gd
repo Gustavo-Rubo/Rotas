@@ -5,7 +5,7 @@ var default_level_info = {
 	1: {
 		"unlocked": true,
 		"low_score": INF,
-		"star": false
+		"score_goal_met": false
 #		"traces": []
 	}
 }
