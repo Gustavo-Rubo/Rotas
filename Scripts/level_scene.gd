@@ -34,8 +34,31 @@ func _ready():
 		for p in net.pads:
 			net.get_node(p).net_number = n
 			net.get_node(p).get_node("NetNumber").text = String(n)
+			
+	# Load the traces from previous solution
+	for trace_save_data in parse_json(GameDataManager.level_info[level_number].traces):
+		var load_trace = trace_resource.instance()
+		add_child(load_trace)
+		
+		for p in trace_save_data.points.size():
+			var pos = Vector2(trace_save_data.points[p][0], trace_save_data.points[p][1])
+			var load_bend_point = bend_point_resource.instance()
+			load_bend_point.position = pos
+			load_trace.add_point(pos)
+			load_trace.bend_points.append(load_bend_point)
+			if p >= 1:
+				load_trace.get_node("Area2D").add_child(CollisionPolygon2D.new())
+			
+#			current_trace.add_point(pos)
+#			current_trace.bend_points.append(current_bend_point)
 
-#	traces = GameDataManager.level_info[level_number].traces
+#		load_trace.from_save(trace_save_data)
+		load_trace.sync_trace_to_bend_points()
+		load_trace.update_collision()
+		traces.append(load_trace)
+		
+	check_nets_solved()
+	check_level_solved()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
@@ -154,6 +177,14 @@ func update_used_trace_length():
 		$GoalMet.texture = goal_not_met
 	
 func complete_level():
+	# Save the traces state:
+	if current_trace != null:
+		traces.append(current_trace)
+	var traces_save_data = []
+	for t in traces:
+		traces_save_data.append(t.save())
+	GameDataManager.level_info[level_number].traces = to_json(traces_save_data)
+	
 	# Update if the player met the goal
 	if used_trace_length <= goal_trace_length:
 		GameDataManager.level_info[level_number].score_goal_met = true
@@ -167,8 +198,8 @@ func complete_level():
 		GameDataManager.level_info[level_number + 1] = {
 			"unlocked": true,
 			"low_score": INF,
-			"score_goal_met": false
-#			"traces": traces
+			"score_goal_met": false,
+			"traces": null
 		}
 		
 	GameDataManager.save_data()
@@ -217,6 +248,7 @@ func _on_Background_gui_input(event):
 				get_node("TraceEditButtons").visible = true
 				
 				current_trace = trace_resource.instance()
+				current_trace.is_selected = true
 				add_child(current_trace)
 				
 				# Add a label for easier debugging:

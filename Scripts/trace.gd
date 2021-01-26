@@ -1,17 +1,17 @@
 extends Line2D
 
-var is_selected = true
+var is_selected = false
 
 var bend_color = Globals.green_base
 
 var recursive_checked = false
 
 var bend_points = []
-export onready var nets = []
+var nets = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	default_color = Globals.green_selected
+	default_color = Globals.green_base
 	width = Globals.GRID_SIZE * 0.5
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,8 +44,24 @@ func set_color(color):
 			default_color = Globals.green_selected
 		else:
 			default_color = Globals.green_base
-		
 
+# Serializes the trace data for saving
+func save():
+	var points_save = []
+	for point in points:
+		points_save.append([point.x, point.y])
+	var save_dict = {
+		"points": points_save
+	}
+	
+	return save_dict
+
+# Reads and loads serialized save data
+#func from_save(save_data):
+#	for point in save_data.points:
+#		print(Vector2(point[0], point[1]))
+#		points.append(Vector2(point[0], point[1]))
+#	print("Points loaded in trace: ", points)
 
 func _on_Trace_draw():
 	$Label.set_global_position(points[0])

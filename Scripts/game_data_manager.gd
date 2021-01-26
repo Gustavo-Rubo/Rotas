@@ -5,8 +5,8 @@ var default_level_info = {
 	1: {
 		"unlocked": true,
 		"low_score": INF,
-		"score_goal_met": false
-#		"traces": []
+		"score_goal_met": false,
+		"traces": to_json([])
 	}
 }
 
@@ -15,7 +15,7 @@ onready var path = "user://save.dat"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level_info = load_data()
-#	reset_save_data()
+	reset_save_data()
 
 func save_data():
 	var file = File.new()
