@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/Consolas.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Sprites/x button.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/cancel_white.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/options_panel.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=5]

@@ -21,6 +21,7 @@ z_index = 1
 shape = SubResource( 1 )
 
 [node name="NetNumber" type="Label" parent="."]
+visible = false
 margin_top = 30.0
 margin_right = 40.0
 margin_bottom = 44.0

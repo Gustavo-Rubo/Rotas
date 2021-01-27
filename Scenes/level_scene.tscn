@@ -1,15 +1,16 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Sprites/conofirm_green.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/right_arrow_black.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/cancel_red.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/right_arrow.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/back_white.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Sprites/back.svg" type="Texture" id=8]
 [ext_resource path="res://Sprites/star_blank.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/star_filled.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/confirm_green.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/right_arrow_green.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -28,18 +29,20 @@ border_width_bottom = 2
 border_color = Color( 0, 0.8, 0, 1 )
 border_blend = true
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 20
+[sub_resource type="DynamicFont" id=5]
+size = 24
 font_data = ExtResource( 3 )
 
 [node name="LevelNode" type="Node2D"]
 script = ExtResource( 2 )
 goal_met = ExtResource( 10 )
 goal_not_met = ExtResource( 9 )
+advance_disabled = ExtResource( 4 )
+advance_enabled = ExtResource( 12 )
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 1024.0
@@ -69,7 +72,7 @@ margin_top = 30.0
 margin_right = 994.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 90, 90 )
-icon = ExtResource( 8 )
+icon = ExtResource( 6 )
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,7 +97,7 @@ margin_left = 20.5
 margin_top = 517.5
 margin_right = 103.5
 margin_bottom = 546.5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "#"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -128,7 +131,7 @@ __meta__ = {
 margin_right = 90.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 90, 90 )
-icon = ExtResource( 4 )
+icon = ExtResource( 11 )
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -150,8 +153,9 @@ margin_left = 904.0
 margin_top = 456.0
 margin_right = 994.0
 margin_bottom = 546.0
+rect_min_size = Vector2( 90, 90 )
 disabled = true
-icon = ExtResource( 6 )
+icon = ExtResource( 4 )
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -162,7 +166,7 @@ margin_left = 312.0
 margin_top = 524.0
 margin_right = 410.0
 margin_bottom = 551.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0.756863, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

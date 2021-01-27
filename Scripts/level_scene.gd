@@ -9,6 +9,9 @@ var used_trace_length = 0
 export (Texture) var goal_met
 export (Texture) var goal_not_met
 
+export (Texture) var advance_disabled
+export (Texture) var advance_enabled
+
 export var nets = []
 var traces = []
 var trace_resource
@@ -19,15 +22,12 @@ var trace_is_selected = false
 var is_pressed = false
 var is_first_section_of_trace = false
 
-onready var level_label = $LblNumber
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
-	level_label.text = "Level " + String(level_number)
+	$LblNumber.set_text(tr("level_w_number") % String(level_number))
 	
 	for n in nets.size():
 		var net = get_node(nets[n])
@@ -59,6 +59,7 @@ func _ready():
 		
 	check_nets_solved()
 	check_level_solved()
+	update_used_trace_length()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
@@ -92,8 +93,11 @@ func check_level_solved():
 	
 	if solved:
 		$AdvanceButton.disabled = false
+		$AdvanceButton.icon = advance_enabled
+		
 	else:
 		$AdvanceButton.disabled = true
+		$AdvanceButton.icon = advance_disabled
 		
 	
 # Helper function for the recursive net checking.
@@ -199,7 +203,7 @@ func complete_level():
 			"unlocked": true,
 			"low_score": INF,
 			"score_goal_met": false,
-			"traces": null
+			"traces": to_json([])
 		}
 		
 	GameDataManager.save_data()
