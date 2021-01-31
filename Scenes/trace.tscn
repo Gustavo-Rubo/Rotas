@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/trace.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Roboto-Light.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,9 @@
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 2 )
+
+[sub_resource type="GradientTexture" id=2]
+width = 100
 
 [node name="Trace" type="Line2D"]
 width = 20.0
@@ -36,4 +39,12 @@ text = "#"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Highlight" type="Line2D" parent="."]
+default_color = Color( 1, 1, 1, 1 )
+texture = SubResource( 2 )
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 [connection signal="draw" from="." to="." method="_on_Trace_draw"]

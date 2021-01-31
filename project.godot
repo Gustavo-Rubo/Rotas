@@ -18,8 +18,7 @@ _global_script_class_icons={
 config/name="Rotas"
 run/main_scene="res://Scenes/level_select_scene.tscn"
 boot_splash/image="res://Sprites/fundo.png"
-config/icon="res://Sprites/criar.png"
-config/auto_accept_quit=false
+config/icon="res://Sprites/icon.png"
 
 [autoload]
 

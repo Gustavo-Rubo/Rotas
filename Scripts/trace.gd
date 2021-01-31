@@ -8,15 +8,37 @@ var recursive_checked = false
 
 var bend_points = []
 var nets = []
+var trace
+var grad = Gradient.new()
+
+onready var highlight = get_node("Highlight")
+var hi : float = 0.5
+var count : float = 0.0
+var loop : float = 300.0
+var time : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	default_color = Globals.green_base
 	width = Globals.GRID_SIZE * 0.5
+	highlight.width = width
+	if points:
+		highlight.points = points
+	
+	grad.offsets = PoolRealArray([-1, -0.5, 0, 0.5, 1])
+	grad.colors = PoolColorArray([Color(1,1,1,hi), Color(1,1,1,0), Color(1,1,1,hi), Color(1,1,1,0), Color(1,1,1,hi)])
+	highlight.texture.set_gradient(grad)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if is_selected:
+		time += delta
+		highlight.visible = true
+		highlight.points = points
+		grad.offsets = PoolRealArray([-1 + fmod(time, 1.0), -0.5 + fmod(time, 1.0), 0 + fmod(time, 1.0), 0.5 + fmod(time, 1.0), 1 + fmod(time, 1.0)])
+		highlight.texture.set_gradient(grad)
+	else:
+		highlight.visible = false
 
 func sync_trace_to_bend_points():
 	for i in bend_points.size():
@@ -56,19 +78,11 @@ func save():
 	
 	return save_dict
 
-# Reads and loads serialized save data
-#func from_save(save_data):
-#	for point in save_data.points:
-#		print(Vector2(point[0], point[1]))
-#		points.append(Vector2(point[0], point[1]))
-#	print("Points loaded in trace: ", points)
-
 func _on_Trace_draw():
 	$Label.set_global_position(points[0])
 	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
 		draw_circle(p, width/2, bend_color)
-		
 		
 func update_collision():
 	if $Area2D.get_child_count() >= 1:

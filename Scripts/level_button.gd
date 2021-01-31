@@ -1,6 +1,6 @@
 extends Node2D
 
-export (int) var level
+export (int) var level_number
 export (String) var level_to_load
 
 export (Texture) var blocked_texture
@@ -21,13 +21,13 @@ onready var previous_path = $PreviousPath
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if GameDataManager.level_info.has(level):
-		enabled = GameDataManager.level_info[level].unlocked
-		score_goal_met = GameDataManager.level_info[level].score_goal_met
+	if GameDataManager.level_info.has(level_number):
+		enabled = GameDataManager.level_info[level_number].unlocked
+		score_goal_met = GameDataManager.level_info[level_number].score_goal_met
 	else:
 		enabled = false
 	
-	if level == 1:
+	if level_number == 1:
 		previous_path.texture = previous_clear
 	elif enabled:
 		previous_path.texture = previous_trace
@@ -37,7 +37,7 @@ func _ready():
 	setup()
 
 func setup():
-	level_label.text = String(level)
+	level_label.text = Globals.level_number_to_code(level_number)
 	if enabled:
 		button.texture_normal = open_texture
 	else:

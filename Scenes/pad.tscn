@@ -22,9 +22,21 @@ shape = SubResource( 1 )
 
 [node name="NetNumber" type="Label" parent="."]
 visible = false
-margin_top = 30.0
+margin_left = 0.23597
+margin_top = 20.0893
+margin_right = 40.236
+margin_bottom = 49.0893
+custom_fonts/font = SubResource( 2 )
+text = "#"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PadSum" type="Label" parent="."]
+visible = false
+margin_top = 44.0893
 margin_right = 40.0
-margin_bottom = 44.0
+margin_bottom = 73.0893
 custom_fonts/font = SubResource( 2 )
 text = "#"
 __meta__ = {

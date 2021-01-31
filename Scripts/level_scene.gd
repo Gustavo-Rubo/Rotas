@@ -27,7 +27,7 @@ func _ready():
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
-	$LblNumber.set_text(tr("level_w_number") % String(level_number))
+	$LblNumber.set_text(tr("level_w_number") % Globals.level_number_to_code(level_number))
 	
 	for n in nets.size():
 		var net = get_node(nets[n])
@@ -62,11 +62,18 @@ func _ready():
 	update_used_trace_length()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):	
+func _process(_delta):
 	if is_pressed:
 		if current_bend_point:
-			var pos = Vector2(get_global_mouse_position().x - fmod(get_global_mouse_position().x, Globals.GRID_SIZE),
-			get_global_mouse_position().y - fmod(get_global_mouse_position().y, Globals.GRID_SIZE))
+			var pos = get_global_mouse_position()
+			# Check if the click was in a pad
+			for n in nets:
+				var net = get_node(n)
+				for p in net.pads:
+					var pad = net.get_node(p)
+					if pad.check_click(pos):
+						pos = pad.position
+			pos = snap_coord_to_grid(pos)
 			current_bend_point.position = pos
 			current_trace.sync_trace_to_bend_points()
 			current_trace.update_collision()
@@ -74,18 +81,24 @@ func _process(_delta):
 			$GuideLines.position = pos
 			$GuideLines.visible = true
 			
-			
 	else:
 		$GuideLines.visible = false
-		
+	
+	update_used_trace_length()
 	check_nets_solved()
 	check_level_solved()
 
 func check_level_solved():
 	var solved = true
+	
+	# If more than the max trace length is used:
+	if used_trace_length > 2*goal_trace_length:
+		solved = false
+	# If not all nets are solved
 	for net in nets:
 		if !get_node(net).solved:
 			solved = false
+	# If nets intersect each other
 	for trace in (traces + [current_trace]):
 		if trace != null:
 			if trace.nets.size() > 1:
@@ -115,20 +128,21 @@ func check_nets_solved():
 		for t in (traces + [current_trace]):
 			if t != null:
 				t.recursive_checked = false
-		for p in net.pads:
-			net.get_node(p).recursive_checked = false
+		for ne in nets: # I'm uncertain if this is a ok way of doing this
+			for p in get_node(ne).pads:
+				get_node(ne).get_node(p).recursive_checked = false
 		
-		var pad_sum
+		var pad_sum = 0
 		
-#		print("net ", n)
 		for p in net.pads:
 			var pad = net.get_node(p)
 			if !pad.recursive_checked:
 				pad.recursive_checked = true
 				pad_sum = 1
+#				print(pad.get_node("Area2D").get_overlapping_areas().size())
 				for trace_area in pad.get_node("Area2D").get_overlapping_areas():
 					pad_sum += recursive_check_net_solved(trace_area.get_parent(), 0, n)
-#				print(pad_sum)
+				pad.get_node("PadSum").set_text(String(pad_sum))
 			
 		if pad_sum == net.pads.size():
 			net.solved = true
@@ -158,10 +172,10 @@ func recursive_check_net_solved(element, pad_sum, net_number):
 			if !element.nets.has(net_number):
 				element.nets.append(net_number)
 				
+		var temp_pad_sum = 0
 		for area in element.get_node("Area2D").get_overlapping_areas():
-			var temp_pad_sum = 0
-			temp_pad_sum += recursive_check_net_solved(area.get_parent(), pad_sum, net_number)
-			pad_sum += temp_pad_sum
+			temp_pad_sum += recursive_check_net_solved(area.get_parent(), 0, net_number)
+		pad_sum += temp_pad_sum
 		return pad_sum
 
 	return 0
@@ -173,7 +187,9 @@ func update_used_trace_length():
 		used_trace_length = current_trace.get_length()
 	for t in traces:
 		used_trace_length += t.get_length()
-	get_node("ProgressBar").value = 100*(used_trace_length/goal_trace_length)
+		
+	get_node("ProgressBar").value = 100*(1 - used_trace_length/(2*goal_trace_length))
+	
 	$TraceLength.text = String(used_trace_length)
 	if used_trace_length <= goal_trace_length:
 		$GoalMet.texture = goal_met
@@ -222,33 +238,47 @@ func _on_BtnGanhar_pressed():
 func _on_BtnVoltar_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
+	
+func snap_coord_to_grid(coord):
+	coord = coord + Vector2(Globals.GRID_SIZE/2, Globals.GRID_SIZE/2)
+	return Vector2(coord.x - fmod(coord.x, Globals.GRID_SIZE),
+			coord.y - fmod(coord.y, Globals.GRID_SIZE))
 
 # Manage inputs
 func _on_Background_gui_input(event):
 	if event is InputEventMouseButton:
 		
+		# Check if the click was made in a trace
 		if !trace_is_selected:
 			for i in traces.size():
 				if (traces[i].check_click(event.position)):
 					trace_is_selected = true
 					current_trace = traces[i]
 					current_trace.is_selected = true
-					current_trace.default_color = Globals.green_selected
+					current_trace.set_color("green")
 					get_node("TraceEditButtons").visible = true
 					traces.remove(i)
 					return
 		
-
-		var pos = Vector2(event.position.x - fmod(event.position.x, 20),
-			event.position.y - fmod(event.position.y, 20))
+		# Check if the click was in a pad
+		for n in nets:
+			var net = get_node(n)
+			for p in net.pads:
+				var pad = net.get_node(p)
+				if pad.check_click(event.position):
+					event.position = pad.position
+				
+		var pos = snap_coord_to_grid(event.position)
 		if event.pressed:
 			
 			is_pressed = true
+			is_first_section_of_trace = false
 				
 			# If pressed while trace is not selected: create new trace
 			if (!trace_is_selected):
 				
 				trace_is_selected = true
+				is_first_section_of_trace = true
 				get_node("TraceEditButtons").visible = true
 				
 				current_trace = trace_resource.instance()
@@ -277,15 +307,26 @@ func _on_Background_gui_input(event):
 				current_trace.get_node("Area2D").add_child(CollisionPolygon2D.new())
 				
 #				current_trace.$Area2D.add_child(CollisionPolygon2D.new())
-				
+		
+		# When the press is released
 		else:
 			is_pressed = false
+			
+			# If the press is released on a pad, finish the trace
+			if !is_first_section_of_trace and trace_is_selected:
+				for n in nets.size():
+					var net = get_node(nets[n])
+					for p in net.pads:
+						var pad = net.get_node(p)
+						if pad.check_click(pos):
+							_on_TraceButton_pressed()
 	
 		update_used_trace_length()
 
 
 func _on_TraceButton_pressed():
 	trace_is_selected = false
+	is_first_section_of_trace = false
 	current_trace.is_selected = false
 	current_trace.default_color = Globals.green_base
 	traces.append(current_trace)
@@ -295,6 +336,7 @@ func _on_TraceButton_pressed():
 	
 func _on_EraseButton_pressed():
 	trace_is_selected = false
+	is_first_section_of_trace = false
 	current_trace.get_parent().remove_child(current_trace)
 	current_trace = null
 	current_bend_point = null
