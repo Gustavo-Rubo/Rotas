@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Rotas"
 run/main_scene="res://Scenes/level_select_scene.tscn"
-boot_splash/image="res://Sprites/fundo.png"
+boot_splash/image="res://Sprites/splash.png"
 config/icon="res://Sprites/icon.png"
 
 [autoload]

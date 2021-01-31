@@ -59,7 +59,6 @@ margin_left = 1024.0
 margin_right = 2048.0
 margin_bottom = 576.0
 rect_min_size = Vector2( 1024, 576 )
-texture = null
 expand = true
 
 [node name="Label" type="Label" parent="."]
