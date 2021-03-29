@@ -1,6 +1,7 @@
 extends Line2D
 
 var is_selected = false
+var is_wrong = false
 
 var bend_color = Globals.green_base
 
@@ -12,33 +13,55 @@ var trace
 var grad = Gradient.new()
 
 onready var highlight = get_node("Highlight")
+onready var wrong = get_node("Wrong")
+
+# Highlight animation variables
 var hi : float = 0.5
 var count : float = 0.0
 var loop : float = 300.0
 var time : float = 0.0
+
+var wrong_shader
+var wrong_material
+
+var circle_points = PoolVector2Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	default_color = Globals.green_base
 	width = Globals.GRID_SIZE * 0.5
 	highlight.width = width
+	wrong.width = width
 	if points:
 		highlight.points = points
+		wrong.points = points
 	
 	grad.offsets = PoolRealArray([-1, -0.5, 0, 0.5, 1])
 	grad.colors = PoolColorArray([Color(1,1,1,hi), Color(1,1,1,0), Color(1,1,1,hi), Color(1,1,1,0), Color(1,1,1,hi)])
 	highlight.texture.set_gradient(grad)
+	
+	wrong.visible = is_wrong
+	wrong_shader = load("res://Shaders/wrong_trace.shader")
+	wrong_material = load("res://Materials/wrong_material.tres")
+	
+	for i in range(0, 20):
+		circle_points.append(Vector2(sin(i*PI/10), cos(i*PI/10)))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_selected:
 		time += delta
-		highlight.visible = true
 		highlight.points = points
+		wrong.points = points
 		grad.offsets = PoolRealArray([-1 + fmod(time, 1.0), -0.5 + fmod(time, 1.0), 0 + fmod(time, 1.0), 0.5 + fmod(time, 1.0), 1 + fmod(time, 1.0)])
 		highlight.texture.set_gradient(grad)
+	
+	highlight.visible = is_selected
+	
+	if is_wrong:
+		material = wrong_material
 	else:
-		highlight.visible = false
+		material = null
 
 func sync_trace_to_bend_points():
 	for i in bend_points.size():
@@ -82,7 +105,7 @@ func _on_Trace_draw():
 	$Label.set_global_position(points[0])
 	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
-		draw_circle(p, width/2, bend_color)
+		draw_circle_aa(p, width/2, bend_color)
 		
 func update_collision():
 	if $Area2D.get_child_count() >= 1:
@@ -104,6 +127,13 @@ func update_collision():
 #
 #			$Area2D.add_child(collision)
 
+# We use this because draw_circle has no anti-aliasing 
+func draw_circle_aa(center, radius, color):
+	var circle_points_radius = PoolVector2Array()
+	for c in circle_points:
+		circle_points_radius.append(c * radius)
+	draw_colored_polygon(circle_points_radius, color, PoolVector2Array(), null, null, true)
+	
 
 # Thanks for the user Jack_5515 for the code at:
 # https://www.reddit.com/r/godot/comments/f3dr76/how_to_make_clickable_line2d/

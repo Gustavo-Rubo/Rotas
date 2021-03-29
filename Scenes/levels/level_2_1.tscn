@@ -1,45 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/level_scene.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scenes/net.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-size = 24
-font_data = ExtResource( 2 )
-
 [node name="LevelNode" instance=ExtResource( 1 )]
 level_number = 5
-goal_trace_length = 4000.0
+goal_trace_length = 490.0
 max_trace_length = 20.0
-nets = [ NodePath("Net") ]
+nets = [ NodePath("Net0") ]
 
-[node name="Net" parent="." index="2" instance=ExtResource( 3 )]
-pads = [ NodePath("../Pad1"), NodePath("../Pad2") ]
+[node name="Net0" parent="." index="2" instance=ExtResource( 3 )]
+pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3") ]
 
 [node name="Pad1" parent="." index="3" instance=ExtResource( 4 )]
-grid_x = -3
-grid_y = -3
+grid_x = 16
+grid_y = 4
 
 [node name="Pad2" parent="." index="4" instance=ExtResource( 4 )]
-grid_x = -3
+grid_x = 20
+grid_y = 12
 
-[node name="Label" type="Label" parent="." index="12"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 279.0
-margin_top = 164.0
-margin_right = 747.0
-margin_bottom = 415.0
-custom_fonts/font = SubResource( 1 )
-text = "text_level_5"
-align = 1
-valign = 1
-autowrap = true
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Pad3" parent="." index="5" instance=ExtResource( 4 )]
+grid_x = 12
+grid_y = 12

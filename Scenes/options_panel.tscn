@@ -63,15 +63,15 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 margin_left = 262.0
-margin_top = 64.0
+margin_top = 84.0
 margin_right = 762.0
-margin_bottom = 511.0
+margin_bottom = 492.0
 rect_min_size = Vector2( 500, 0 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 margin_right = 500.0
-margin_bottom = 447.0
+margin_bottom = 408.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -84,7 +84,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 480.0
-margin_bottom = 427.0
+margin_bottom = 388.0
 custom_constants/separation = 10
 alignment = 1
 __meta__ = {
@@ -260,6 +260,7 @@ __meta__ = {
 }
 
 [node name="Support" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+visible = false
 margin_top = 378.0
 margin_right = 460.0
 margin_bottom = 407.0

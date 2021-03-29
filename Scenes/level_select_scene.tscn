@@ -49,7 +49,6 @@ anchor_bottom = 0.0
 margin_right = 1024.0
 margin_bottom = 576.0
 rect_min_size = Vector2( 1024, 576 )
-texture = null
 expand = true
 
 [node name="level_backdrop_2" parent="ScrollContainer/HBoxContainer" instance=ExtResource( 6 )]

@@ -21,9 +21,21 @@ var current_bend_point
 var trace_is_selected = false
 var is_pressed = false
 var is_first_section_of_trace = false
+var pos_last_pressed
+var last_press_was_on_trace = false
+
+# variable to store states for the undo/redo buttons
+var game_states = Array()
+var max_states = 20
+var state_position = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#	slide_in()
+#	var a
+#	var s
+#	$BackButton.icon.draw(a, s, Globals.red_base)
+	
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
@@ -36,30 +48,12 @@ func _ready():
 			net.get_node(p).get_node("NetNumber").text = String(n)
 			
 	# Load the traces from previous solution
-	for trace_save_data in parse_json(GameDataManager.level_info[level_number].traces):
-		var load_trace = trace_resource.instance()
-		add_child(load_trace)
-		
-		for p in trace_save_data.points.size():
-			var pos = Vector2(trace_save_data.points[p][0], trace_save_data.points[p][1])
-			var load_bend_point = bend_point_resource.instance()
-			load_bend_point.position = pos
-			load_trace.add_point(pos)
-			load_trace.bend_points.append(load_bend_point)
-			if p >= 1:
-				load_trace.get_node("Area2D").add_child(CollisionPolygon2D.new())
-			
-#			current_trace.add_point(pos)
-#			current_trace.bend_points.append(current_bend_point)
-
-#		load_trace.from_save(trace_save_data)
-		load_trace.sync_trace_to_bend_points()
-		load_trace.update_collision()
-		traces.append(load_trace)
+	deserialize_and_load_traces(parse_json(GameDataManager.level_info[level_number].traces))
 		
 	check_nets_solved()
 	check_level_solved()
 	update_used_trace_length()
+	update_game_state()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -85,6 +79,7 @@ func _process(_delta):
 		$GuideLines.visible = false
 	
 	update_used_trace_length()
+	update_undo_redo_buttons()
 	check_nets_solved()
 	check_level_solved()
 
@@ -154,9 +149,11 @@ func check_nets_solved():
 	for t in (traces + [current_trace]):
 		if t != null:
 			if t.nets.size() >= 2:
-				t.set_color("red")
+				t.is_wrong = true
+#				t.set_color("red")
 			else:
-				t.set_color("green")
+				t.is_wrong = false
+#				t.set_color("green")
 			t.get_node("LabelNets").text = String(t.nets)
 
 # Recursive function for determining which traces belong to which nets,
@@ -180,6 +177,33 @@ func recursive_check_net_solved(element, pad_sum, net_number):
 
 	return 0
 
+func serialize_traces():
+#	if current_trace != null:
+#		traces.append(current_trace)
+	var traces_serial = []
+	for t in (traces + [current_trace]):
+		if t != null:
+			traces_serial.append(t.save())
+	return traces_serial
+
+func deserialize_and_load_traces(traces_serial):
+	for trace_serial_data in traces_serial:
+		var load_trace = trace_resource.instance()
+		add_child(load_trace)
+		
+		for p in trace_serial_data.points.size():
+			var pos = Vector2(trace_serial_data.points[p][0], trace_serial_data.points[p][1])
+			var load_bend_point = bend_point_resource.instance()
+			load_bend_point.position = pos
+			load_trace.add_point(pos)
+			load_trace.bend_points.append(load_bend_point)
+			if p >= 1:
+				load_trace.get_node("Area2D").add_child(CollisionPolygon2D.new())
+			
+		load_trace.sync_trace_to_bend_points()
+		load_trace.update_collision()
+		traces.append(load_trace)
+
 		
 func update_used_trace_length():
 	used_trace_length = 0
@@ -198,12 +222,7 @@ func update_used_trace_length():
 	
 func complete_level():
 	# Save the traces state:
-	if current_trace != null:
-		traces.append(current_trace)
-	var traces_save_data = []
-	for t in traces:
-		traces_save_data.append(t.save())
-	GameDataManager.level_info[level_number].traces = to_json(traces_save_data)
+	GameDataManager.level_info[level_number].traces = to_json(serialize_traces())
 	
 	# Update if the player met the goal
 	if used_trace_length <= goal_trace_length:
@@ -224,18 +243,7 @@ func complete_level():
 		
 	GameDataManager.save_data()
 	
-# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
-
-func _on_BtnPassar_pressed():
-	used_trace_length = goal_trace_length + 1
-	complete_level()
-
-func _on_BtnGanhar_pressed():
-	used_trace_length = goal_trace_length - 1
-	complete_level()
-
-func _on_BtnVoltar_pressed():
+#	slide_out()
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 	
@@ -248,19 +256,27 @@ func snap_coord_to_grid(coord):
 func _on_Background_gui_input(event):
 	if event is InputEventMouseButton:
 		
-		# Check if the click was made in a trace
+		if event.pressed:
+			last_press_was_on_trace = false
+			pos_last_pressed = event.position
+		
+		# Check if the input was made in a trace
 		if !trace_is_selected:
 			for i in traces.size():
 				if (traces[i].check_click(event.position)):
+					last_press_was_on_trace = true
 					trace_is_selected = true
 					current_trace = traces[i]
 					current_trace.is_selected = true
-					current_trace.set_color("green")
+#					current_trace.is_wrong = false4
+#					current_trace.set_color("green")
 					get_node("TraceEditButtons").visible = true
 					traces.remove(i)
+					current_bend_point = current_trace.bend_points[-1]
+					current_bend_point.is_selected = true
 					return
 		
-		# Check if the click was in a pad
+		# Check if the input was in a pad
 		for n in nets:
 			var net = get_node(n)
 			for p in net.pads:
@@ -270,6 +286,7 @@ func _on_Background_gui_input(event):
 				
 		var pos = snap_coord_to_grid(event.position)
 		if event.pressed:
+			pos_last_pressed = pos
 			
 			is_pressed = true
 			is_first_section_of_trace = false
@@ -288,44 +305,58 @@ func _on_Background_gui_input(event):
 				# Add a label for easier debugging:
 				current_trace.get_node("Label").text = String(traces.size())
 				
-				current_bend_point = bend_point_resource.instance()
-				current_bend_point.position = pos
-#				add_child(current_bend_point)
+				add_bend_point(pos)
+				add_bend_point(pos)
 				
-				current_trace.add_point(pos)	
-				current_trace.bend_points.append(current_bend_point)
+				current_trace.get_node("Area2D").add_child(CollisionPolygon2D.new())
 			
 			# If pressed while trace is selected: add new point to the selected trace
 			else:
-				current_bend_point = bend_point_resource.instance()
-				current_bend_point.position = pos
-#				add_child(current_bend_point)
-				
-				current_trace.add_point(pos)
-				current_trace.bend_points.append(current_bend_point)
-				
+				add_bend_point(pos)
 				current_trace.get_node("Area2D").add_child(CollisionPolygon2D.new())
-				
-#				current_trace.$Area2D.add_child(CollisionPolygon2D.new())
+			
+			current_trace.update_collision()
 		
 		# When the press is released
 		else:
+			# This is to control the flow of game states
+			if (!last_press_was_on_trace):
+				update_game_state()
+#				print ("state altered")
+				last_press_was_on_trace = false
+				
 			is_pressed = false
 			
-			# If the press is released on a pad, finish the trace
-			if !is_first_section_of_trace and trace_is_selected:
-				for n in nets.size():
-					var net = get_node(nets[n])
-					for p in net.pads:
-						var pad = net.get_node(p)
-						if pad.check_click(pos):
-							_on_TraceButton_pressed()
+			# If the press is released on a pad different from the first, finish the trace
+			if trace_is_selected:
+				# The distance between the pressing event and the releasing event
+				var dist_travelled = pos_last_pressed.distance_to(pos)
+				
+				if (!is_first_section_of_trace) or (is_first_section_of_trace and dist_travelled > Globals.GRID_SIZE):
+					for n in nets.size():
+						var net = get_node(nets[n])
+						for p in net.pads:
+							var pad = net.get_node(p)
+							if pad.check_click(pos):
+								_on_TraceButton_pressed()
 	
 		update_used_trace_length()
+
+func add_bend_point(pos):
+	if (current_bend_point):
+		current_bend_point.is_selected = false
+	current_bend_point = bend_point_resource.instance()
+	current_bend_point.position = pos
+	current_bend_point.is_selected = true
+	add_child(current_bend_point)
+
+	current_trace.add_point(pos)	
+	current_trace.bend_points.append(current_bend_point)
 
 
 func _on_TraceButton_pressed():
 	trace_is_selected = false
+	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
 	current_trace.is_selected = false
 	current_trace.default_color = Globals.green_base
@@ -335,8 +366,11 @@ func _on_TraceButton_pressed():
 	get_node("TraceEditButtons").visible = false
 	
 func _on_EraseButton_pressed():
+	
 	trace_is_selected = false
 	is_first_section_of_trace = false
+	for bp in current_trace.bend_points:
+		get_node(".").remove_child(bp)
 	current_trace.get_parent().remove_child(current_trace)
 	current_trace = null
 	current_bend_point = null
@@ -344,7 +378,9 @@ func _on_EraseButton_pressed():
 	update_used_trace_length()
 
 	get_node("TraceEditButtons").visible = false
-
+	
+	update_game_state()
+#	print("state altered")
 
 func _on_BackButton_pressed():
 # warning-ignore:return_value_discarded
@@ -353,3 +389,62 @@ func _on_BackButton_pressed():
 
 func _on_AdvanceButton_pressed():
 	complete_level()
+
+
+# From here on, everything is related to state management for the undo/redo function
+
+# Called when an action (that is not redo/undo) updates the state of the game
+func update_game_state():
+	
+	game_states.resize(state_position + 1)
+	
+	game_states.push_back(to_json(serialize_traces()))
+	if (game_states.size() <= max_states):
+		state_position += 1
+	else:
+		game_states.pop_front()
+	print("Position:", state_position, "  Size:", game_states.size())
+	
+# Controls wether or not you can click on the undo and redo buttons	
+func update_undo_redo_buttons():
+	if (state_position == 0):
+		$UndoRedoButtons/UndoButton.disabled = true
+	else:
+		$UndoRedoButtons/UndoButton.disabled = false
+	
+	if (state_position == game_states.size() - 1):
+		$UndoRedoButtons/RedoButton.disabled = true
+	else:
+		$UndoRedoButtons/RedoButton.disabled = false
+		
+func _on_UndoButton_pressed():
+	state_position -= 1
+	change_state()
+
+func _on_RedoButton_pressed():
+	state_position += 1
+	change_state()
+
+# Makes the traces sync to the current state
+func change_state():
+	if trace_is_selected:
+		_on_TraceButton_pressed()
+	
+	for t in (traces + [current_trace]):
+		if (t != null):
+			remove_child(t)
+	if (current_bend_point != null):
+		remove_child(current_bend_point)
+	traces = []
+	current_trace = null
+	deserialize_and_load_traces(parse_json(game_states[state_position]))
+#	traces = game_states[state_position]
+#	for t in traces:
+#		add_child(t)
+
+	print("Position:", state_position, "  Size:", game_states.size())
+	
+# Syncronize the traces on screen to the data stored in traces[].
+# Is necessary for using the undo/redo buttons
+#func sync_trace_objects():
+#	get_children()
