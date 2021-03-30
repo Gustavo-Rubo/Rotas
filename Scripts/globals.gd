@@ -1,28 +1,37 @@
 extends Node
 
 # Colors
-var green_base = Color(0, 0.8, 0)
-var green_selected = Color(0.15, 1, 0.15)
-var red_base = Color(0.8, 0, 0)
-var red_selected = Color(1, 0.1, 0.15)
-var blue_base = Color(0, 0, 0.8)
-var blue_selected = Color(0.4, 0.4, 1)
-var gray_menu : Color
-var gray_dots = Color(0.3, 0.3, 0.3)
-var white_highlight = Color(1, 1, 1, 0.5)
-var blue_background = Color(0.05, 0.08, 0.15)
+var Colors_base = {
+	green_base = Color(0, 0.8, 0),
+	green_selected = Color(0.15, 1, 0.15),
+	red_base = Color(0.8, 0, 0),
+	red_selected = Color(1, 0.1, 0.15),
+	blue_base = Color(0, 0, 0.8),
+	blue_selected = Color(0.4, 0.4, 1),
+#	gray_menu : Color,
+	gray_dots = Color(0.3, 0.3, 0.3),
+	white_highlight = Color(1, 1, 1, 0.5),
+	blue_background = Color(0.05, 0.08, 0.15)
+}
 
 # Alternative Colors
-#var green_base = Color(0.2, 0.8, 0.4)
-#var green_selected = Color(0.15, 0.9, 0.15)
-#var red_base = Color(0.8, 0.4, 0.2)
-#var red_selected = Color(0.9, 0.1, 0.15)
-#var blue_base = Color(0, 0, 0.8)
-#var blue_selected = Color(0.4, 0.4, 1)
-#var gray_menu : Color
-#var gray_dots = Color(0.7, 0.7, 0.7)
-#var white_highlight = Color(0.2, 0.2, 0.2, 0.5)
-#var blue_background = Color(0.9, 0.9, 0.9)
+var Colors_alt1 = {
+	green_base = Color(0.2, 0.8, 0.4),
+	green_selected = Color(0.15, 0.9, 0.15),
+	red_base = Color(0.8, 0.4, 0.2),
+	red_selected = Color(0.9, 0.1, 0.15),
+	blue_base = Color(0, 0, 0.8),
+	blue_selected = Color(0.4, 0.4, 1),
+#	gray_menu : Color,
+	gray_dots = Color(0.7, 0.7, 0.7),
+	white_highlight = Color(0.2, 0.2, 0.2, 0.5),
+	blue_background = Color(0.9, 0.9, 0.9)
+}
+
+var Colors = Colors_base
+
+func set_colors(x):
+	Colors = x
 
 # Sizes
 var GRID_SIZE = 32

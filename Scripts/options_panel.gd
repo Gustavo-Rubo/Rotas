@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var toggle_audio = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/Audio/ToggleAudio 
-onready var slider_text = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/TextSize/SliderText
+onready var toggle_audio = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Audio/ToggleAudio 
+onready var slider_text = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/TextSize/SliderText
 
 func _ready():
 	toggle_audio.pressed = ConfigManager.audio_on
@@ -43,3 +43,13 @@ func _on_CenterContainer_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
 			slide_out()
+
+
+func _on_Dark_pressed():
+	Globals.set_colors(Globals.Colors_base)
+	print("dark")
+
+
+func _on_Light_pressed():
+	Globals.set_colors(Globals.Colors_alt1)
+	print("light")

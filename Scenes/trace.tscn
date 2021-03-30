@@ -9,7 +9,7 @@
 size = 24
 font_data = ExtResource( 2 )
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 void fragment() {
@@ -22,8 +22,8 @@ void fragment() {
 	COLOR = vec4(0, 0, 0, value);
 }"
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 
 [sub_resource type="Gradient" id=4]
 resource_local_to_scene = true
@@ -33,15 +33,15 @@ colors = PoolColorArray( 0.733333, 0.133333, 0.870588, 1, 0.733333, 0.133333, 0.
 [sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 4 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.201005, 0.582915 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.201005, 0.201005, 0.201005, 1, 0.351759, 0.351759, 0.351759, 1 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 width = 100
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 4 )
 
 [node name="Trace" type="Line2D"]
@@ -77,7 +77,7 @@ __meta__ = {
 }
 
 [node name="Wrong" type="Line2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 3 )
 default_color = Color( 0.0313726, 0.133333, 0.623529, 0 )
 texture = SubResource( 5 )
 texture_mode = 2
@@ -87,9 +87,8 @@ end_cap_mode = 2
 antialiased = true
 
 [node name="Highlight" type="Line2D" parent="."]
-visible = false
 default_color = Color( 1, 1, 1, 1 )
-texture = SubResource( 2 )
+texture = SubResource( 7 )
 texture_mode = 2
 joint_mode = 2
 begin_cap_mode = 2
@@ -97,7 +96,7 @@ end_cap_mode = 2
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
-material = SubResource( 7 )
+material = SubResource( 8 )
 points = PoolVector2Array( 512.753, 326.575, 273.368, 308.936, 663.943, 64.5117, 757.177, 291.298, 585.828, 409.73, 616.066, 225.782, 863.011, 321.536 )
 width = 20.0
 texture_mode = 2

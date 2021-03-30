@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/cancel_red.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/back_white.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/options_panel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/star_blank.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/star_filled.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/confirm_green.png" type="Texture" id=11]
@@ -62,30 +63,6 @@ shader_param/outline_color = Color( 0.145098, 0.145098, 0.145098, 1 )
 [sub_resource type="DynamicFont" id=7]
 size = 24
 font_data = ExtResource( 3 )
-
-[sub_resource type="Animation" id=8]
-resource_name = "slide_in_level"
-length = 0.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 576, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
 
 [node name="LevelNode" type="Node2D"]
 script = ExtResource( 2 )
@@ -168,8 +145,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TraceEditButtons" type="HBoxContainer" parent="."]
-visible = false
+[node name="ControlButtons" type="HBoxContainer" parent="."]
 margin_left = 694.0
 margin_top = 456.0
 margin_right = 889.0
@@ -180,40 +156,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ConfirmButton" type="Button" parent="TraceEditButtons"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-icon = ExtResource( 11 )
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EraseButton" type="Button" parent="TraceEditButtons"]
-margin_left = 105.0
-margin_right = 195.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-icon = ExtResource( 5 )
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="UndoRedoButtons" type="HBoxContainer" parent="."]
-visible = false
-margin_left = 694.0
-margin_top = 456.0
-margin_right = 889.0
-margin_bottom = 546.0
-rect_min_size = Vector2( 0, 90 )
-custom_constants/separation = 15
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="UndoButton" type="Button" parent="UndoRedoButtons"]
+[node name="UndoButton" type="Button" parent="ControlButtons"]
 margin_right = 90.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 90, 90 )
@@ -222,7 +165,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RedoButton" type="Button" parent="UndoRedoButtons"]
+[node name="EraseButton" type="Button" parent="ControlButtons"]
+margin_left = 105.0
+margin_right = 195.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+disabled = true
+icon = ExtResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RedoButton" type="Button" parent="ControlButtons"]
+visible = false
 margin_left = 105.0
 margin_right = 195.0
 margin_bottom = 90.0
@@ -232,11 +188,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AdvanceButton" type="Button" parent="."]
-margin_left = 904.0
-margin_top = 456.0
-margin_right = 994.0
-margin_bottom = 546.0
+[node name="ConfirmButton" type="Button" parent="ControlButtons"]
+margin_left = 210.0
+margin_right = 300.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+disabled = true
+icon = ExtResource( 11 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdvanceButton" type="Button" parent="ControlButtons"]
+visible = false
+margin_left = 210.0
+margin_right = 300.0
+margin_bottom = 90.0
 rect_min_size = Vector2( 90, 90 )
 disabled = true
 icon = ExtResource( 4 )
@@ -256,12 +224,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in_level = SubResource( 8 )
+[node name="OptionsPanel" parent="." instance=ExtResource( 8 )]
+
+[node name="ScrollContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer" index="1"]
+scroll_vertical = 100
+
+[node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
+margin_bottom = 192.0
+
+[node name="Tutu" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="4"]
+visible = false
+
+[node name="Github" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
+visible = false
+
+[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="7"]
+visible = true
+margin_top = 152.0
+margin_bottom = 192.0
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="TraceEditButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
-[connection signal="pressed" from="TraceEditButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
-[connection signal="pressed" from="UndoRedoButtons/UndoButton" to="." method="_on_UndoButton_pressed"]
-[connection signal="pressed" from="UndoRedoButtons/RedoButton" to="." method="_on_RedoButton_pressed"]
-[connection signal="pressed" from="AdvanceButton" to="." method="_on_AdvanceButton_pressed"]
+[connection signal="pressed" from="ControlButtons/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="ControlButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
+[connection signal="pressed" from="ControlButtons/RedoButton" to="." method="_on_RedoButton_pressed"]
+[connection signal="pressed" from="ControlButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
+[connection signal="pressed" from="ControlButtons/AdvanceButton" to="." method="_on_AdvanceButton_pressed"]
+[connection signal="pressed" from="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
+
+[editable path="OptionsPanel"]

@@ -13,4 +13,4 @@ func _process(_delta):
 
 func _draw():
 	for n in range(0, 20):
-		draw_arc(Vector2(0, 0), Globals.GRID_SIZE*3/2, 2*PI*n/20, 2*PI*(n+0.5)/20, 30, Globals.white_highlight, 2)
+		draw_arc(Vector2(0, 0), Globals.GRID_SIZE*3/2, 2*PI*n/20, 2*PI*(n+0.5)/20, 30, Globals.Colors.white_highlight, 2)

@@ -3,7 +3,7 @@ extends Line2D
 var is_selected = false
 var is_wrong = false
 
-var bend_color = Globals.green_base
+var bend_color = Globals.Colors.green_base
 
 var recursive_checked = false
 
@@ -28,7 +28,7 @@ var circle_points = PoolVector2Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	default_color = Globals.green_base
+	default_color = Globals.Colors.green_base
 	width = Globals.GRID_SIZE * 0.5
 	highlight.width = width
 	wrong.width = width
@@ -74,21 +74,6 @@ func get_length():
 			length += points[i].distance_to(points[i+1])
 
 	return length
-
-func set_color(color):
-	if color == "red":
-		bend_color = Globals.red_base
-		if is_selected:
-			default_color = Globals.red_selected
-		else:
-			default_color = Globals.red_base
-			
-	elif color == "green":
-		bend_color = Globals.green_base
-		if is_selected:
-			default_color = Globals.green_selected
-		else:
-			default_color = Globals.green_base
 
 # Serializes the trace data for saving
 func save():

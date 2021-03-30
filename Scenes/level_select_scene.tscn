@@ -113,3 +113,5 @@ __meta__ = {
 [editable path="ScrollContainer/HBoxContainer/level_backdrop/LevelSet"]
 
 [editable path="ScrollContainer/HBoxContainer/level_backdrop_2"]
+
+[editable path="OptionsPanel"]

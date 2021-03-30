@@ -1,6 +1,7 @@
 extends Node2D
 
 export (int) var level_number
+onready var options_panel = $OptionsPanel
 
 export (float) var goal_trace_length = 1
 export (float) var max_trace_length = 1
@@ -31,10 +32,6 @@ var state_position = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	slide_in()
-#	var a
-#	var s
-#	$BackButton.icon.draw(a, s, Globals.red_base)
 	
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
@@ -100,12 +97,16 @@ func check_level_solved():
 				solved = false
 	
 	if solved:
-		$AdvanceButton.disabled = false
-		$AdvanceButton.icon = advance_enabled
+		$ControlButtons/AdvanceButton.disabled = false
+		$ControlButtons/AdvanceButton.icon = advance_enabled
+		$ControlButtons/AdvanceButton.visible = true
+		$ControlButtons/ConfirmButton.visible = false
 		
 	else:
-		$AdvanceButton.disabled = true
-		$AdvanceButton.icon = advance_disabled
+		$ControlButtons/AdvanceButton.disabled = true
+		$ControlButtons/AdvanceButton.icon = advance_disabled
+		$ControlButtons/AdvanceButton.visible = false
+		$ControlButtons/ConfirmButton.visible = true
 		
 	
 # Helper function for the recursive net checking.
@@ -134,7 +135,6 @@ func check_nets_solved():
 			if !pad.recursive_checked:
 				pad.recursive_checked = true
 				pad_sum = 1
-#				print(pad.get_node("Area2D").get_overlapping_areas().size())
 				for trace_area in pad.get_node("Area2D").get_overlapping_areas():
 					pad_sum += recursive_check_net_solved(trace_area.get_parent(), 0, n)
 				pad.get_node("PadSum").set_text(String(pad_sum))
@@ -150,10 +150,8 @@ func check_nets_solved():
 		if t != null:
 			if t.nets.size() >= 2:
 				t.is_wrong = true
-#				t.set_color("red")
 			else:
 				t.is_wrong = false
-#				t.set_color("green")
 			t.get_node("LabelNets").text = String(t.nets)
 
 # Recursive function for determining which traces belong to which nets,
@@ -270,7 +268,9 @@ func _on_Background_gui_input(event):
 					current_trace.is_selected = true
 #					current_trace.is_wrong = false4
 #					current_trace.set_color("green")
-					get_node("TraceEditButtons").visible = true
+#					get_node("TraceEditButtons").visible = true
+					$ControlButtons/ConfirmButton.disabled = false
+					$ControlButtons/EraseButton.disabled = false
 					traces.remove(i)
 					current_bend_point = current_trace.bend_points[-1]
 					current_bend_point.is_selected = true
@@ -296,7 +296,9 @@ func _on_Background_gui_input(event):
 				
 				trace_is_selected = true
 				is_first_section_of_trace = true
-				get_node("TraceEditButtons").visible = true
+#				get_node("TraceEditButtons").visible = true
+				$ControlButtons/ConfirmButton.disabled = false
+				$ControlButtons/EraseButton.disabled = false
 				
 				current_trace = trace_resource.instance()
 				current_trace.is_selected = true
@@ -322,7 +324,6 @@ func _on_Background_gui_input(event):
 			# This is to control the flow of game states
 			if (!last_press_was_on_trace):
 				update_game_state()
-#				print ("state altered")
 				last_press_was_on_trace = false
 				
 			is_pressed = false
@@ -359,11 +360,13 @@ func _on_TraceButton_pressed():
 	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
 	current_trace.is_selected = false
-	current_trace.default_color = Globals.green_base
+	current_trace.default_color = Globals.Colors.green_base
 	traces.append(current_trace)
 	current_trace = null
 	current_bend_point = null
-	get_node("TraceEditButtons").visible = false
+#	get_node("TraceEditButtons").visible = false
+	$ControlButtons/ConfirmButton.disabled = true
+	$ControlButtons/EraseButton.disabled = true
 	
 func _on_EraseButton_pressed():
 	
@@ -377,12 +380,16 @@ func _on_EraseButton_pressed():
 	
 	update_used_trace_length()
 
-	get_node("TraceEditButtons").visible = false
+#	get_node("TraceEditButtons").visible = false
+	$ControlButtons/ConfirmButton.disabled = true
+	$ControlButtons/EraseButton.disabled = true
 	
 	update_game_state()
-#	print("state altered")
 
 func _on_BackButton_pressed():
+	options_panel.slide_in()
+
+func _on_MenuButton_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
@@ -403,19 +410,18 @@ func update_game_state():
 		state_position += 1
 	else:
 		game_states.pop_front()
-	print("Position:", state_position, "  Size:", game_states.size())
 	
 # Controls wether or not you can click on the undo and redo buttons	
 func update_undo_redo_buttons():
 	if (state_position == 0):
-		$UndoRedoButtons/UndoButton.disabled = true
+		$ControlButtons/UndoButton.disabled = true
 	else:
-		$UndoRedoButtons/UndoButton.disabled = false
+		$ControlButtons/UndoButton.disabled = false
 	
 	if (state_position == game_states.size() - 1):
-		$UndoRedoButtons/RedoButton.disabled = true
+		$ControlButtons/RedoButton.disabled = true
 	else:
-		$UndoRedoButtons/RedoButton.disabled = false
+		$ControlButtons/RedoButton.disabled = false
 		
 func _on_UndoButton_pressed():
 	state_position -= 1
@@ -433,16 +439,12 @@ func change_state():
 	for t in (traces + [current_trace]):
 		if (t != null):
 			remove_child(t)
-	if (current_bend_point != null):
-		remove_child(current_bend_point)
+#	I still don't know if it is better or not to remove the bend points here
+#	if (current_bend_point != null):
+#		remove_child(current_bend_point)
 	traces = []
 	current_trace = null
 	deserialize_and_load_traces(parse_json(game_states[state_position]))
-#	traces = game_states[state_position]
-#	for t in traces:
-#		add_child(t)
-
-	print("Position:", state_position, "  Size:", game_states.size())
 	
 # Syncronize the traces on screen to the data stored in traces[].
 # Is necessary for using the undo/redo buttons
