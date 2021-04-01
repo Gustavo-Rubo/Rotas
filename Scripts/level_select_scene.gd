@@ -16,6 +16,8 @@ func _enter_tree():
 			stars += 1
 	
 	$StarCounter.set_text(String(stars) + "/5")
+	
+	AudioServer.set_bus_mute(0, !ConfigManager.audio_on)
 
 func _on_OptionsButton_pressed():
 	options_panel.slide_in()

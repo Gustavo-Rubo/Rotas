@@ -4,7 +4,7 @@ onready var toggle_audio = $CenterContainer/PanelContainer/MarginContainer2/VBox
 onready var slider_text = $CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/TextSize/SliderText
 
 func _ready():
-	toggle_audio.pressed = ConfigManager.audio_on
+	toggle_audio.pressed = !ConfigManager.audio_on
 	slider_text.value = ConfigManager.text_size
 	pass
 	
@@ -22,15 +22,14 @@ func _on_TextureButton_pressed():
 
 
 func _on_HSlider_toggled(_button_pressed):
-	ConfigManager.audio_on = toggle_audio.pressed
+	ConfigManager.audio_on = !toggle_audio.pressed
 	ConfigManager.save_config()
-	pass
+	AudioServer.set_bus_mute(0, !ConfigManager.audio_on)
 
 
 func _on_HSlider_value_changed(_value):
 	ConfigManager.text_size = slider_text.value
 	ConfigManager.save_config()
-	pass # Replace with function body.
 
 func _on_en_GB_pressed():
 	TranslationServer.set_locale("en_GB")
@@ -47,9 +46,9 @@ func _on_CenterContainer_gui_input(event):
 
 func _on_Dark_pressed():
 	Globals.set_colors(Globals.Colors_base)
-	print("dark")
+#	get_tree().get_current_scene().update()
 
 
 func _on_Light_pressed():
 	Globals.set_colors(Globals.Colors_alt1)
-	print("light")
+#	get_tree().get_current_scene().update()

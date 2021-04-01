@@ -11,7 +11,9 @@ var Colors_base = {
 #	gray_menu : Color,
 	gray_dots = Color(0.3, 0.3, 0.3),
 	white_highlight = Color(1, 1, 1, 0.5),
-	blue_background = Color(0.05, 0.08, 0.15)
+	blue_background = Color(0.05, 0.08, 0.15),
+	white_button = Color(1, 1, 1),
+	gray_disabled = Color(0.3, 0.3, 0.3)
 }
 
 # Alternative Colors
@@ -25,7 +27,9 @@ var Colors_alt1 = {
 #	gray_menu : Color,
 	gray_dots = Color(0.7, 0.7, 0.7),
 	white_highlight = Color(0.2, 0.2, 0.2, 0.5),
-	blue_background = Color(0.9, 0.9, 0.9)
+	blue_background = Color(0.9, 0.9, 0.9),
+	white_button = Color(1, 1, 1),
+	gray_disabled = Color(0.3, 0.3, 0.3)
 }
 
 var Colors = Colors_base

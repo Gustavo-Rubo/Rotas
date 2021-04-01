@@ -1,20 +1,21 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Sprites/right_arrow_black.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/cancel_red.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/back_white.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/undo.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/cancel.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/confirm.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/options_panel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/star_blank.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/star_filled.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/confirm_green.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/right_arrow_green.png" type="Texture" id=12]
+[ext_resource path="res://Audio/somfilamentowav.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sprites/options.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/advance.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
-size = 64
+size = 52
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=2]
@@ -23,12 +24,11 @@ border_color = Color( 0, 0.780392, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0.8, 0, 1 )
-border_blend = true
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0, 0.784314, 0, 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
@@ -68,8 +68,10 @@ font_data = ExtResource( 3 )
 script = ExtResource( 2 )
 goal_met = ExtResource( 10 )
 goal_not_met = ExtResource( 9 )
-advance_disabled = ExtResource( 4 )
-advance_enabled = ExtResource( 12 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "Traces"
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 1024.0
@@ -93,17 +95,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="Button" parent="."]
-margin_left = 904.0
+[node name="MenuButton" type="TextureButton" parent="."]
+margin_left = 914.0
 margin_top = 30.0
 margin_right = 994.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 90, 90 )
-icon = ExtResource( 6 )
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 110.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 12 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 margin_left = 20.0
@@ -146,72 +144,57 @@ __meta__ = {
 }
 
 [node name="ControlButtons" type="HBoxContainer" parent="."]
-margin_left = 694.0
-margin_top = 456.0
-margin_right = 889.0
+margin_left = 724.0
+margin_top = 466.0
+margin_right = 1089.0
 margin_bottom = 546.0
-rect_min_size = Vector2( 0, 90 )
+rect_min_size = Vector2( 0, 80 )
 custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UndoButton" type="Button" parent="ControlButtons"]
-margin_right = 90.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-text = "Undo"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="UndoButton" type="TextureButton" parent="ControlButtons"]
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 4 )
+expand = true
 
-[node name="EraseButton" type="Button" parent="ControlButtons"]
-margin_left = 105.0
-margin_right = 195.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
+[node name="EraseButton" type="TextureButton" parent="ControlButtons"]
+margin_left = 95.0
+margin_right = 175.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
 disabled = true
-icon = ExtResource( 5 )
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_normal = ExtResource( 5 )
+expand = true
 
-[node name="RedoButton" type="Button" parent="ControlButtons"]
+[node name="RedoButton" type="TextureButton" parent="ControlButtons"]
 visible = false
-margin_left = 105.0
-margin_right = 195.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-text = "Redo"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 190.0
+margin_right = 270.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+expand = true
 
-[node name="ConfirmButton" type="Button" parent="ControlButtons"]
-margin_left = 210.0
-margin_right = 300.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
+[node name="ConfirmButton" type="TextureButton" parent="ControlButtons"]
+margin_left = 190.0
+margin_right = 270.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
 disabled = true
-icon = ExtResource( 11 )
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_normal = ExtResource( 6 )
+expand = true
 
-[node name="AdvanceButton" type="Button" parent="ControlButtons"]
-visible = false
-margin_left = 210.0
-margin_right = 300.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
+[node name="AdvanceButton" type="TextureButton" parent="ControlButtons"]
+margin_left = 285.0
+margin_right = 365.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
 disabled = true
-icon = ExtResource( 4 )
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_normal = ExtResource( 13 )
+expand = true
 
 [node name="Hint" type="Label" parent="."]
 margin_left = 312.0
@@ -226,11 +209,22 @@ __meta__ = {
 
 [node name="OptionsPanel" parent="." instance=ExtResource( 8 )]
 
+[node name="PanelContainer" parent="OptionsPanel/CenterContainer" index="0"]
+margin_top = 37.0
+margin_bottom = 539.0
+
+[node name="MarginContainer2" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
+margin_bottom = 502.0
+
+[node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2" index="0"]
+margin_bottom = 482.0
+
 [node name="ScrollContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer" index="1"]
+margin_bottom = 462.0
 scroll_vertical = 100
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
-margin_bottom = 192.0
+margin_bottom = 230.0
 
 [node name="Tutu" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="4"]
 visible = false
@@ -239,11 +233,10 @@ visible = false
 visible = false
 
 [node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="7"]
-visible = true
-margin_top = 152.0
-margin_bottom = 192.0
+margin_top = 180.0
+margin_bottom = 230.0
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
-[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="ControlButtons/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="ControlButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
 [connection signal="pressed" from="ControlButtons/RedoButton" to="." method="_on_RedoButton_pressed"]
