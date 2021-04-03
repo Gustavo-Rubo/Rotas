@@ -52,6 +52,10 @@ func _ready():
 	update_used_trace_length()
 	update_game_state()
 
+# Stop playing sounds when the level is unloaded
+func _exit_tree():
+	AudioManager.stop_loop()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if is_pressed:
@@ -383,7 +387,6 @@ func _on_MenuButton_pressed():
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
 func _on_AdvanceButton_pressed():
-	AudioManager.stop_loop()
 	complete_level()
 
 func complete_level():

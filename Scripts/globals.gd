@@ -3,6 +3,7 @@ extends Node
 # Colors
 var Colors_base = {
 	green_base = Color(0, 0.8, 0),
+	bend_color = Color(0, 0.8, 0),
 	green_selected = Color(0.15, 1, 0.15),
 	red_base = Color(0.8, 0, 0),
 	red_selected = Color(1, 0.1, 0.15),
@@ -19,6 +20,7 @@ var Colors_base = {
 # Alternative Colors
 var Colors_alt1 = {
 	green_base = Color(0.2, 0.8, 0.4),
+	bend_color = Color(0.2, 0.8, 0.4),
 	green_selected = Color(0.15, 0.9, 0.15),
 	red_base = Color(0.8, 0.4, 0.2),
 	red_selected = Color(0.9, 0.1, 0.15),

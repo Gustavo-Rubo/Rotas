@@ -3,8 +3,6 @@ extends Line2D
 var is_selected = false
 var is_wrong = false
 
-var bend_color = Globals.Colors.green_base
-
 var recursive_checked = false
 
 var bend_points = []
@@ -90,7 +88,7 @@ func _on_Trace_draw():
 	$Label.set_global_position(points[0])
 	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
-		draw_circle_aa(p, width/2, bend_color)
+		draw_circle_aa(p, width/2, Globals.Colors.bend_color)
 		
 func update_collision():
 	if $Area2D.get_child_count() >= 1:
@@ -113,10 +111,10 @@ func update_collision():
 #			$Area2D.add_child(collision)
 
 # We use this because draw_circle has no anti-aliasing 
-func draw_circle_aa(_center, radius, color):
+func draw_circle_aa(center, radius, color):
 	var circle_points_radius = PoolVector2Array()
 	for c in circle_points:
-		circle_points_radius.append(c * radius)
+		circle_points_radius.append(center + c * radius)
 	draw_colored_polygon(circle_points_radius, color, PoolVector2Array(), null, null, true)
 	
 
