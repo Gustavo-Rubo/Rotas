@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/connection_wrong.wav-86b64c9b6fb5611fa9e000b2c3f86776.sample"
+
+[deps]
+
+source_file="res://Audio/connection_wrong.wav"
+dest_files=[ "res://.import/connection_wrong.wav-86b64c9b6fb5611fa9e000b2c3f86776.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

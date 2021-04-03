@@ -4,6 +4,10 @@ Connect the dots, don't let your traces cross one another, and try to find the s
 
 Rotas is a puzzle mobile game inspired by electronic circuit design.
 
+Play a demo on Itch:
+
+https://gustavorubo.itch.io/rotas
+
 ## Acknowledgements
 
 [Godot](https://godotengine.org/) - The game engine used for the project

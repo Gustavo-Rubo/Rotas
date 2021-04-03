@@ -5,9 +5,8 @@ onready var options_panel = $OptionsPanel
 var stars
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-#	$OptionsButton.modulate = Globals.red_base
-	pass # Replace with function body.
+#func _ready():
+#	pass # Replace with function body.
 
 func _enter_tree():
 	stars = 0
@@ -17,7 +16,8 @@ func _enter_tree():
 	
 	$StarCounter.set_text(String(stars) + "/5")
 	
-	AudioServer.set_bus_mute(0, !ConfigManager.audio_on)
+	# Mute the master bus according to the current config
+	AudioServer.set_bus_mute(1, !ConfigManager.audio_on)
 
 func _on_OptionsButton_pressed():
 	options_panel.slide_in()

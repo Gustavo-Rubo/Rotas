@@ -134,4 +134,6 @@ visible = false
 
 [editable path="ScrollContainer/HBoxContainer/level_backdrop_2"]
 
+[editable path="ScrollContainer/HBoxContainer/level_backdrop_2/LevelSet"]
+
 [editable path="OptionsPanel"]

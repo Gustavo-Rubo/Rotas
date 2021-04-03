@@ -28,8 +28,7 @@ var max_states = 20
 var state_position = -1
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	
+func _ready():	
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
@@ -76,10 +75,19 @@ func _process(_delta):
 	else:
 		$GuideLines.visible = false
 	
+	# Updating and checking the level solution
 	update_used_trace_length()
 	update_undo_redo_buttons()
 	check_nets_solved()
 	check_level_solved()
+	
+	# Logic that chooses which trace sound effect to play
+	if trace_is_selected and !is_pressed:
+		AudioManager.play_loop("trace_selected")
+	elif trace_is_selected and is_pressed:
+		AudioManager.play_loop("trace_hold")
+	else:
+		AudioManager.stop_loop()
 
 func check_level_solved():
 	var solved = true
@@ -150,6 +158,9 @@ func check_nets_solved():
 	for t in (traces + [current_trace]):
 		if t != null:
 			if t.nets.size() >= 2:
+				# Play the "wrong" sound effect on the moment it becomes wrong
+				if (!t.is_wrong):
+					AudioManager.play_connection("connection_wrong")
 				t.is_wrong = true
 			else:
 				t.is_wrong = false
@@ -177,8 +188,6 @@ func recursive_check_net_solved(element, pad_sum, net_number):
 	return 0
 
 func serialize_traces():
-#	if current_trace != null:
-#		traces.append(current_trace)
 	var traces_serial = []
 	for t in (traces + [current_trace]):
 		if t != null:
@@ -219,32 +228,6 @@ func update_used_trace_length():
 	else:
 		$GoalMet.texture = goal_not_met
 	
-func complete_level():
-	# Save the traces state:
-	GameDataManager.level_info[level_number].traces = to_json(serialize_traces())
-	
-	# Update if the player met the goal
-	if used_trace_length <= goal_trace_length:
-		GameDataManager.level_info[level_number].score_goal_met = true
-	
-	# Update the lowest score, if necessary
-	if used_trace_length < GameDataManager.level_info[level_number].low_score:
-		GameDataManager.level_info[level_number].low_score = used_trace_length
-	
-	# Next level is unlocked:
-	if !GameDataManager.level_info.has(level_number + 1):
-		GameDataManager.level_info[level_number + 1] = {
-			"unlocked": true,
-			"low_score": INF,
-			"score_goal_met": false,
-			"traces": to_json([])
-		}
-		
-	GameDataManager.save_data()
-	
-#	slide_out()
-# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 	
 func snap_coord_to_grid(coord):
 	coord = coord + Vector2(Globals.GRID_SIZE/2, Globals.GRID_SIZE/2)
@@ -265,7 +248,6 @@ func _on_Background_gui_input(event):
 				if (traces[i].check_click(event.position)):
 					last_press_was_on_trace = true
 					trace_is_selected = true
-					$AudioStreamPlayer.play()
 					current_trace = traces[i]
 					current_trace.is_selected = true
 					$ControlButtons/ConfirmButton.disabled = false
@@ -296,7 +278,6 @@ func _on_Background_gui_input(event):
 			if (!trace_is_selected):
 				
 				trace_is_selected = true
-				$AudioStreamPlayer.play()
 				is_first_section_of_trace = true
 				$ControlButtons/ConfirmButton.disabled = false
 				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors.green_base)
@@ -342,6 +323,8 @@ func _on_Background_gui_input(event):
 						for p in net.pads:
 							var pad = net.get_node(p)
 							if pad.check_click(pos):
+								# TODO: logic if this is a correct connection or not
+								AudioManager.play_connection("connection_complete")
 								_on_TraceButton_pressed()
 	
 		update_used_trace_length()
@@ -360,7 +343,6 @@ func add_bend_point(pos):
 
 func _on_TraceButton_pressed():
 	trace_is_selected = false
-	$AudioStreamPlayer.stop()
 	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
 	current_trace.is_selected = false
@@ -376,7 +358,6 @@ func _on_TraceButton_pressed():
 func _on_EraseButton_pressed():
 	
 	trace_is_selected = false
-	$AudioStreamPlayer.stop()
 	is_first_section_of_trace = false
 	for bp in current_trace.bend_points:
 		get_node(".").remove_child(bp)
@@ -401,9 +382,36 @@ func _on_MenuButton_pressed():
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
-
 func _on_AdvanceButton_pressed():
+	AudioManager.stop_loop()
 	complete_level()
+
+func complete_level():
+	# Save the traces state:
+	GameDataManager.level_info[level_number].traces = to_json(serialize_traces())
+	
+	# Update if the player met the goal
+	if used_trace_length <= goal_trace_length:
+		GameDataManager.level_info[level_number].score_goal_met = true
+	
+	# Update the lowest score, if necessary
+	if used_trace_length < GameDataManager.level_info[level_number].low_score:
+		GameDataManager.level_info[level_number].low_score = used_trace_length
+	
+	# Next level is unlocked:
+	if !GameDataManager.level_info.has(level_number + 1):
+		GameDataManager.level_info[level_number + 1] = {
+			"unlocked": true,
+			"low_score": INF,
+			"score_goal_met": false,
+			"traces": to_json([])
+		}
+		
+	GameDataManager.save_data()
+	
+#	slide_out()
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
 
 # From here on, everything is related to state management for the undofunction

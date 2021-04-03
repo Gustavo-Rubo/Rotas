@@ -40,13 +40,13 @@ func _draw():
 	if (net_number == 5): draw_star(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
 
 # We use this because draw_circle has no anti-aliasing 
-func draw_circle_aa(center, radius, color):
+func draw_circle_aa(_center, r, color):
 	var circle_points_radius = PoolVector2Array()
 	for c in circle_points:
-		circle_points_radius.append(c * radius)
+		circle_points_radius.append(c * r)
 	draw_colored_polygon(circle_points_radius, color, PoolVector2Array(), null, null, true)
 	
-func draw_square(pos, r, color):
+func draw_square(_pos, r, color):
 	r = r*1.2
 	var points = PoolVector2Array([
 		Vector2(0, -r).rotated(PI*1/4),
@@ -55,7 +55,7 @@ func draw_square(pos, r, color):
 		Vector2(0, -r).rotated(PI*7/4)])
 	draw_colored_polygon(points, color, PoolVector2Array(), null, null, true)
 
-func draw_triangle(pos, r, color):
+func draw_triangle(_pos, r, color):
 	r = r*1.2
 	var points = PoolVector2Array([
 		Vector2(0, -r).rotated(0),
@@ -63,7 +63,7 @@ func draw_triangle(pos, r, color):
 		Vector2(0, -r).rotated(PI*4/3)])
 	draw_colored_polygon(points, color, PoolVector2Array(), null, null, true)
 	
-func draw_diamond(pos, r, color):
+func draw_diamond(_pos, r, color):
 	r = r*1.2
 	var points = PoolVector2Array([
 		Vector2(0, r),
@@ -72,7 +72,7 @@ func draw_diamond(pos, r, color):
 		Vector2(-r, 0)])
 	draw_colored_polygon(points, color, PoolVector2Array(), null, null, true)
 	
-func draw_pentagon(pos, r, color):
+func draw_pentagon(_pos, r, color):
 	r = r*1.2
 	var points = PoolVector2Array([
 		Vector2(0, -r).rotated(0),
@@ -82,7 +82,7 @@ func draw_pentagon(pos, r, color):
 		Vector2(0, -r).rotated(PI*8/5)])
 	draw_colored_polygon(points, color, PoolVector2Array(), null, null, true)
 	
-func draw_star(pos, r, color):
+func draw_star(_pos, r, color):
 	r = r*1.2
 	var points = PoolVector2Array([
 		Vector2(0, -r).rotated(0),

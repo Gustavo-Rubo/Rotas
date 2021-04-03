@@ -113,7 +113,7 @@ func update_collision():
 #			$Area2D.add_child(collision)
 
 # We use this because draw_circle has no anti-aliasing 
-func draw_circle_aa(center, radius, color):
+func draw_circle_aa(_center, radius, color):
 	var circle_points_radius = PoolVector2Array()
 	for c in circle_points:
 		circle_points_radius.append(c * radius)

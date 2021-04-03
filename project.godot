@@ -25,6 +25,7 @@ config/icon="res://Sprites/icon.png"
 ConfigManager="*res://Scripts/config_manager.gd"
 GameDataManager="*res://Scripts/game_data_manager.gd"
 Globals="*res://Scripts/globals.gd"
+AudioManager="*res://Scripts/audio_manager.gd"
 
 [display]
 
