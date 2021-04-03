@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
@@ -8,17 +8,17 @@
 [ext_resource path="res://Sprites/confirm.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/options_panel.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Sprites/star_blank.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/star_filled.png" type="Texture" id=10]
+[ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Sprites/star.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/options.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/advance.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 52
-font_data = ExtResource( 3 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0.827451, 0, 1 )
+bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 0, 0.780392, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -27,49 +27,24 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color( 0, 0.784314, 0, 1 )
+border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="Shader" id=5]
-code = "shader_type canvas_item;
-
-uniform float width : hint_range(0.0, 30.0);
-uniform vec4 outline_color : hint_color;
-
-void fragment()
-{
-	float size = width / float(textureSize(TEXTURE, 0).x);
-	
-	vec4 sprite_color = texture(TEXTURE, UV);
-	float alpha = -4.0 * sprite_color.a;
-	alpha += texture(TEXTURE, UV + vec2(size, 0.0)).a;
-	alpha += texture(TEXTURE, UV + vec2(-size, 0.0)).a;
-	alpha += texture(TEXTURE, UV + vec2(0.0, size)).a;
-	alpha += texture(TEXTURE, UV + vec2(0.0, -size)).a;
-	
-	vec4 final_color = mix(sprite_color, outline_color, clamp(alpha, 0.0, 1.0));
-	COLOR = vec4(final_color.rgb, clamp(abs(alpha) + sprite_color.a, 0.0, 1.0));
-}"
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
-shader_param/width = 3.0
-shader_param/outline_color = Color( 0.145098, 0.145098, 0.145098, 1 )
-
 [sub_resource type="DynamicFont" id=7]
 size = 24
 font_data = ExtResource( 3 )
 
-[node name="LevelNode" type="Node2D"]
+[node name="LevelNode" type="Node2D" groups=[
+"color_change",
+]]
 script = ExtResource( 2 )
-goal_met = ExtResource( 10 )
-goal_not_met = ExtResource( 9 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 1024.0
+margin_left = 0.471954
+margin_right = 1024.47
 margin_bottom = 576.0
 expand = true
 script = ExtResource( 1 )
@@ -85,6 +60,7 @@ margin_top = 20.0
 margin_right = 100.0
 margin_bottom = 96.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "#"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -100,9 +76,9 @@ texture_normal = ExtResource( 12 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 margin_left = 20.0
-margin_top = 520.0
+margin_top = 522.0
 margin_right = 283.0
-margin_bottom = 545.0
+margin_bottom = 547.0
 rect_min_size = Vector2( 263, 25 )
 custom_styles/fg = SubResource( 2 )
 custom_styles/bg = SubResource( 3 )
@@ -115,9 +91,9 @@ __meta__ = {
 [node name="TraceLength" type="Label" parent="."]
 visible = false
 margin_left = 20.5
-margin_top = 517.5
+margin_top = 522.0
 margin_right = 103.5
-margin_bottom = 546.5
+margin_bottom = 551.0
 custom_fonts/font = SubResource( 4 )
 text = "#"
 __meta__ = {
@@ -125,14 +101,12 @@ __meta__ = {
 }
 
 [node name="GoalMet" type="TextureRect" parent="."]
-material = SubResource( 6 )
-use_parent_material = true
 margin_left = 136.0
-margin_top = 516.0
-margin_right = 166.0
-margin_bottom = 546.0
+margin_top = 518.0
+margin_right = 168.0
+margin_bottom = 550.0
 rect_min_size = Vector2( 30, 30 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -197,7 +171,7 @@ margin_top = 524.0
 margin_right = 410.0
 margin_bottom = 551.0
 custom_fonts/font = SubResource( 7 )
-custom_colors/font_color = Color( 0, 0.756863, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -205,11 +179,14 @@ __meta__ = {
 [node name="OptionsPanel" parent="." instance=ExtResource( 8 )]
 
 [node name="PanelContainer" parent="OptionsPanel/CenterContainer" index="0"]
-margin_top = 37.0
-margin_bottom = 539.0
+margin_top = 34.0
+margin_bottom = 542.0
 
-[node name="MarginContainer2" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
-margin_bottom = 502.0
+[node name="ColorPanel" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
+margin_bottom = 505.0
+
+[node name="MarginContainer2" parent="OptionsPanel/CenterContainer/PanelContainer" index="1"]
+margin_bottom = 505.0
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2" index="0"]
 margin_bottom = 482.0
@@ -227,7 +204,7 @@ visible = false
 [node name="Github" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
 visible = false
 
-[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="7"]
+[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="6"]
 margin_top = 180.0
 margin_bottom = 230.0
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]

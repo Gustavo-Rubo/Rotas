@@ -7,6 +7,11 @@ onready var solved
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	solved = false
+	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
+	options_panel.connect("change_color", self, "_on_change_color")
+	
+func _on_change_color():
+	update()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -24,7 +29,7 @@ func _draw():
 	if pads.size() >= 2:
 		for i in (pads.size() - 1):
 			if !solved:
-				draw_dashed_line(get_node(pads[i]).position, get_node(pads[i+1]).position, Globals.Colors.blue_selected, 2, 10)
+				draw_dashed_line(get_node(pads[i]).position, get_node(pads[i+1]).position, Globals.Colors[ConfigManager.color_palette].blue_selected, 2, 10)
 			else:
 				print("net solved")
 

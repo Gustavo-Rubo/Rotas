@@ -26,27 +26,39 @@ func _ready():
 		score_goal_met = GameDataManager.level_info[level_number].score_goal_met
 	else:
 		enabled = false
-	
+		
+	# Palette coloring
+	level_label.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
+		
 	if level_number == 1:
 		previous_path.texture = previous_clear
 	elif enabled:
 		previous_path.texture = previous_trace
 	else:
 		previous_path.texture = previous_rat
-		
-	setup()
-
-func setup():
+			
 	level_label.text = Globals.level_number_to_code(level_number)
+	
+	_on_change_color()
+	
+	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
+	options_panel.connect("change_color", self, "_on_change_color")
+	
+func _on_change_color():
+	level_label.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
+	button.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+	
 	if enabled:
-		button.texture_normal = open_texture
+		button.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
 	else:
-		button.texture_normal = blocked_texture
+		button.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
+		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].blue_selected)
 		
 	if score_goal_met:
-		star.texture = goal_met
+		star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 	else:
-		star.texture = goal_not_met
+		star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_blank)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

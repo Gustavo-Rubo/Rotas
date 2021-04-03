@@ -26,7 +26,7 @@ var circle_points = PoolVector2Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	default_color = Globals.Colors.green_base
+	default_color = Globals.Colors[ConfigManager.color_palette].green_base
 	width = Globals.GRID_SIZE * 0.5
 	highlight.width = width
 	wrong.width = width
@@ -44,6 +44,13 @@ func _ready():
 	
 	for i in range(0, 20):
 		circle_points.append(Vector2(sin(i*PI/10), cos(i*PI/10)))
+	
+	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
+	options_panel.connect("change_color", self, "_on_change_color")
+	
+func _on_change_color():
+	update()
+	default_color = Globals.Colors[ConfigManager.color_palette].green_base
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -88,7 +95,7 @@ func _on_Trace_draw():
 	$Label.set_global_position(points[0])
 	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
-		draw_circle_aa(p, width/2, Globals.Colors.bend_color)
+		draw_circle_aa(p, width/2, Globals.Colors[ConfigManager.color_palette].bend_color)
 		
 func update_collision():
 	if $Area2D.get_child_count() >= 1:

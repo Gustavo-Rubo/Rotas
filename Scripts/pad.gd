@@ -27,17 +27,23 @@ func _ready():
 	
 	for i in range(0, 20):
 		circle_points.append(Vector2(sin(i*PI/10), cos(i*PI/10)))
+		
+	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
+	options_panel.connect("change_color", self, "_on_change_color")
+	
+func _on_change_color():
+	update()
 	
 func _draw():
 	# We use the draw_colored_polygon function because the draw_circle has no antialiasing
-	draw_circle_aa(Vector2(0,0), radius, Globals.Colors.green_base)
+	draw_circle_aa(Vector2(0,0), radius, Globals.Colors[ConfigManager.color_palette].green_base)
 	
-	if (net_number == 0): draw_circle_aa(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
-	if (net_number == 1): draw_square(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
-	if (net_number == 2): draw_triangle(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
-	if (net_number == 3): draw_diamond(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
-	if (net_number == 4): draw_pentagon(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
-	if (net_number == 5): draw_star(Vector2(0, 0), radius / 2, Globals.Colors.blue_background)
+	if (net_number == 0): draw_circle_aa(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
+	if (net_number == 1): draw_square(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
+	if (net_number == 2): draw_triangle(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
+	if (net_number == 3): draw_diamond(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
+	if (net_number == 4): draw_pentagon(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
+	if (net_number == 5): draw_star(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
 
 # We use this because draw_circle has no anti-aliasing 
 func draw_circle_aa(_center, r, color):

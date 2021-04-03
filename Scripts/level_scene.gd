@@ -7,9 +7,6 @@ export (float) var goal_trace_length = 1
 export (float) var max_trace_length = 1
 var used_trace_length = 0
 
-export (Texture) var goal_met
-export (Texture) var goal_not_met
-
 export var nets = []
 var traces = []
 var trace_resource
@@ -32,11 +29,12 @@ func _ready():
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
+	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
+	options_panel.connect("change_color", self, "_on_change_color")
+	
 	$LblNumber.set_text(tr("level_w_number") % Globals.level_number_to_code(level_number))
 	$ControlButtons/ConfirmButton.disabled = true
-	$ControlButtons/ConfirmButton.set_modulate(Globals.Colors.gray_disabled)
 	$ControlButtons/EraseButton.disabled = true
-	$ControlButtons/EraseButton.set_modulate(Globals.Colors.gray_disabled)
 	
 	for n in nets.size():
 		var net = get_node(nets[n])
@@ -51,6 +49,7 @@ func _ready():
 	check_level_solved()
 	update_used_trace_length()
 	update_game_state()
+	_on_change_color()
 
 # Stop playing sounds when the level is unloaded
 func _exit_tree():
@@ -93,6 +92,30 @@ func _process(_delta):
 	else:
 		AudioManager.stop_loop()
 
+func _on_change_color():
+	$MenuButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
+	$ProgressBar.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+	$LblNumber.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
+	$TraceLength.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
+	$Hint.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
+	
+	if trace_is_selected:
+		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
+		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+	else:
+		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
+		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
+		
+	if $ControlButtons/AdvanceButton.visible:
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+	else:
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
+	
+	if used_trace_length <= goal_trace_length:
+		$GoalMet.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
+	else:
+		$GoalMet.set_modulate(Globals.Colors[ConfigManager.color_palette].star_blank)
+	
 func check_level_solved():
 	var solved = true
 	
@@ -112,13 +135,13 @@ func check_level_solved():
 	if solved:
 		$ControlButtons/AdvanceButton.disabled = false
 		$ControlButtons/AdvanceButton.visible = true
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors.green_base)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
 		$ControlButtons/ConfirmButton.visible = false
 		
 	else:
 		$ControlButtons/AdvanceButton.disabled = true
 		$ControlButtons/AdvanceButton.visible = false
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors.red_base)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
 		$ControlButtons/ConfirmButton.visible = true
 		
 	
@@ -226,11 +249,12 @@ func update_used_trace_length():
 		
 	get_node("ProgressBar").value = 100*(1 - used_trace_length/(2*goal_trace_length))
 	
+	# Update the star color according to wether or not the goal has been reached
 	$TraceLength.text = String(used_trace_length)
 	if used_trace_length <= goal_trace_length:
-		$GoalMet.texture = goal_met
+		$GoalMet.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 	else:
-		$GoalMet.texture = goal_not_met
+		$GoalMet.set_modulate(Globals.Colors[ConfigManager.color_palette].star_blank)
 	
 	
 func snap_coord_to_grid(coord):
@@ -255,9 +279,9 @@ func _on_Background_gui_input(event):
 					current_trace = traces[i]
 					current_trace.is_selected = true
 					$ControlButtons/ConfirmButton.disabled = false
-					$ControlButtons/ConfirmButton.set_modulate(Globals.Colors.green_base)
+					$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
 					$ControlButtons/EraseButton.disabled = false
-					$ControlButtons/EraseButton.set_modulate(Globals.Colors.red_base)
+					$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
 					traces.remove(i)
 					current_bend_point = current_trace.bend_points[-1]
 					current_bend_point.is_selected = true
@@ -284,9 +308,9 @@ func _on_Background_gui_input(event):
 				trace_is_selected = true
 				is_first_section_of_trace = true
 				$ControlButtons/ConfirmButton.disabled = false
-				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors.green_base)
+				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
 				$ControlButtons/EraseButton.disabled = false
-				$ControlButtons/EraseButton.set_modulate(Globals.Colors.red_base)
+				$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
 				
 				current_trace = trace_resource.instance()
 				current_trace.is_selected = true
@@ -350,14 +374,14 @@ func _on_TraceButton_pressed():
 	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
 	current_trace.is_selected = false
-	current_trace.default_color = Globals.Colors.green_base
+	current_trace.default_color = Globals.Colors[ConfigManager.color_palette].green_base
 	traces.append(current_trace)
 	current_trace = null
 	current_bend_point = null
 	$ControlButtons/ConfirmButton.disabled = true
-	$ControlButtons/ConfirmButton.set_modulate(Globals.Colors.gray_disabled)
+	$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	$ControlButtons/EraseButton.disabled = true
-	$ControlButtons/EraseButton.set_modulate(Globals.Colors.gray_disabled)
+	$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	
 func _on_EraseButton_pressed():
 	
@@ -371,11 +395,10 @@ func _on_EraseButton_pressed():
 	
 	update_used_trace_length()
 
-#	get_node("TraceEditButtons").visible = false
 	$ControlButtons/ConfirmButton.disabled = true
-	$ControlButtons/ConfirmButton.set_modulate(Globals.Colors.gray_disabled)
+	$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	$ControlButtons/EraseButton.disabled = true
-	$ControlButtons/EraseButton.set_modulate(Globals.Colors.gray_disabled)
+	$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	
 	update_game_state()
 
@@ -434,10 +457,10 @@ func update_game_state():
 func update_undo_redo_buttons():
 	if (state_position == 0):
 		$ControlButtons/UndoButton.disabled = true
-		$ControlButtons/UndoButton.set_modulate(Globals.Colors.gray_disabled)
+		$ControlButtons/UndoButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	else:
 		$ControlButtons/UndoButton.disabled = false
-		$ControlButtons/UndoButton.set_modulate(Globals.Colors.white_button)
+		$ControlButtons/UndoButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
 	
 	# The Redo button was dropped because players don't use it.
 	# Well, i'm keeping this just in case.

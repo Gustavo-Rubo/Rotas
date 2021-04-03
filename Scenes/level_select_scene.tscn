@@ -7,7 +7,7 @@
 [ext_resource path="res://Sprites/options.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/worlds/world_backdrop_2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/star_filled.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/star.png" type="Texture" id=8]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=9]
 
 [sub_resource type="DynamicFont" id=1]
@@ -93,6 +93,9 @@ rect_min_size = Vector2( 24, 24 )
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StarCounter" type="Label" parent="."]
 margin_left = 68.0
@@ -109,11 +112,14 @@ __meta__ = {
 [node name="OptionsPanel" parent="." instance=ExtResource( 3 )]
 
 [node name="PanelContainer" parent="OptionsPanel/CenterContainer" index="0"]
-margin_top = 37.0
-margin_bottom = 539.0
+margin_top = 34.0
+margin_bottom = 542.0
 
-[node name="MarginContainer2" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
-margin_bottom = 502.0
+[node name="ColorPanel" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
+margin_bottom = 505.0
+
+[node name="MarginContainer2" parent="OptionsPanel/CenterContainer/PanelContainer" index="1"]
+margin_bottom = 505.0
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2" index="0"]
 margin_bottom = 482.0
@@ -124,7 +130,7 @@ margin_bottom = 462.0
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
 margin_bottom = 376.0
 
-[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="7"]
+[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="6"]
 visible = false
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 

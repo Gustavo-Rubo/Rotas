@@ -19,5 +19,17 @@ func _enter_tree():
 	# Mute the master bus according to the current config
 	AudioServer.set_bus_mute(1, !ConfigManager.audio_on)
 
+func _ready():
+	# Palette coloring
+	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
+	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
+	
+	options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
+	options_panel.connect("change_color", self, "_on_change_color")
+	
+func _on_change_color():
+	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
+	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
+
 func _on_OptionsButton_pressed():
 	options_panel.slide_in()
