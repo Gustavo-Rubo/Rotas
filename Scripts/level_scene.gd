@@ -424,11 +424,17 @@ func complete_level():
 	if used_trace_length < GameDataManager.level_info[level_number].low_score:
 		GameDataManager.level_info[level_number].low_score = used_trace_length
 	
+	# Update the goal trace length
+	# This ideally should be done when the level is unlocked,
+	# but this info is currently only used for the scoreboard, so this works
+	GameDataManager.level_info[level_number].goal_trace_length = goal_trace_length
+	
 	# Next level is unlocked:
 	if !GameDataManager.level_info.has(level_number + 1):
 		GameDataManager.level_info[level_number + 1] = {
 			"unlocked": true,
 			"low_score": INF,
+			"goal_trace_length": 0,
 			"score_goal_met": false,
 			"traces": to_json([])
 		}

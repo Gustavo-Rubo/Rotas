@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/worlds/world_backdrop_1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/level_select_scene.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/star.png" type="Texture" id=8]
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scenes/low_score_panel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/op3.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -68,6 +70,18 @@ margin_bottom = 121.999
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.94902, 0.94902, 0.94902, 1 )
 text = "Rotas"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreButton" type="TextureButton" parent="."]
+margin_left = 819.0
+margin_top = 30.0
+margin_right = 899.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 80, 80 )
+texture_normal = ExtResource( 11 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -132,6 +146,9 @@ margin_bottom = 376.0
 
 [node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="6"]
 visible = false
+
+[node name="LowScorePanel" parent="." instance=ExtResource( 10 )]
+[connection signal="pressed" from="ScoreButton" to="." method="_on_ScoreButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 
 [editable path="ScrollContainer/HBoxContainer/level_backdrop"]

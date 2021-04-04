@@ -5,6 +5,7 @@ var default_level_info = {
 	1: {
 		"unlocked": true,
 		"low_score": INF,
+		"goal_trace_length": 500,
 		"score_goal_met": false,
 		"traces": to_json([])
 	}

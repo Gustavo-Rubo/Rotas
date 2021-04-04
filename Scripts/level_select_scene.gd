@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 onready var options_panel = $OptionsPanel
+onready var low_score_panel = $LowScorePanel
 
 var stars
 
@@ -33,3 +34,6 @@ func _on_change_color():
 
 func _on_OptionsButton_pressed():
 	options_panel.slide_in()
+
+func _on_ScoreButton_pressed():
+	low_score_panel.slide_in()

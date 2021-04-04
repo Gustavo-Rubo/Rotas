@@ -79,3 +79,7 @@ func _on_Monokai_pressed():
 	ConfigManager.color_palette = Globals.PALETTE_MONOKAI
 	ConfigManager.save_config()
 	emit_signal("change_color")
+
+
+func _on_CloseButton_pressed():
+	pass # Replace with function body.
