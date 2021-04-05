@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=4]
 
 [node name="LevelNode" instance=ExtResource( 1 )]
-level_number = 5
+level_code = "2_1"
 goal_trace_length = 490.0
 max_trace_length = 20.0
 nets = [ NodePath("Net0") ]
@@ -24,3 +24,5 @@ grid_y = 12
 [node name="Pad3" parent="." index="5" instance=ExtResource( 4 )]
 grid_x = 12
 grid_y = 12
+
+[editable path="OptionsPanel"]

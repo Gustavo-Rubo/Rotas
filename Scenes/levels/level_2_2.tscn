@@ -10,7 +10,7 @@ size = 24
 font_data = ExtResource( 2 )
 
 [node name="LevelNode" instance=ExtResource( 1 )]
-level_number = 6
+level_code = "2_2"
 goal_trace_length = 4000.0
 max_trace_length = 20.0
 nets = [ NodePath("Net") ]
@@ -44,3 +44,5 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="OptionsPanel"]

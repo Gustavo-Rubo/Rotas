@@ -12,5 +12,6 @@ func _process(_delta):
 	get_node(".").visible = is_selected
 
 func _draw():
+	# Draw the dashed circle around the touch area
 	for n in range(0, 20):
-		draw_arc(Vector2(0, 0), Globals.GRID_SIZE*3/2, 2*PI*n/20, 2*PI*(n+0.5)/20, 30, Globals.Colors[ConfigManager.color_palette].white_highlight, 2)
+		draw_arc(Vector2(0, 0), Globals.GRID_SIZE*2, 2*PI*n/20, 2*PI*(n+0.5)/20, 30, Globals.Colors[ConfigManager.color_palette].white_highlight, 2)

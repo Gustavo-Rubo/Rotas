@@ -32,13 +32,11 @@ border_color = Color( 1, 1, 1, 1 )
 size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 size = 24
 font_data = ExtResource( 3 )
 
-[node name="LevelNode" type="Node2D" groups=[
-"color_change",
-]]
+[node name="LevelNode" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Background" type="TextureRect" parent="."]
@@ -169,7 +167,7 @@ margin_left = 312.0
 margin_top = 524.0
 margin_right = 410.0
 margin_bottom = 551.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -178,8 +176,8 @@ __meta__ = {
 [node name="OptionsPanel" parent="." instance=ExtResource( 8 )]
 
 [node name="PanelContainer" parent="OptionsPanel/CenterContainer" index="0"]
-margin_top = 34.0
-margin_bottom = 542.0
+margin_top = 33.0
+margin_bottom = 541.0
 
 [node name="ColorPanel" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
 margin_bottom = 505.0

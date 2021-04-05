@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=3]
 
 [node name="LevelNode" instance=ExtResource( 1 )]
-level_number = 2
+level_code = "1_2"
 goal_trace_length = 940.0
 max_trace_length = 1000.0
 nets = [ NodePath("Net0"), NodePath("Net1") ]
@@ -38,7 +38,9 @@ position = Vector2( 440, 440 )
 grid_x = 16
 grid_y = 14
 
-[node name="Hint" parent="." index="15"]
+[node name="Hint" parent="." index="14"]
 text = "hint_level_2"
 
 [editable path="Net1"]
+
+[editable path="OptionsPanel"]

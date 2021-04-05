@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/level_scene.tscn" type="PackedScene" id=3]
 
 [node name="LevelNode" instance=ExtResource( 3 )]
-level_number = 4
+level_code = "1_4"
 goal_trace_length = 1940.0
 nets = [ NodePath("Net0"), NodePath("Net1"), NodePath("Net2"), NodePath("Net3"), NodePath("Net4") ]
 
@@ -64,5 +64,7 @@ grid_y = 6
 grid_x = 24
 grid_y = 12
 
-[node name="Hint" parent="." index="24"]
+[node name="Hint" parent="." index="23"]
 text = "hint_level_3"
+
+[editable path="OptionsPanel"]

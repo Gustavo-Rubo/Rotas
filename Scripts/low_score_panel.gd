@@ -5,13 +5,13 @@ onready var list = $CenterContainer/PanelContainer/MarginContainer2/VBoxContaine
 func _ready():
 	
 	# Update the list with current scores
-	for level in GameDataManager.level_info:
-		var info = GameDataManager.level_info[level]
+	for level_code in GameDataManager.level_info:
+		var info = GameDataManager.level_info[level_code]
 		# Only put the level in the list if it has been cleared
-		if info["low_score"] != INF:
+		if info["solved"] == true:
 			var list_item = list.get_node("Level").duplicate()
 			
-			list_item.get_node("Text").set_text(Globals.level_number_to_code(level))
+			list_item.get_node("Text").set_text(Globals.level_code_to_text(level_code))
 			list_item.get_node("LevelScore").set_text(String(info["low_score"]).pad_decimals(1))
 			list_item.get_node("ProgressBar").value = 100*(1 - info["low_score"]/(2*info["goal_trace_length"]))
 			list_item.visible = true

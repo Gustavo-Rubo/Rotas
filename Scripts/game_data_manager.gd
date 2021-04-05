@@ -2,8 +2,9 @@ extends Node
 
 var level_info = {}
 var default_level_info = {
-	1: {
+	"1_1": {
 		"unlocked": true,
+		"solved": false,
 		"low_score": INF,
 		"goal_trace_length": 500,
 		"score_goal_met": false,
@@ -15,8 +16,8 @@ onready var path = "user://save.dat"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	level_info = load_data()
 #	reset_save_data()
+	level_info = load_data()
 
 func save_data():
 	var file = File.new()

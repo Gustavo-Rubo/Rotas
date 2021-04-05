@@ -1,6 +1,6 @@
 extends Node2D
 
-export (int) var level_number
+export (String) var level_code
 onready var options_panel = $OptionsPanel
 
 export (float) var goal_trace_length = 1
@@ -29,10 +29,9 @@ func _ready():
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
-	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
 	options_panel.connect("change_color", self, "_on_change_color")
 	
-	$LblNumber.set_text(tr("level_w_number") % Globals.level_number_to_code(level_number))
+	$LblNumber.set_text(tr("level_w_number") % Globals.level_code_to_text(level_code))
 	$ControlButtons/ConfirmButton.disabled = true
 	$ControlButtons/EraseButton.disabled = true
 	
@@ -43,7 +42,7 @@ func _ready():
 			net.get_node(p).get_node("NetNumber").text = String(n)
 			
 	# Load the traces from previous solution
-	deserialize_and_load_traces(parse_json(GameDataManager.level_info[level_number].traces))
+	deserialize_and_load_traces(parse_json(GameDataManager.level_info[level_code].traces))
 		
 	check_nets_solved()
 	check_level_solved()
@@ -413,31 +412,43 @@ func _on_AdvanceButton_pressed():
 	complete_level()
 
 func complete_level():
+	# Save that the level has been solved:
+	GameDataManager.level_info[level_code].solved = true
+	
 	# Save the traces state:
-	GameDataManager.level_info[level_number].traces = to_json(serialize_traces())
+	GameDataManager.level_info[level_code].traces = to_json(serialize_traces())
 	
 	# Update if the player met the goal
 	if used_trace_length <= goal_trace_length:
-		GameDataManager.level_info[level_number].score_goal_met = true
+		GameDataManager.level_info[level_code].score_goal_met = true
 	
 	# Update the lowest score, if necessary
-	if used_trace_length < GameDataManager.level_info[level_number].low_score:
-		GameDataManager.level_info[level_number].low_score = used_trace_length
+	if used_trace_length < GameDataManager.level_info[level_code].low_score:
+		GameDataManager.level_info[level_code].low_score = used_trace_length
 	
 	# Update the goal trace length
 	# This ideally should be done when the level is unlocked,
 	# but this info is currently only used for the scoreboard, so this works
-	GameDataManager.level_info[level_number].goal_trace_length = goal_trace_length
+	GameDataManager.level_info[level_code].goal_trace_length = goal_trace_length
 	
 	# Next level is unlocked:
-	if !GameDataManager.level_info.has(level_number + 1):
-		GameDataManager.level_info[level_number + 1] = {
+	if !GameDataManager.level_info.has(Globals.levels[level_code].next_level_code):
+		GameDataManager.level_info[Globals.levels[level_code].next_level_code] = {
 			"unlocked": true,
+			"solved": false,
 			"low_score": INF,
 			"goal_trace_length": 0,
 			"score_goal_met": false,
 			"traces": to_json([])
 		}
+#	if !GameDataManager.level_info.has(level_number + 1):
+#		GameDataManager.level_info[level_number + 1] = {
+#			"unlocked": true,
+#			"low_score": INF,
+#			"goal_trace_length": 0,
+#			"score_goal_met": false,
+#			"traces": to_json([])
+#		}
 		
 	GameDataManager.save_data()
 	

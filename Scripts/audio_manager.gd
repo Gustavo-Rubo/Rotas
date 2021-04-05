@@ -30,16 +30,17 @@ func stop_loop():
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	ConnectionPlayer = AudioStreamPlayer.new()
 	ConnectionPlayer.set_bus("Connections")
 	LoopPlayer = AudioStreamPlayer.new()
 	LoopPlayer.set_bus("Traces")
 	ButtonPlayer = AudioStreamPlayer.new()
 	ButtonPlayer.set_bus("Buttons")
-	
-	add_child(AudioManager.ConnectionPlayer)
-	add_child(AudioManager.LoopPlayer)
-	add_child(AudioManager.ButtonPlayer)
+
+	add_child(ConnectionPlayer)
+	add_child(LoopPlayer)
+	add_child(ButtonPlayer)	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

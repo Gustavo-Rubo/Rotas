@@ -1,5 +1,15 @@
 extends Node
 
+# Dictionary with all levels, and what is their following level
+var levels = {
+	"1_1": { "next_level_code": "1_2" },
+	"1_2": { "next_level_code": "1_3" },
+	"1_3": { "next_level_code": "1_4" },
+	"1_4": { "next_level_code": "2_1" },
+	"2_1": { "next_level_code": "2_2" },
+	"2_2": { "next_level_code": null },
+}
+
 # Colors
 
 enum {
@@ -86,6 +96,9 @@ func _ready():
 
 func level_number_to_code(level_number):
 	return String(ceil(float(level_number)/4)) + " - " + String((level_number-1)%4 + 1)
+
+func level_code_to_text(level_code):
+	return level_code[0] + " - " + level_code[2]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

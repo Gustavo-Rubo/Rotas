@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprites/star_filled.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/star.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/bend_point.gd" type="Script" id=2]
 
 [node name="BendPoint" type="Node2D"]
