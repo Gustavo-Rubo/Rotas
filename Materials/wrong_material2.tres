@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float length_line;
+
+// Usually takes a number between 0 and 2
+float kind_of_square_pulse(float s) {
+	float transition = 0.04;
+	if (s < transition) return s/transition;
+	else if (s >= transition && s < 1.0) return 1.0;
+	else if (s >= 1.0 && s < 1.0 + transition) return (-s + 1.0 + transition)/transition;
+	else if (s >= 1.0 + transition && s < 2.0) return 0.0;
+}
+
+float sawtooth(float x, float interval) {
+	return 2.0*mod(x, interval)/interval;
+}
+
+void fragment() {
+	// roughly the pixel interval of the repeating pattern
+	float interval = 20.0;
+	
+	vec2 coord = UV * length_line;
+	
+	float value = kind_of_square_pulse(sawtooth(coord.r + coord.g/40.0, interval));
+	
+	COLOR = vec4(COLOR.rgb, value);
+}"
+
+[resource]
+shader = SubResource( 8 )
+shader_param/length_line = 1.0

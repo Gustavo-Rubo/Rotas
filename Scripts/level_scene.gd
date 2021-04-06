@@ -367,8 +367,11 @@ func add_bend_point(pos):
 	current_trace.add_point(pos)	
 	current_trace.bend_points.append(current_bend_point)
 
-
+# The confirm button
 func _on_TraceButton_pressed():
+	
+	AudioManager.play_button("confirm")
+	
 	trace_is_selected = false
 	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
@@ -381,8 +384,11 @@ func _on_TraceButton_pressed():
 	$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	$ControlButtons/EraseButton.disabled = true
 	$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
-	
+
+# The cancel button	
 func _on_EraseButton_pressed():
+	
+	AudioManager.play_button("cancel")
 	
 	trace_is_selected = false
 	is_first_section_of_trace = false
@@ -402,13 +408,16 @@ func _on_EraseButton_pressed():
 	update_game_state()
 
 func _on_BackButton_pressed():
+	AudioManager.play_button("options")
 	options_panel.slide_in()
 
 func _on_MenuButton_pressed():
 # warning-ignore:return_value_discarded
+#	AudioManager.play_button("menu")
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
 func _on_AdvanceButton_pressed():
+	AudioManager.play_button("advance")
 	complete_level()
 
 func complete_level():
@@ -441,14 +450,6 @@ func complete_level():
 			"score_goal_met": false,
 			"traces": to_json([])
 		}
-#	if !GameDataManager.level_info.has(level_number + 1):
-#		GameDataManager.level_info[level_number + 1] = {
-#			"unlocked": true,
-#			"low_score": INF,
-#			"goal_trace_length": 0,
-#			"score_goal_met": false,
-#			"traces": to_json([])
-#		}
 		
 	GameDataManager.save_data()
 	
@@ -487,6 +488,7 @@ func update_undo_redo_buttons():
 #		$ControlButtons/RedoButton.disabled = false
 		
 func _on_UndoButton_pressed():
+	AudioManager.play_button("undo")
 	state_position -= 1
 	change_state()
 

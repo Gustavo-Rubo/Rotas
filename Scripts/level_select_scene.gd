@@ -33,7 +33,9 @@ func _on_change_color():
 	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 
 func _on_OptionsButton_pressed():
+	AudioManager.play_button("options")
 	options_panel.slide_in()
 
 func _on_ScoreButton_pressed():
+	AudioManager.play_button("menu")
 	low_score_panel.slide_in()

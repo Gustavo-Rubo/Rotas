@@ -41,10 +41,13 @@ func _on_TextureButton_pressed():
 # https://iconscout.com/icon-pack/country-flags
 
 
+# Audio toggle button
 func _on_HSlider_toggled(_button_pressed):
 	ConfigManager.audio_on = !toggle_audio.pressed
 	ConfigManager.save_config()
 	AudioServer.set_bus_mute(0, !ConfigManager.audio_on)
+	if ConfigManager.audio_on:
+		AudioManager.play_button("audio_on")
 
 
 func _on_HSlider_value_changed(_value):

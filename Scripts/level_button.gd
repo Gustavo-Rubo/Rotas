@@ -29,9 +29,9 @@ func _ready():
 		
 #	for next_level_code in next_levels:
 	if GameDataManager.level_info.has(Globals.levels[level_code].next_level_code) and GameDataManager.level_info[Globals.levels[level_code].next_level_code].unlocked:
-		draw_line(position, position + Vector2(256, 0), Globals.Colors[ConfigManager.color_palette].green_base, Globals.GRID_SIZE, true)
-		draw_circle(Vector2(100, 100), 50, Color(1, 1, 1))
-		print("desenhando")
+#		draw_line(position, position + Vector2(256, 0), Globals.Colors[ConfigManager.color_palette].green_base, Globals.GRID_SIZE, true)
+#		draw_circle(Vector2(100, 100), 50, Color(1, 1, 1))
+#		print("desenhando")
 		$NextPath.visible = true
 		
 	if level_code == "1_1":

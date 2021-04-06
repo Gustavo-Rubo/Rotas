@@ -26,7 +26,9 @@ var circle_points = PoolVector2Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	default_color = Globals.Colors[ConfigManager.color_palette].green_base
+	
+	_on_change_color()
+	
 	width = Globals.GRID_SIZE * 0.5
 	highlight.width = width
 	wrong.width = width
@@ -51,9 +53,11 @@ func _ready():
 func _on_change_color():
 	update()
 	default_color = Globals.Colors[ConfigManager.color_palette].green_base
+	$Wrong.default_color = Globals.Colors[ConfigManager.color_palette].red_base
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$Wrong.material.set_shader_param("length_line", get_length())	
 	if is_selected:
 		time += delta
 		highlight.points = points
@@ -64,9 +68,11 @@ func _process(delta):
 	highlight.visible = is_selected
 	
 	if is_wrong:
-		material = wrong_material
+#		material = wrong_material
+		$Wrong.visible = true
 	else:
-		material = null
+		$Wrong.visible = false
+#		material = null
 
 func sync_trace_to_bend_points():
 	for i in bend_points.size():

@@ -1,37 +1,49 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/trace.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Roboto-Light.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Materials/wrong_material.tres" type="Material" id=3]
-[ext_resource path="res://Shaders/wrong_trace.shader" type="Shader" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 2 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float length_line;
+
+// Usually takes a number between 0 and 2
+float kind_of_square_pulse(float s) {
+	float transition = 0.04;
+	if (s < transition) return s/transition;
+	else if (s >= transition && s < 1.0) return 1.0;
+	else if (s >= 1.0 && s < 1.0 + transition) return (-s + 1.0 + transition)/transition;
+	else if (s >= 1.0 + transition && s < 2.0) return 0.0;
+}
+
+float sawtooth(float x, float interval) {
+	return 2.0*mod(x, interval)/interval;
+}
 
 void fragment() {
-	int interval = 30;
+	// roughly the pixel interval of the repeating pattern
+	float interval = 25.0;
 	
-	vec2 coord = FRAGCOORD.xy;
+	// the angle that the lines will be
+	float angle = 0.2;
 	
-	float value = round(float(int(coord.x - coord.y/2.0) % interval) / float(interval));
+	vec2 coord = UV * length_line;
 	
-	COLOR = vec4(0, 0, 0, value);
+	float value = kind_of_square_pulse(sawtooth(pow(cos(angle), 2.0)*coord.r + pow(sin(angle), 2.0)*coord.g, interval));
+	
+	COLOR = vec4(COLOR.rgb, value);
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-
-[sub_resource type="Gradient" id=4]
+[sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0, 0.5, 0.51 )
-colors = PoolColorArray( 0.733333, 0.133333, 0.870588, 1, 0.733333, 0.133333, 0.870588, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+shader = SubResource( 8 )
+shader_param/length_line = 1.0
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.201005, 0.582915 )
@@ -41,11 +53,11 @@ colors = PoolColorArray( 0, 0, 0, 1, 0.201005, 0.201005, 0.201005, 1, 0.351759, 
 gradient = SubResource( 6 )
 width = 100
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 4 )
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 8 )
+shader_param/length_line = 1.0
 
 [node name="Trace" type="Line2D"]
-material = ExtResource( 3 )
 width = 20.0
 joint_mode = 2
 begin_cap_mode = 2
@@ -77,9 +89,8 @@ __meta__ = {
 }
 
 [node name="Wrong" type="Line2D" parent="."]
-material = SubResource( 3 )
-default_color = Color( 0.0313726, 0.133333, 0.623529, 0 )
-texture = SubResource( 5 )
+material = SubResource( 11 )
+default_color = Color( 1, 0, 0, 1 )
 texture_mode = 2
 joint_mode = 2
 begin_cap_mode = 2
@@ -96,10 +107,12 @@ end_cap_mode = 2
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
-material = SubResource( 8 )
-points = PoolVector2Array( 512.753, 326.575, 273.368, 308.936, 663.943, 64.5117, 757.177, 291.298, 585.828, 409.73, 616.066, 225.782, 863.011, 321.536 )
+material = SubResource( 10 )
+position = Vector2( 0.799255, 0 )
+points = PoolVector2Array( 512.753, 326.575, 273.368, 308.936, 663.943, 64.5117, 757.177, 291.298, 585.828, 409.73, 616.066, 225.782, 741.414, 431.065 )
 width = 20.0
-texture_mode = 2
+default_color = Color( 0.4, 0.501961, 1, 1 )
+texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2

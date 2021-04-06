@@ -6,10 +6,23 @@ var ButtonPlayer
 
 # Audio preloads
 var Audio = {
+	# Connections
 	connection_complete = preload("res://Audio/connection_complete.wav"),
 	connection_wrong = preload("res://Audio/connection_wrong.wav"),
+	
+	# Traces
 	trace_selected = preload("res://Audio/trace_selected.tres"),
-	trace_hold = preload("res://Audio/trace_hold.tres")
+	trace_hold = preload("res://Audio/trace_hold.tres"),
+	
+	# Buttons
+	advance = preload("res://Audio/advance.wav"),
+	cancel = preload("res://Audio/cancel.wav"),
+	confirm = preload("res://Audio/confirm.wav"),
+	undo = preload("res://Audio/undo.wav"),
+	options = preload("res://Audio/options.wav"),
+	menu = preload("res://Audio/menu.wav"),
+	audio_on = preload("res://Audio/audio_on.wav"),
+	audio_off = preload("res://Audio/audio_off.wav")
 }
 
 func play_connection(con):
