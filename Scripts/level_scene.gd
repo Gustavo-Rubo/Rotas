@@ -430,6 +430,10 @@ func complete_level():
 	# Update if the player met the goal
 	if used_trace_length <= goal_trace_length:
 		GameDataManager.level_info[level_code].score_goal_met = true
+		
+		# Update if it is the first time the player met the goal
+		if !GameDataManager.level_info[level_code].just_got_goal:
+			GameDataManager.level_info[level_code].just_got_goal = true
 	
 	# Update the lowest score, if necessary
 	if used_trace_length < GameDataManager.level_info[level_code].low_score:
@@ -443,10 +447,12 @@ func complete_level():
 	# Next level is unlocked:
 	if !GameDataManager.level_info.has(Globals.levels[level_code].next_level_code):
 		GameDataManager.level_info[Globals.levels[level_code].next_level_code] = {
+			"just_unlocked": true,
 			"unlocked": true,
 			"solved": false,
 			"low_score": INF,
 			"goal_trace_length": 0,
+			"just_got_goal": false,
 			"score_goal_met": false,
 			"traces": to_json([])
 		}

@@ -45,6 +45,7 @@ func slide_out():
 	$AnimationPlayer.play_backwards("slide_in_options")
 
 func _on_CloseButton_pressed():
+	AudioManager.play_button("close")
 	slide_out()
 
 func _on_CenterContainer_gui_input(event):

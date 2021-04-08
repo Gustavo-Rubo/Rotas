@@ -35,6 +35,7 @@ func slide_out():
 	$AnimationPlayer.play_backwards("slide_in_options")
 
 func _on_TextureButton_pressed():
+	AudioManager.play_button("close")
 	slide_out()
 
 # Country Flags Icon Pack

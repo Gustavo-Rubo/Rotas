@@ -20,6 +20,7 @@ var Audio = {
 	confirm = preload("res://Audio/confirm.wav"),
 	undo = preload("res://Audio/undo.wav"),
 	options = preload("res://Audio/options.wav"),
+	close = preload("res://Audio/close.wav"),
 	menu = preload("res://Audio/menu.wav"),
 	audio_on = preload("res://Audio/audio_on.wav"),
 	audio_off = preload("res://Audio/audio_off.wav")

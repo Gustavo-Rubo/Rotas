@@ -32,10 +32,10 @@ font_data = ExtResource( 4 )
 size = 24
 font_data = ExtResource( 5 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 3
 border_width_top = 3
@@ -43,10 +43,10 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.4
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:offset:x")
@@ -200,8 +200,8 @@ margin_left = 157.0
 margin_right = 420.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 263, 25 )
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = SubResource( 8 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
 step = 1.0
 percent_visible = false
 __meta__ = {
@@ -221,7 +221,7 @@ margin_top = 472.0
 margin_right = 460.0
 margin_bottom = 522.0
 rect_min_size = Vector2( 300, 50 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 text = "online_scores"
 expand_icon = true
 __meta__ = {
@@ -229,6 +229,6 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in_options = SubResource( 6 )
+anims/slide_in_options = SubResource( 8 )
 [connection signal="gui_input" from="CenterContainer" to="." method="_on_CenterContainer_gui_input"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

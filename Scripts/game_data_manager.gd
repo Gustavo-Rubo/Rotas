@@ -3,10 +3,12 @@ extends Node
 var level_info = {}
 var default_level_info = {
 	"1_1": {
+		"just_unlocked": false,
 		"unlocked": true,
 		"solved": false,
 		"low_score": INF,
 		"goal_trace_length": 500,
+		"just_got_goal": false,
 		"score_goal_met": false,
 		"traces": to_json([])
 	}

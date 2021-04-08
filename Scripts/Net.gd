@@ -44,16 +44,11 @@ func draw_dashed_line(from, to, color, width, dash_length = 5, cap_end = false, 
 		return
 
 	else:
-		var draw_flag = true
 		var segment_start = from
 		var steps = length/dash_length
-		for _start_length in range(0, steps + 1):
-			var segment_end = segment_start + dash_step
-			if draw_flag:
-				draw_line(segment_start, segment_end, color, width, antialiased)
-
-			segment_start = segment_end
-			draw_flag = !draw_flag
+		for _start_length in range(0, (steps + 2)/2):
+			draw_line(segment_start, segment_start + dash_step, color, width, antialiased)
+			segment_start += 2*dash_step
 		
 		if cap_end:
 			draw_line(segment_start, to, color, width, antialiased)
