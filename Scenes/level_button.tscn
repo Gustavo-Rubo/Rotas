@@ -47,7 +47,7 @@ void fragment() {
 shader = SubResource( 2 )
 shader_param/length_line = 200.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "star_anim"
 length = 0.6
 tracks/0/type = "value"
@@ -75,8 +75,7 @@ tracks/1/keys = {
 "values": [ 0.0, 288.0 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "path_anim"
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("NextPath:points")
@@ -159,9 +158,9 @@ rotation = 5.02655
 texture = ExtResource( 10 )
 
 [node name="AnimationStar" type="AnimationPlayer" parent="."]
-anims/star_anim = SubResource( 5 )
+anims/star_anim = SubResource( 4 )
 
 [node name="AnimationPath" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/path_anim = SubResource( 4 )
+anims/path_anim = SubResource( 5 )
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

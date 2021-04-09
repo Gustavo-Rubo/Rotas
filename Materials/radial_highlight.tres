@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
@@ -14,11 +14,13 @@ float sawtooth(float x, float a) {
 
 void fragment() {
 	float angle = 0.2;
+	vec4 coord = FRAGCOORD;
 	
 	float dist = distance(vec2(0.5,0.5), UV);
 	
-	float value = (sin((dist/interval - TIME)*3.14/period)+1.0) / 2.0;
+//	float value = (sin((dist/interval - TIME)*3.14/period)+1.0) / 2.0;
 //	float value = min(sawtooth((dist*interval - TIME/period), 1.0/rings), 0.8);
+	float value = (sin(- TIME + (cos(angle) * coord.x - sin(angle) * coord.y) / 80.0) + 0.3) / 2.0;
 	
 	COLOR = texture(TEXTURE, UV);
 	COLOR = vec4(1.0, 1.0, 1.0,  0.6 * COLOR.a * value);
@@ -26,7 +28,7 @@ void fragment() {
 }"
 
 [resource]
-shader = SubResource( 6 )
+shader = SubResource( 1 )
 shader_param/interval = 0.273
 shader_param/rings = 1.0
 shader_param/period = 2.276

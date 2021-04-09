@@ -133,6 +133,7 @@ margin_bottom = 376.0
 visible = false
 
 [node name="LowScorePanel" parent="." instance=ExtResource( 10 )]
+[connection signal="gui_input" from="ScrollContainer" to="." method="_on_ScrollContainer_gui_input"]
 [connection signal="pressed" from="ScoreButton" to="." method="_on_ScoreButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 

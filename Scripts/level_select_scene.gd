@@ -25,8 +25,16 @@ func _ready():
 	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 	
+	# Position the scroll container in the last position
+	yield(get_tree(), "idle_frame");
+	$ScrollContainer.set_h_scroll(ConfigManager.select_position)
+	
 	options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
 	options_panel.connect("change_color", self, "_on_change_color")
+
+func _exit_tree():
+	ConfigManager.select_position = $ScrollContainer.get_h_scroll()
+	ConfigManager.save_config()
 	
 func _on_change_color():
 	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
@@ -39,3 +47,8 @@ func _on_OptionsButton_pressed():
 func _on_ScoreButton_pressed():
 	AudioManager.play_button("menu")
 	low_score_panel.slide_in()
+
+
+#func _on_ScrollContainer_gui_input(event):
+#	if (event is InputEventScreenDrag):
+#		$ScrollContainer.scroll_horizontal -= event.relative.x #speed.x/100
