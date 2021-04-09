@@ -36,14 +36,14 @@ func _on_change_color():
 	
 func _draw():
 	# We use the draw_colored_polygon function because the draw_circle has no antialiasing
-	draw_circle_aa(Vector2(0,0), radius, Globals.Colors[ConfigManager.color_palette].green_base)
+	draw_circle_aa(Vector2(0,0), radius, Globals.Colors[ConfigManager.color_palette].base1)
 	
-	if (net_number == 0): draw_circle_aa(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
-	if (net_number == 1): draw_square(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
-	if (net_number == 2): draw_triangle(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
-	if (net_number == 3): draw_diamond(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
-	if (net_number == 4): draw_pentagon(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
-	if (net_number == 5): draw_star(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].blue_background)
+	if (net_number == 0): draw_circle_aa(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
+	if (net_number == 1): draw_square(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
+	if (net_number == 2): draw_triangle(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
+	if (net_number == 3): draw_diamond(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
+	if (net_number == 4): draw_pentagon(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
+	if (net_number == 5): draw_star(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
 
 # We use this because draw_circle has no anti-aliasing 
 func draw_circle_aa(_center, r, color):

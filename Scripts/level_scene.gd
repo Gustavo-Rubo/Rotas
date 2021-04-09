@@ -93,20 +93,20 @@ func _process(_delta):
 
 func _on_change_color():
 	$MenuButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
-	$ProgressBar.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+	$ProgressBar.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 	$LblNumber.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$TraceLength.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
 	$Hint.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
 	
 	if trace_is_selected:
-		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
-		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
+		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 	else:
 		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 		
 	if $ControlButtons/AdvanceButton.visible:
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 	else:
 		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	
@@ -134,13 +134,13 @@ func check_level_solved():
 	if solved:
 		$ControlButtons/AdvanceButton.disabled = false
 		$ControlButtons/AdvanceButton.visible = true
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 		$ControlButtons/ConfirmButton.visible = false
 		
 	else:
 		$ControlButtons/AdvanceButton.disabled = true
 		$ControlButtons/AdvanceButton.visible = false
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
 		$ControlButtons/ConfirmButton.visible = true
 		
 	
@@ -278,9 +278,9 @@ func _on_Background_gui_input(event):
 					current_trace = traces[i]
 					current_trace.is_selected = true
 					$ControlButtons/ConfirmButton.disabled = false
-					$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+					$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 					$ControlButtons/EraseButton.disabled = false
-					$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
+					$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
 					traces.remove(i)
 					current_bend_point = current_trace.bend_points[-1]
 					current_bend_point.is_selected = true
@@ -307,9 +307,9 @@ func _on_Background_gui_input(event):
 				trace_is_selected = true
 				is_first_section_of_trace = true
 				$ControlButtons/ConfirmButton.disabled = false
-				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 				$ControlButtons/EraseButton.disabled = false
-				$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].red_base)
+				$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
 				
 				current_trace = trace_resource.instance()
 				current_trace.is_selected = true
@@ -376,7 +376,7 @@ func _on_TraceButton_pressed():
 	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
 	current_trace.is_selected = false
-	current_trace.default_color = Globals.Colors[ConfigManager.color_palette].green_base
+	current_trace.default_color = Globals.Colors[ConfigManager.color_palette].base1
 	traces.append(current_trace)
 	current_trace = null
 	current_bend_point = null
@@ -413,7 +413,7 @@ func _on_BackButton_pressed():
 
 func _on_MenuButton_pressed():
 # warning-ignore:return_value_discarded
-#	AudioManager.play_button("menu")
+	AudioManager.play_button("close")
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
 func _on_AdvanceButton_pressed():

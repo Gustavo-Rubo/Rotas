@@ -22,8 +22,7 @@ func _enter_tree():
 
 func _ready():
 	# Palette coloring
-	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
-	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
+	_on_change_color()
 	
 	# Position the scroll container in the last position
 	yield(get_tree(), "idle_frame");
@@ -39,6 +38,8 @@ func _exit_tree():
 func _on_change_color():
 	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
+	$ScoreButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
+	$OptionsButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
 
 func _on_OptionsButton_pressed():
 	AudioManager.play_button("options")
@@ -49,6 +50,7 @@ func _on_ScoreButton_pressed():
 	low_score_panel.slide_in()
 
 
-#func _on_ScrollContainer_gui_input(event):
+func _on_ScrollContainer_gui_input(event):
+	pass
 #	if (event is InputEventScreenDrag):
 #		$ScrollContainer.scroll_horizontal -= event.relative.x #speed.x/100

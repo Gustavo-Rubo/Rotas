@@ -29,7 +29,7 @@ func _draw():
 	if pads.size() >= 2:
 		for i in (pads.size() - 1):
 			if !solved:
-				draw_dashed_line(get_node(pads[i]).position, get_node(pads[i+1]).position, Globals.Colors[ConfigManager.color_palette].blue_selected, 2, 10)
+				draw_dashed_line(get_node(pads[i]).position, get_node(pads[i+1]).position, Globals.Colors[ConfigManager.color_palette].ratline, 2, 10)
 			else:
 				print("net solved")
 

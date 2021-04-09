@@ -13,7 +13,6 @@ func _ready():
 func save_config():
 	var config = ConfigFile.new()
 	config.set_value("cfg", "audio", audio_on)
-	config.set_value("cfg", "text_size", text_size)
 	config.set_value("cfg", "color_palette", color_palette)
 	config.set_value("cfg", "select_position", select_position)
 	
@@ -25,7 +24,6 @@ func load_config():
 	var config = ConfigFile.new()
 	var default_options = {
 		"audio": true,
-		"text_size": 1,
 		"color_palette": Globals.PALETTE_DARK,
 		"select_position": 0
 	}
@@ -36,6 +34,5 @@ func load_config():
 	
 #	var options = {}
 	audio_on = config.get_value("cfg", "audio", true)
-	text_size = config.get_value("cfg", "text_size", 1)
 	color_palette = config.get_value("cfg", "color_palette", Globals.PALETTE_DARK)
 	select_position = config.get_value("cfg", "select_position", 0)

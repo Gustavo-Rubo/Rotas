@@ -176,14 +176,14 @@ __meta__ = {
 [node name="OptionsPanel" parent="." instance=ExtResource( 8 )]
 
 [node name="PanelContainer" parent="OptionsPanel/CenterContainer" index="0"]
-margin_top = 33.0
-margin_bottom = 541.0
+margin_top = 32.0
+margin_bottom = 542.0
 
 [node name="ColorPanel" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
-margin_bottom = 505.0
+margin_bottom = 506.0
 
 [node name="MarginContainer2" parent="OptionsPanel/CenterContainer/PanelContainer" index="1"]
-margin_bottom = 505.0
+margin_bottom = 506.0
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2" index="0"]
 margin_bottom = 482.0
@@ -193,17 +193,21 @@ margin_bottom = 462.0
 scroll_vertical = 100
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
-margin_bottom = 230.0
+margin_bottom = 238.0
 
-[node name="Tutu" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="4"]
+[node name="Tutu" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="3"]
 visible = false
 
-[node name="Github" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
+[node name="Github" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="4"]
 visible = false
 
-[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="6"]
+[node name="PanelContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
 margin_top = 180.0
-margin_bottom = 230.0
+margin_bottom = 238.0
+
+[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer" index="1"]
+shortcut_in_tooltip = false
+clip_text = true
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="ControlButtons/UndoButton" to="." method="_on_UndoButton_pressed"]
@@ -211,6 +215,6 @@ margin_bottom = 230.0
 [connection signal="pressed" from="ControlButtons/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="pressed" from="ControlButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
 [connection signal="pressed" from="ControlButtons/AdvanceButton" to="." method="_on_AdvanceButton_pressed"]
-[connection signal="pressed" from="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
 
 [editable path="OptionsPanel"]

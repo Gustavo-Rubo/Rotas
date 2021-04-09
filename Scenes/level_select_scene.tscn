@@ -129,7 +129,7 @@ margin_bottom = 462.0
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
 margin_bottom = 376.0
 
-[node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="6"]
+[node name="PanelContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
 visible = false
 
 [node name="LowScorePanel" parent="." instance=ExtResource( 10 )]

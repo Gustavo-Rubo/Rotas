@@ -15,7 +15,7 @@ func _on_change_color():
 	update()
 	
 func _draw():
-	draw_rect(Rect2(0, 0, Globals.DISPLAY_WIDTH, Globals.DISPLAY_HEIGHT), Globals.Colors[ConfigManager.color_palette].blue_background)
+	draw_rect(Rect2(0, 0, Globals.DISPLAY_WIDTH, Globals.DISPLAY_HEIGHT), Globals.Colors[ConfigManager.color_palette].background)
 	for i in (1 + Globals.DISPLAY_WIDTH/Globals.GRID_SIZE):
 		for j in (1 + Globals.DISPLAY_HEIGHT/Globals.GRID_SIZE):
 			draw_circle(Vector2(Globals.GRID_SIZE * i, Globals.GRID_SIZE * j), 1, Globals.Colors[ConfigManager.color_palette].gray_dots)

@@ -70,19 +70,19 @@ func _on_change_color():
 	level_label.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
 	
 	if enabled:
-		button.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
-		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+		button.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 	else:
 		button.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
-		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].blue_selected)
+		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].ratline)
 		
 	if score_goal_met:
 		star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 	else:
 		star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_blank)
 	
-	$NextPath.set_modulate(Globals.Colors[ConfigManager.color_palette].green_base) 
-	$NextRat.set_modulate(Globals.Colors[ConfigManager.color_palette].blue_selected) 
+	$NextPath.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+	$NextRat.set_modulate(Globals.Colors[ConfigManager.color_palette].ratline) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -90,5 +90,6 @@ func _on_change_color():
 
 func _on_TextureButton_pressed():
 	if enabled:
+		AudioManager.play_button("confirm")
 		var _scene = get_tree().change_scene(level_to_load)
 

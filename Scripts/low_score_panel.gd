@@ -25,14 +25,17 @@ func _ready():
 	options_panel.connect("change_color", self, "_on_change_color")
 	
 func _on_change_color():
-	$CenterContainer/PanelContainer/ColorPanel.set_modulate(Globals.Colors[ConfigManager.color_palette].blue_background)
+	$CenterContainer/PanelContainer/ColorPanel.set_modulate(Globals.Colors[ConfigManager.color_palette].background)
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/LowScoreTitle.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/CloseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/ColorPanel.set_modulate(Globals.Colors[ConfigManager.color_palette].background)
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/MenuButton.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
+	
 
 	for item in list.get_children():
 		item.get_node("Text").set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 		item.get_node("LevelScore").set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
-		item.get_node("ProgressBar").set_modulate(Globals.Colors[ConfigManager.color_palette].green_base)
+		item.get_node("ProgressBar").set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
 		if item.get_node("ProgressBar").value >= 50:
 			item.get_node("GoalMet").set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 		else:

@@ -1,9 +1,8 @@
 ,en_GB,pt_BR
 options_title,Options,Opções
-language,Language:,Língua:
-text_size,Text size:,Tamanho do texto:
+language,Language,Língua
 color_scheme,Colour Scheme,Esquema de Cores
-audio,Audio:,Áudio:
+audio,Audio,Áudio
 github,This game is on github: github.com/Gustavo-Rubo/Rotas,Este jogo está no github: github.com/Gustavo-Rubo/Rotas
 back_to_menu,Back to level select,Voltar à seleção de níveis
 level_w_number,Level %s,Nível %s

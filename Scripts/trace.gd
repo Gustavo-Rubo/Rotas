@@ -52,8 +52,8 @@ func _ready():
 	
 func _on_change_color():
 	update()
-	default_color = Globals.Colors[ConfigManager.color_palette].green_base
-	$Wrong.default_color = Globals.Colors[ConfigManager.color_palette].red_base
+	default_color = Globals.Colors[ConfigManager.color_palette].base1
+	$Wrong.default_color = Globals.Colors[ConfigManager.color_palette].wrong
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -101,7 +101,7 @@ func _on_Trace_draw():
 	$Label.set_global_position(points[0])
 	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
-		draw_circle_aa(p, width/2, Globals.Colors[ConfigManager.color_palette].bend_color)
+		draw_circle_aa(p, width/2, Globals.Colors[ConfigManager.color_palette].base1)
 		
 func update_collision():
 	if $Area2D.get_child_count() >= 1:
