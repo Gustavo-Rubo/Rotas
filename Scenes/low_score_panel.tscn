@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/low_score_panel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/close.png" type="Texture" id=2]
@@ -8,26 +8,27 @@
 [ext_resource path="res://Resources/panel_border.tres" type="StyleBox" id=6]
 [ext_resource path="res://Resources/panel_style.tres" type="StyleBox" id=7]
 [ext_resource path="res://Resources/config_font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Sprites/mock score.png" type="Texture" id=9]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 44
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 5 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 3
 border_width_top = 3
@@ -35,7 +36,7 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 length = 0.4
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:offset:x")
@@ -86,7 +87,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 504.0
 margin_bottom = 524.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 margin_left = 4.0
@@ -122,7 +123,7 @@ __meta__ = {
 [node name="LowScoreTitle" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
 margin_right = 298.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "low_score_title"
 
@@ -143,6 +144,17 @@ stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ContainerLevel" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+visible = false
+margin_top = 62.0
+margin_right = 460.0
+margin_bottom = 412.0
+rect_min_size = Vector2( 460, 350 )
+
+[node name="Sprite" type="Sprite" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel"]
+texture = ExtResource( 9 )
+centered = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
 margin_top = 62.0
@@ -166,7 +178,7 @@ custom_constants/separation = 15
 [node name="Text" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Level"]
 margin_right = 76.0
 margin_bottom = 29.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "level_#"
 
 [node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Level"]
@@ -181,7 +193,7 @@ size_flags_horizontal = 3
 margin_left = 127.0
 margin_right = 142.0
 margin_bottom = 29.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "#"
 
 [node name="ProgressBar" type="ProgressBar" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Level"]
@@ -189,8 +201,8 @@ margin_left = 157.0
 margin_right = 420.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 263, 25 )
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = SubResource( 6 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
 step = 1.0
 percent_visible = false
 __meta__ = {
@@ -221,7 +233,7 @@ margin_bottom = 54.0
 rect_min_size = Vector2( 300, 50 )
 custom_styles/panel = ExtResource( 7 )
 
-[node name="MenuButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer"]
+[node name="OnlineButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 456.0
@@ -236,6 +248,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in_options = SubResource( 8 )
+anims/slide_in_options = SubResource( 6 )
 [connection signal="gui_input" from="CenterContainer" to="." method="_on_CenterContainer_gui_input"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/OnlineButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/OnlineButton" to="." method="_on_OnlineButton_pressed"]

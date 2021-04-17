@@ -4,9 +4,11 @@
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
-uniform float interval : hint_range(0.1, 20);
-uniform float rings : hint_range(1, 4);
-uniform float period : hint_range(0.1, 5);
+//uniform float interval : hint_range(0.1, 20);
+//uniform float rings : hint_range(1, 4);
+//uniform float period : hint_range(0.1, 5);
+
+uniform float frequency : hint_range(1, 5);
 
 float sawtooth(float x, float a) {
 	return mod(x, a)/a;
@@ -20,7 +22,7 @@ void fragment() {
 	
 //	float value = (sin((dist/interval - TIME)*3.14/period)+1.0) / 2.0;
 //	float value = min(sawtooth((dist*interval - TIME/period), 1.0/rings), 0.8);
-	float value = (sin(- TIME + (cos(angle) * coord.x - sin(angle) * coord.y) / 80.0) + 0.3) / 2.0;
+	float value = (sin(- (TIME * frequency) + (cos(angle) * coord.x - sin(angle) * coord.y) / 80.0) + 0.3) / 2.0;
 	
 	COLOR = texture(TEXTURE, UV);
 	COLOR = vec4(1.0, 1.0, 1.0,  0.6 * COLOR.a * value);
@@ -29,6 +31,4 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/interval = 0.273
-shader_param/rings = 1.0
-shader_param/period = 2.276
+shader_param/frequency = 5.0

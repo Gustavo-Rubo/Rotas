@@ -45,7 +45,6 @@ func _on_en_GB_pressed():
 func _on_pt_BR_pressed():
 	TranslationServer.set_locale("pt_BR")
 
-
 # Palette change buttons
 func _on_PaletteButton_pressed(a):
 	ConfigManager.color_palette = a

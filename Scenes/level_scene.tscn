@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/guide_lines.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/options_panel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Materials/radial_highlight.tres" type="Material" id=10]
 [ext_resource path="res://Sprites/star.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/options.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/advance.png" type="Texture" id=13]
@@ -29,7 +30,7 @@ border_width_bottom = 3
 border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 24
+size = 22
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -58,7 +59,7 @@ margin_right = 100.0
 margin_bottom = 96.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "#"
+text = "level_w_number"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -86,7 +87,6 @@ __meta__ = {
 }
 
 [node name="TraceLength" type="Label" parent="."]
-visible = false
 margin_left = 20.5
 margin_top = 522.0
 margin_right = 103.5
@@ -128,13 +128,23 @@ texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="EraseButton" type="TextureButton" parent="ControlButtons"]
+modulate = Color( 1, 0, 0, 1 )
 margin_left = 95.0
 margin_right = 175.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 80 )
-disabled = true
 texture_normal = ExtResource( 5 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EraseHighlight" type="Sprite" parent="ControlButtons"]
+visible = false
+material = ExtResource( 10 )
+position = Vector2( 95, 0 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="RedoButton" type="TextureButton" parent="ControlButtons"]
 visible = false
@@ -145,6 +155,7 @@ rect_min_size = Vector2( 80, 80 )
 expand = true
 
 [node name="ConfirmButton" type="TextureButton" parent="ControlButtons"]
+modulate = Color( 0.12549, 0.815686, 0, 1 )
 margin_left = 190.0
 margin_right = 270.0
 margin_bottom = 80.0
@@ -152,6 +163,13 @@ rect_min_size = Vector2( 80, 80 )
 disabled = true
 texture_normal = ExtResource( 6 )
 expand = true
+
+[node name="ConfirmHighlight" type="Sprite" parent="ControlButtons"]
+visible = false
+material = ExtResource( 10 )
+position = Vector2( 190, 0 )
+texture = ExtResource( 6 )
+centered = false
 
 [node name="AdvanceButton" type="TextureButton" parent="ControlButtons"]
 margin_left = 285.0
@@ -173,11 +191,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="EraseAllDialog" type="ConfirmationDialog" parent="."]
+visible = true
+margin_right = 200.0
+margin_bottom = 70.0
+window_title = ""
+dialog_text = "erase_all"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="OptionsPanel" parent="." instance=ExtResource( 8 )]
 
 [node name="PanelContainer" parent="OptionsPanel/CenterContainer" index="0"]
-margin_top = 32.0
-margin_bottom = 542.0
+margin_top = 33.0
+margin_bottom = 543.0
 
 [node name="ColorPanel" parent="OptionsPanel/CenterContainer/PanelContainer" index="0"]
 margin_bottom = 506.0
@@ -215,6 +243,7 @@ clip_text = true
 [connection signal="pressed" from="ControlButtons/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="pressed" from="ControlButtons/ConfirmButton" to="." method="_on_TraceButton_pressed"]
 [connection signal="pressed" from="ControlButtons/AdvanceButton" to="." method="_on_AdvanceButton_pressed"]
+[connection signal="confirmed" from="EraseAllDialog" to="." method="_on_EraseAllDialog_confirmed"]
 [connection signal="pressed" from="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/MenuButton" to="." method="_on_MenuButton_pressed"]
 
 [editable path="OptionsPanel"]

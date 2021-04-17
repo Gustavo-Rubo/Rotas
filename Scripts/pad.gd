@@ -21,6 +21,8 @@ var circle_points = PoolVector2Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_as_toplevel(true)
+	
 	radius = Globals.GRID_SIZE * 0.8
 	position = Globals.GRID_SIZE * Vector2(grid_x, grid_y)
 	$Area2D/CollisionShape2D.shape.set("radius", radius)

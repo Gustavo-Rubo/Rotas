@@ -54,7 +54,7 @@ func _ready():
 
 	add_child(ConnectionPlayer)
 	add_child(LoopPlayer)
-	add_child(ButtonPlayer)	
+	add_child(ButtonPlayer)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

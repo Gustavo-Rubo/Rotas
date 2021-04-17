@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Materials/radial_highlight.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/level_button.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/path.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/rat.png" type="Texture" id=8]
@@ -46,6 +45,43 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 shader_param/length_line = 200.0
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+//uniform float interval : hint_range(0.1, 20);
+//uniform float rings : hint_range(1, 4);
+//uniform float period : hint_range(0.1, 5);
+
+uniform float frequency : hint_range(1, 5);
+
+float sawtooth(float x, float a) {
+	return mod(x, a)/a;
+}
+
+void fragment() {
+	float angle = 0.2;
+	vec4 coord = FRAGCOORD;
+	
+	float dist = distance(vec2(0.5,0.5), UV);
+	
+//	float value = (sin((dist/interval - TIME)*3.14/period)+1.0) / 2.0;
+//	float value = min(sawtooth((dist*interval - TIME/period), 1.0/rings), 0.8);
+	float value = (sin(- (TIME * frequency) + (cos(angle) * coord.x - sin(angle) * coord.y) / 80.0) + 0.3) / 2.0;
+	
+	COLOR = texture(TEXTURE, UV);
+	COLOR = vec4(1.0, 1.0, 1.0,  0.6 * COLOR.a * value);
+//	COLOR = mix(COLOR, vec4(1.0, 1.0, 1.0, COLOR.a), value);
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/frequency = 1.8
+
+[sub_resource type="StreamTexture" id=8]
+flags = 4
+load_path = "res://.import/level_button.png-a456e52d1dce623cfd7d3373525b30ad.stex"
 
 [sub_resource type="Animation" id=4]
 resource_name = "star_anim"
@@ -144,8 +180,8 @@ __meta__ = {
 
 [node name="Highlight" type="Sprite" parent="."]
 visible = false
-material = ExtResource( 2 )
-texture = ExtResource( 9 )
+material = SubResource( 7 )
+texture = SubResource( 8 )
 
 [node name="PreviousPath" type="Sprite" parent="."]
 visible = false
