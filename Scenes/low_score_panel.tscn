@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/low_score_panel.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/close.png" type="Texture" id=2]
@@ -20,6 +20,10 @@ corner_radius_bottom_left = 8
 [sub_resource type="DynamicFont" id=2]
 size = 44
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 18
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -75,9 +79,9 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 margin_left = 258.0
-margin_top = 23.0
+margin_top = 179.0
 margin_right = 766.0
-margin_bottom = 551.0
+margin_bottom = 709.0
 rect_min_size = Vector2( 500, 0 )
 custom_styles/panel = ExtResource( 6 )
 
@@ -86,14 +90,14 @@ modulate = Color( 0.168627, 0.168627, 0.168627, 1 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 504.0
-margin_bottom = 524.0
+margin_bottom = 526.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 504.0
-margin_bottom = 524.0
+margin_bottom = 526.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -106,7 +110,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 480.0
-margin_bottom = 500.0
+margin_bottom = 502.0
 custom_constants/separation = 10
 alignment = 1
 __meta__ = {
@@ -146,20 +150,57 @@ __meta__ = {
 }
 
 [node name="ContainerLevel" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-visible = false
 margin_top = 62.0
 margin_right = 460.0
-margin_bottom = 412.0
-rect_min_size = Vector2( 460, 350 )
+margin_bottom = 482.0
+rect_min_size = Vector2( 460, 420 )
 
 [node name="Sprite" type="Sprite" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel"]
 texture = ExtResource( 9 )
 centered = false
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_top = 62.0
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel"]
+margin_top = 360.0
 margin_right = 460.0
-margin_bottom = 412.0
+margin_bottom = 418.0
+rect_min_size = Vector2( 300, 50 )
+custom_styles/panel = ExtResource( 6 )
+
+[node name="ColorPanel" type="Panel" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel/PanelContainer"]
+modulate = Color( 0.168627, 0.168627, 0.168627, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 456.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 300, 50 )
+custom_styles/panel = ExtResource( 7 )
+
+[node name="OfflineButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 456.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 300, 50 )
+custom_fonts/font = ExtResource( 8 )
+text = "list_scores"
+flat = true
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "online_not_available"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+visible = false
+margin_top = 422.0
+margin_right = 460.0
+margin_bottom = 772.0
 rect_min_size = Vector2( 460, 350 )
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
@@ -218,6 +259,7 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
+visible = false
 margin_top = 422.0
 margin_right = 460.0
 margin_bottom = 480.0
@@ -251,5 +293,5 @@ __meta__ = {
 anims/slide_in_options = SubResource( 6 )
 [connection signal="gui_input" from="CenterContainer" to="." method="_on_CenterContainer_gui_input"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/OnlineButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel/PanelContainer/OfflineButton" to="." method="_on_OfflineButton_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/OnlineButton" to="." method="_on_OnlineButton_pressed"]

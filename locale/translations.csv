@@ -18,5 +18,7 @@ Por favor, lembre de responder o formulário de avaliação e fique atento para 
 
 (Você pode desenhar nesse nível, se quiser)"
 low_score_title,Scoreboard,Placar de Pontos
-online_scores,See online scoreboards,Ver placar online
 erase_all,No traces are selected. Do you wish to erase all traces?,Nenhum traço está selecionado. Deseja apagar todos os traços?
+online_scores,See online scoreboards,Ver placar online
+list_scores,Back to your scoreboard,Voltar ao seu placar
+online_not_available,Online leaderboards are not available yet.,Placares online não estão disponíveis ainda.

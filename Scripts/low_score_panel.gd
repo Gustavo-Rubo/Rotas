@@ -30,6 +30,8 @@ func _on_change_color():
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/CloseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/ColorPanel.set_modulate(Globals.Colors[ConfigManager.color_palette].background)
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer/OnlineButton.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel/PanelContainer/ColorPanel.set_modulate(Globals.Colors[ConfigManager.color_palette].background)
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel/PanelContainer/OfflineButton.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 
 	for item in list.get_children():
 		item.get_node("Text").set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
@@ -59,3 +61,10 @@ func _on_OnlineButton_pressed():
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer.visible = false
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel.visible = true
 	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer.visible = false
+
+
+func _on_OfflineButton_pressed():
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer.visible = true
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ContainerLevel.visible = false
+	$CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/PanelContainer.visible = true
+	
