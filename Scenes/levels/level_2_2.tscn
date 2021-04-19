@@ -15,31 +15,28 @@ goal_trace_length = 955.0
 max_trace_length = 20.0
 nets = [ NodePath("Net") ]
 
-[node name="Net" parent="." index="2" instance=ExtResource( 3 )]
-pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3"), NodePath("../Pad4"), NodePath("../Pad5") ]
-
-[node name="Pad1" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Pad1" parent="." index="2" instance=ExtResource( 4 )]
 grid_x = 16
 grid_y = 3
 
-[node name="Pad2" parent="." index="4" instance=ExtResource( 4 )]
+[node name="Pad2" parent="." index="3" instance=ExtResource( 4 )]
 grid_x = 22
 grid_y = 8
 
-[node name="Pad3" parent="." index="5" instance=ExtResource( 4 )]
+[node name="Pad3" parent="." index="4" instance=ExtResource( 4 )]
 grid_x = 20
 grid_y = 15
 
-[node name="Pad4" parent="." index="6" instance=ExtResource( 4 )]
+[node name="Pad4" parent="." index="5" instance=ExtResource( 4 )]
 grid_x = 12
 grid_y = 15
 
-[node name="Pad5" parent="." index="7" instance=ExtResource( 4 )]
+[node name="Pad5" parent="." index="6" instance=ExtResource( 4 )]
 grid_x = 10
 grid_y = 8
 
-[node name="TraceLength" parent="." index="11"]
-visible = true
+[node name="Net" parent="." index="7" instance=ExtResource( 3 )]
+pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3"), NodePath("../Pad4"), NodePath("../Pad5") ]
 
 [node name="Label" type="Label" parent="." index="15"]
 visible = false

@@ -50,7 +50,7 @@ func _on_ScoreButton_pressed():
 	low_score_panel.slide_in()
 
 
+# Uncomment this function when you release for web
 func _on_ScrollContainer_gui_input(event):
-	pass
-#	if (event is InputEventScreenDrag):
-#		$ScrollContainer.scroll_horizontal -= event.relative.x #speed.x/100
+	if (event is InputEventScreenDrag):
+		$ScrollContainer.scroll_horizontal -= event.relative.x #speed.x/100

@@ -42,7 +42,6 @@ func _ready():
 	# Load the traces from previous solution
 	deserialize_and_load_traces(parse_json(GameDataManager.level_info[level_code].traces))
 	
-#	$EraseAllDialog.set_as_toplevel(true)
 	$LblNumber.set_text(tr("level_w_number") % Globals.level_code_to_text(level_code))
 	$ControlButtons/ConfirmButton.disabled = true
 	$ControlButtons/ConfirmHighlight.visible = false
@@ -177,14 +176,25 @@ func check_nets_solved():
 		
 		var pad_sum = 0
 		
+		# reset the net's subnets
+		net.subnets = []
+		var subnet_number = -1
+		
 		for p in net.pads:
 			var pad = net.get_node(p)
 			if !pad.recursive_checked:
 				pad.recursive_checked = true
+				subnet_number += 1
+				
+				# handle the net's subnets
+				net.subnets.append([pad.position])
+				
 				pad_sum = 1
 				for trace_area in pad.get_node("Area2D").get_overlapping_areas():
-					pad_sum += recursive_check_net_solved(trace_area.get_parent(), 0, n)
+					pad_sum += recursive_check_net_solved(trace_area.get_parent(), 0, n, subnet_number)
 				pad.get_node("PadSum").set_text(String(pad_sum))
+		
+		net.update()
 			
 		if pad_sum == net.pads.size():
 			net.solved = true
@@ -206,20 +216,25 @@ func check_nets_solved():
 
 # Recursive function for determining which traces belong to which nets,
 # and to know if nets are solved
-func recursive_check_net_solved(element, pad_sum, net_number):
+func recursive_check_net_solved(element, pad_sum, net_number, subnet_number):
 	if !element.recursive_checked:
 		element.recursive_checked = true
+		
+		var net = get_node(nets[net_number])
 		
 		if "Pad" in element.name:
 			if element.net_number == net_number:
 				pad_sum += 1
+				net.subnets[subnet_number].append(element.position)
 		if "Trace" in element.name:
 			if !element.nets.has(net_number):
 				element.nets.append(net_number)
+				for p in element.points:
+					net.subnets[subnet_number].append(p)
 				
 		var temp_pad_sum = 0
 		for area in element.get_node("Area2D").get_overlapping_areas():
-			temp_pad_sum += recursive_check_net_solved(area.get_parent(), 0, net_number)
+			temp_pad_sum += recursive_check_net_solved(area.get_parent(), 0, net_number, subnet_number)
 		pad_sum += temp_pad_sum
 		return pad_sum
 

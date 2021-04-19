@@ -10,19 +10,19 @@ goal_trace_length = 490.0
 max_trace_length = 20.0
 nets = [ NodePath("Net0") ]
 
-[node name="Net0" parent="." index="2" instance=ExtResource( 3 )]
-pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3") ]
-
-[node name="Pad1" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Pad1" parent="." index="2" instance=ExtResource( 4 )]
 grid_x = 16
 grid_y = 4
 
-[node name="Pad2" parent="." index="4" instance=ExtResource( 4 )]
+[node name="Pad2" parent="." index="3" instance=ExtResource( 4 )]
 grid_x = 20
 grid_y = 12
 
-[node name="Pad3" parent="." index="5" instance=ExtResource( 4 )]
+[node name="Pad3" parent="." index="4" instance=ExtResource( 4 )]
 grid_x = 12
 grid_y = 12
+
+[node name="Net0" parent="." index="5" instance=ExtResource( 3 )]
+pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3") ]
 
 [editable path="OptionsPanel"]
