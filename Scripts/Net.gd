@@ -5,7 +5,6 @@ export var pads = []
 onready var solved
 
 # This stores the positions of all points in each subnet.
-# If there is no subnet in the index, its value is null.  < - may be false
 # The net is solved if there exists only one subnet.
 var subnets = []
 
@@ -17,18 +16,11 @@ func _ready():
 	
 	for i in (pads.size()):
 		subnets.append([get_node(pads[i]).position])
-#	print("Subnets: " + String(subnets.size()))
-#	print(subnets)
 	
 func _on_change_color():
 	update()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _on_net_solved(args):
-#	print("signal arrived ", args[1])
 	if name == args[0]:
 		solved = args[1]
 

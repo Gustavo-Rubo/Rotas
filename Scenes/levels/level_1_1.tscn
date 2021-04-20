@@ -31,14 +31,15 @@ grid_x = 16
 grid_y = 14
 
 [node name="Net0" parent="." index="6" instance=ExtResource( 2 )]
-z_index = 2
 pads = [ NodePath("../Pad1"), NodePath("../Pad4") ]
 
 [node name="Net1" parent="." index="7" instance=ExtResource( 2 )]
-z_index = 2
 pads = [ NodePath("../Pad2"), NodePath("../Pad3") ]
 
-[node name="Hint" parent="." index="14"]
+[node name="LayerControls" parent="." index="13"]
+visible = false
+
+[node name="Hint" parent="." index="15"]
 text = "hint_level_1"
 
 [editable path="Net1"]

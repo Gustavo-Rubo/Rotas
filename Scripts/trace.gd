@@ -9,6 +9,7 @@ var bend_points = []
 var nets = []
 var trace
 var grad = Gradient.new()
+var layer_number = 0
 
 onready var highlight = get_node("Highlight")
 onready var wrong = get_node("Wrong")
@@ -28,6 +29,10 @@ var circle_points = PoolVector2Array()
 func _ready():
 	
 	_on_change_color()
+	
+	# put the trace in the right collision layer according to its layer number
+	$Area2D.set_collision_layer_bit(layer_number, true)
+	$Area2D.set_collision_mask_bit(layer_number, true)
 	
 	width = Globals.GRID_SIZE * 0.5
 	highlight.width = width
@@ -51,9 +56,9 @@ func _ready():
 	options_panel.connect("change_color", self, "_on_change_color")
 	
 func _on_change_color():
-	update()
-	default_color = Globals.Colors[ConfigManager.color_palette].base1
+	default_color = Globals.Colors[ConfigManager.color_palette].base[layer_number]
 	$Wrong.default_color = Globals.Colors[ConfigManager.color_palette].wrong
+	update()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -92,7 +97,8 @@ func save():
 	for point in points:
 		points_save.append([point.x, point.y])
 	var save_dict = {
-		"points": points_save
+		"points": points_save,
+		"layer_number": layer_number
 	}
 	
 	return save_dict
@@ -101,7 +107,7 @@ func _on_Trace_draw():
 	$Label.set_global_position(points[0])
 	$LabelNets.set_global_position(points[0] + Vector2(0, -50))
 	for p in points:
-		draw_circle_aa(p, width/2, Globals.Colors[ConfigManager.color_palette].base1)
+		draw_circle_aa(p, width/2, Globals.Colors[ConfigManager.color_palette].base[layer_number])
 		
 func update_collision():
 	if $Area2D.get_child_count() >= 1:

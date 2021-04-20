@@ -25,4 +25,7 @@ grid_y = 12
 [node name="Net0" parent="." index="5" instance=ExtResource( 3 )]
 pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3") ]
 
+[node name="LayerControls" parent="." index="11"]
+visible = false
+
 [editable path="OptionsPanel"]

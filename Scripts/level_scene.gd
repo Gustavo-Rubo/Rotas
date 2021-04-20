@@ -26,6 +26,9 @@ var game_states = Array()
 var max_states = 20
 var state_position = -1
 
+# layer variables
+var layer_selected = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	trace_resource = load("res://Scenes/trace.tscn")
@@ -101,22 +104,27 @@ func _process(_delta):
 
 func _on_change_color():
 	$MenuButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
-	$ProgressBar.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+	$ProgressBar.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 	$LblNumber.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$TraceLength.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$Hint.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
+	
+	$LayerControls/Layer0Button.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
+	$LayerControls/Layer1Button.set_modulate(Globals.Colors[ConfigManager.color_palette].base[1])
+	$LayerControls/Layer2Button.set_modulate(Globals.Colors[ConfigManager.color_palette].base[2])
+	$LayerControls/LayerSquare.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
 	
 	if traces.size() > 0:
 		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
 	else:
 		$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	if trace_is_selected:
-		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 	else:
 		$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 		
 	if $ControlButtons/AdvanceButton.visible:
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 	else:
 		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 	
@@ -144,7 +152,7 @@ func check_level_solved():
 	if level_solved:
 		$ControlButtons/AdvanceButton.disabled = false
 		$ControlButtons/AdvanceButton.visible = true
-		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+		$ControlButtons/AdvanceButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 		$ControlButtons/ConfirmButton.visible = false
 		$ControlButtons/ConfirmHighlight.visible = false
 		
@@ -250,6 +258,7 @@ func serialize_traces():
 func deserialize_and_load_traces(traces_serial):
 	for trace_serial_data in traces_serial:
 		var load_trace = trace_resource.instance()
+		load_trace.layer_number = trace_serial_data.layer_number
 		add_child(load_trace)
 		
 		for p in trace_serial_data.points.size():
@@ -307,7 +316,7 @@ func _on_Background_gui_input(event):
 					$ControlButtons/ConfirmButton.disabled = false
 					if !level_solved:
 						$ControlButtons/ConfirmHighlight.visible = true
-					$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+					$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 					$ControlButtons/EraseButton.disabled = false
 					$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
 					$ControlButtons/EraseHighlight.visible = true
@@ -339,12 +348,13 @@ func _on_Background_gui_input(event):
 				$ControlButtons/ConfirmButton.disabled = false
 				if !level_solved:
 					$ControlButtons/ConfirmHighlight.visible = true
-				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+				$ControlButtons/ConfirmButton.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 				$ControlButtons/EraseButton.disabled = false
 				$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].wrong)
 				$ControlButtons/EraseHighlight.visible = true
 				
 				current_trace = trace_resource.instance()
+				current_trace.layer_number = layer_selected
 				current_trace.is_selected = true
 				add_child(current_trace)
 				
@@ -410,7 +420,7 @@ func _on_TraceButton_pressed():
 	current_bend_point.is_selected = false
 	is_first_section_of_trace = false
 	current_trace.is_selected = false
-	current_trace.default_color = Globals.Colors[ConfigManager.color_palette].base1
+#	current_trace.default_color = Globals.Colors[ConfigManager.color_palette].base[layer_selected]
 	traces.append(current_trace)
 	current_trace = null
 	current_bend_point = null
@@ -519,6 +529,30 @@ func complete_level():
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/level_select_scene.tscn")
 
+func _on_EraseAllDialog_confirmed():
+	for t in traces:
+		remove_child(t)
+	traces = []
+	$ControlButtons/EraseButton.disabled = true
+	$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
+	$ControlButtons/EraseHighlight.visible = false
+
+
+func _on_Layer0Button_pressed():
+	layer_selected = 0
+	$LayerControls/Tween.interpolate_property($LayerControls/LayerSquare, "position", $LayerControls/LayerSquare.position, $LayerControls/Layer0Button.rect_position, 0.2, Tween.TRANS_QUAD)
+	$LayerControls/Tween.start()
+
+func _on_Layer1Button_pressed():
+	layer_selected = 1
+	$LayerControls/Tween.interpolate_property($LayerControls/LayerSquare, "position", $LayerControls/LayerSquare.position, $LayerControls/Layer1Button.rect_position, 0.2, Tween.TRANS_QUAD)
+	$LayerControls/Tween.start()	
+
+func _on_Layer2Button_pressed():
+	layer_selected = 2
+	$LayerControls/Tween.interpolate_property($LayerControls/LayerSquare, "position", $LayerControls/LayerSquare.position, $LayerControls/Layer2Button.rect_position, 0.2, Tween.TRANS_QUAD)
+	$LayerControls/Tween.start()
+
 
 # From here on, everything is related to state management for the undofunction
 
@@ -577,12 +611,3 @@ func change_state():
 # Is necessary for using the undo/redo buttons
 #func sync_trace_objects():
 #	get_children()
-
-
-func _on_EraseAllDialog_confirmed():
-	for t in traces:
-		remove_child(t)
-	traces = []
-	$ControlButtons/EraseButton.disabled = true
-	$ControlButtons/EraseButton.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
-	$ControlButtons/EraseHighlight.visible = false

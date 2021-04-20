@@ -64,7 +64,10 @@ pads = [ NodePath("../Pad7"), NodePath("../Pad4") ]
 [node name="Net4" parent="." index="16" instance=ExtResource( 1 )]
 pads = [ NodePath("../Pad9"), NodePath("../Pad8") ]
 
-[node name="Hint" parent="." index="23"]
+[node name="LayerControls" parent="." index="22"]
+visible = false
+
+[node name="Hint" parent="." index="24"]
 text = "hint_level_3"
 
 [editable path="OptionsPanel"]

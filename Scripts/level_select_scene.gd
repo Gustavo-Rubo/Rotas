@@ -52,5 +52,6 @@ func _on_ScoreButton_pressed():
 
 # Uncomment this function when you release for web
 func _on_ScrollContainer_gui_input(event):
-	if (event is InputEventScreenDrag):
-		$ScrollContainer.scroll_horizontal -= event.relative.x #speed.x/100
+	pass
+#	if (event is InputEventScreenDrag):
+#		$ScrollContainer.scroll_horizontal -= event.relative.x #speed.x/100

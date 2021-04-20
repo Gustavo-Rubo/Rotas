@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Sprites/star.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/options.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/advance.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/layer_square.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/layer_circle.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 52
@@ -87,6 +89,7 @@ __meta__ = {
 }
 
 [node name="TraceLength" type="Label" parent="."]
+visible = false
 margin_left = 20.5
 margin_top = 522.0
 margin_right = 103.5
@@ -108,6 +111,44 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LayerControls" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 330.0
+margin_right = 70.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 50 )
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="LayerControls"]
+
+[node name="Layer2Button" type="TextureButton" parent="LayerControls"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 15 )
+
+[node name="Layer1Button" type="TextureButton" parent="LayerControls"]
+margin_top = 60.0
+margin_right = 50.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 15 )
+
+[node name="Layer0Button" type="TextureButton" parent="LayerControls"]
+margin_top = 120.0
+margin_right = 50.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 15 )
+
+[node name="LayerSquare" type="Sprite" parent="LayerControls"]
+position = Vector2( 0, 120 )
+texture = ExtResource( 14 )
+centered = false
 
 [node name="ControlButtons" type="HBoxContainer" parent="."]
 margin_left = 724.0
@@ -238,6 +279,9 @@ shortcut_in_tooltip = false
 clip_text = true
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="LayerControls/Layer2Button" to="." method="_on_Layer2Button_pressed"]
+[connection signal="pressed" from="LayerControls/Layer1Button" to="." method="_on_Layer1Button_pressed"]
+[connection signal="pressed" from="LayerControls/Layer0Button" to="." method="_on_Layer0Button_pressed"]
 [connection signal="pressed" from="ControlButtons/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="ControlButtons/EraseButton" to="." method="_on_EraseButton_pressed"]
 [connection signal="pressed" from="ControlButtons/RedoButton" to="." method="_on_RedoButton_pressed"]

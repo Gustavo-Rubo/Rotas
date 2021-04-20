@@ -7,7 +7,8 @@ var levels = {
 	"1_3": { "next_level_code": "1_4" },
 	"1_4": { "next_level_code": "2_1" },
 	"2_1": { "next_level_code": "2_2" },
-	"2_2": { "next_level_code": null },
+	"2_2": { "next_level_code": "3_1" },
+	"3_1": { "next_level_code": null }
 }
 
 # Colors
@@ -23,7 +24,9 @@ enum {
 var Colors = [
 	# Base colors (DARK_PALETTE)
 	{
-		base1 = Color(0, 0.8, 0),
+		base = [Color(0, 0.8, 0),
+				Color(0.2, 0.6, 0.7),
+				Color(0.4, 0.7, 0.5)],
 		wrong = Color(0.8, 0, 0),
 		ratline = Color(0.4, 0.4, 1),
 		background = Color(0.05, 0.08, 0.15),
@@ -39,7 +42,7 @@ var Colors = [
 
 	# Alternative Colors (PALETTE_LIGHT)
 	{
-		base1 = Color(0.2, 0.8, 0.4),
+		base = [Color(0.2, 0.8, 0.4)],
 		wrong = Color(0.8, 0.4, 0.2),
 		ratline = Color(0.4, 0.4, 1),
 		background = Color(0.9, 0.9, 0.9),
@@ -55,7 +58,9 @@ var Colors = [
 	
 	# Monokai (PALETTE_MONOKAI)
 	{
-		base1 = Color(0.65, 0.89, 0.18),
+		base = [Color(0.65, 0.89, 0.18),
+				Color("#FD971F"),
+				Color("#ae81ff")],
 		wrong = Color(0.98, 0.15, 0.45),
 		ratline = Color(0.40, 0.84, 0.94),
 		background = Color(0.15, 0.16, 0.13),
@@ -74,7 +79,9 @@ var Colors = [
 	# https://coolors.co/264653-2a9d8f-8ab17d-e9c46a-f4a261-e76f51
 	# A short hike (PALETTE_SHORTHIKE)
 	{
-		base1 = Color("#2A9D8F"),
+		base = [Color("#2A9D8F"),
+				Color("#F4A261"),
+				Color("#662b9e")],
 		wrong = Color("#E76F51"),
 		ratline = Color("#8AB17D"),
 		background = Color("#264653"),
@@ -93,7 +100,7 @@ var Colors = [
 	# https://www.schemecolor.com/wave-of-retro.php
 	# Vaporwave (PALETTE_VAPORWAVE)
 	{
-		base1 = Color("#22eae0"),
+		base = [Color("#22eae0")],
 		wrong = Color("#E0473D"),
 		ratline = Color("#e60efe"),
 		background = Color("#211830"),

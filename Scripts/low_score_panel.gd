@@ -36,7 +36,7 @@ func _on_change_color():
 	for item in list.get_children():
 		item.get_node("Text").set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 		item.get_node("LevelScore").set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
-		item.get_node("ProgressBar").set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+		item.get_node("ProgressBar").set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 		if item.get_node("ProgressBar").value >= 50:
 			item.get_node("GoalMet").set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 		else:

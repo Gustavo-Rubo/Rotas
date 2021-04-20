@@ -38,7 +38,7 @@ func _on_change_color():
 	
 func _draw():
 	# We use the draw_colored_polygon function because the draw_circle has no antialiasing
-	draw_circle_aa(Vector2(0,0), radius, Globals.Colors[ConfigManager.color_palette].base1)
+	draw_circle_aa(Vector2(0,0), radius, Globals.Colors[ConfigManager.color_palette].base[0])
 	
 	if (net_number == 0): draw_circle_aa(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)
 	if (net_number == 1): draw_square(Vector2(0, 0), radius / 2, Globals.Colors[ConfigManager.color_palette].background)

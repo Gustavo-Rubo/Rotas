@@ -70,8 +70,8 @@ func _on_change_color():
 	level_label.set_modulate(Globals.Colors[ConfigManager.color_palette].text2)
 	
 	if enabled:
-		button.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
-		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+		button.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
+		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 	else:
 		button.set_modulate(Globals.Colors[ConfigManager.color_palette].gray_disabled)
 		previous_path.set_modulate(Globals.Colors[ConfigManager.color_palette].ratline)
@@ -81,7 +81,7 @@ func _on_change_color():
 	else:
 		star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_blank)
 	
-	$NextPath.set_modulate(Globals.Colors[ConfigManager.color_palette].base1)
+	$NextPath.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 	$NextRat.set_modulate(Globals.Colors[ConfigManager.color_palette].ratline) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
