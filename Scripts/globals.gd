@@ -22,11 +22,12 @@ enum {
 }
 
 var Colors = [
+	# https://coolors.co/0d1426-cc0000-6868ff-f0cf4a-00cc00-09099e-455ab0-c99206
 	# Base colors (DARK_PALETTE)
 	{
 		base = [Color(0, 0.8, 0),
-				Color(0.2, 0.6, 0.7),
-				Color(0.4, 0.7, 0.5)],
+				Color("#09099E"),
+				Color("#C99206")],
 		wrong = Color(0.8, 0, 0),
 		ratline = Color(0.4, 0.4, 1),
 		background = Color(0.05, 0.08, 0.15),
@@ -39,14 +40,17 @@ var Colors = [
 		text1 = Color(0.95, 0.95, 0.95),
 		text2 = Color(0.66, 0.66, 0.66)
 	},
-
+	
+	# https://coolors.co/e6e6e6-33cc66-cc6633-6868ff-db169a-2cdbdb-d1d102-d17649
 	# Alternative Colors (PALETTE_LIGHT)
 	{
-		base = [Color(0.2, 0.8, 0.4)],
+		base = [Color(0.2, 0.8, 0.4),
+				Color("#DB169A"),
+				Color("#2CDBDB")],
 		wrong = Color(0.8, 0.4, 0.2),
 		ratline = Color(0.4, 0.4, 1),
 		background = Color(0.9, 0.9, 0.9),
-		star_filled = Color(0.85, 0.85, 0.00),
+		star_filled = Color("#D1D102"),
 		star_blank = Color(0.61, 0.61, 0.61),
 		gray_dots = Color(0.7, 0.7, 0.7),
 		white_highlight = Color(0.2, 0.2, 0.2, 0.5),
@@ -76,16 +80,16 @@ var Colors = [
 		# purple ae81ff
 	},
 	
-	# https://coolors.co/264653-2a9d8f-8ab17d-e9c46a-f4a261-e76f51
+	# https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51-db5461-c94277-94524a
 	# A short hike (PALETTE_SHORTHIKE)
 	{
 		base = [Color("#2A9D8F"),
-				Color("#F4A261"),
-				Color("#662b9e")],
-		wrong = Color("#E76F51"),
+				Color("#E9C46A"),
+				Color("#C94277")],
+		wrong = Color("#db5461"),
 		ratline = Color("#8AB17D"),
 		background = Color("#264653"),
-		star_filled = Color("#E9C46A"),
+		star_filled = Color("#E76F51"),
 		star_blank = Color(0.61, 0.61, 0.61),
 		gray_dots = Color(0.7, 0.7, 0.7),
 		white_highlight = Color(1, 1, 1, 0.5),
@@ -93,26 +97,25 @@ var Colors = [
 		gray_disabled = Color(0.3, 0.3, 0.3),
 		text1 = Color(0.95, 0.95, 0.95),
 		text2 = Color(0.66, 0.66, 0.66)
-		# orange F4A261
-		# purple 662b9e
 	},
 	
-	# https://www.schemecolor.com/wave-of-retro.php
+	# https://coolors.co/200933-fc199a-9963ff-61e2ff-ffcc00-f26419-fff9fb-dbdbdb
 	# Vaporwave (PALETTE_VAPORWAVE)
 	{
-		base = [Color("#22eae0")],
+		base = [Color("#FC199A"),
+				Color("#9963FF"),
+				Color("#F26419")],
 		wrong = Color("#E0473D"),
-		ratline = Color("#e60efe"),
+		ratline = Color("#61E2FF"),
 		background = Color("#211830"),
-		star_filled = Color("#e60efe"),
+		star_filled = Color("#FFCC00"),
 		star_blank = Color(0.61, 0.61, 0.61),
 		gray_dots = Color(0.7, 0.7, 0.7),
 		white_highlight = Color(1, 1, 1, 0.5),
 		white_button = Color(1, 1, 1),
 		gray_disabled = Color(0.3, 0.3, 0.3),
-		text1 = Color("#22eae0"),
-		text2 = Color("#e60efe")
-		# purple 7512BD
+		text1 = Color("#FFF9FB"),
+		text2 = Color("#61E2FF")
 	},
 ]
 

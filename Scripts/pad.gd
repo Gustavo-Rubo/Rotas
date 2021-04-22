@@ -1,3 +1,5 @@
+tool
+
 extends Node2D
 
 export (int) var grid_x
@@ -20,7 +22,7 @@ var circle_points = PoolVector2Array()
 # 5 - star
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():		
 	set_as_toplevel(true)
 	
 	radius = Globals.GRID_SIZE * 0.8
@@ -32,6 +34,11 @@ func _ready():
 		
 	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
 	options_panel.connect("change_color", self, "_on_change_color")
+
+func _process(delta):
+	# Position in the correct place. Functions only inside the editor.
+	if Engine.editor_hint:
+		position = 32 * Vector2(grid_x, grid_y)
 	
 func _on_change_color():
 	update()

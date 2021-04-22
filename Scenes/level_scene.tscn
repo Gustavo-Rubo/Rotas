@@ -233,7 +233,6 @@ __meta__ = {
 }
 
 [node name="EraseAllDialog" type="ConfirmationDialog" parent="."]
-visible = true
 margin_right = 200.0
 margin_bottom = 70.0
 window_title = ""

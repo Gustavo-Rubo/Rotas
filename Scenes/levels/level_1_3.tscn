@@ -10,26 +10,32 @@ goal_trace_length = 1300.0
 nets = [ NodePath("Net0"), NodePath("Net1"), NodePath("Net2") ]
 
 [node name="Pad1" parent="." index="2" instance=ExtResource( 2 )]
+position = Vector2( 416, 128 )
 grid_x = 13
 grid_y = 4
 
 [node name="Pad2" parent="." index="3" instance=ExtResource( 2 )]
+position = Vector2( 608, 128 )
 grid_x = 19
 grid_y = 4
 
 [node name="Pad3" parent="." index="4" instance=ExtResource( 2 )]
+position = Vector2( 704, 288 )
 grid_x = 22
 grid_y = 9
 
 [node name="Pad4" parent="." index="5" instance=ExtResource( 2 )]
+position = Vector2( 608, 448 )
 grid_x = 19
 grid_y = 14
 
 [node name="Pad5" parent="." index="6" instance=ExtResource( 2 )]
+position = Vector2( 416, 448 )
 grid_x = 13
 grid_y = 14
 
 [node name="Pad6" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( 320, 288 )
 grid_x = 10
 grid_y = 9
 
