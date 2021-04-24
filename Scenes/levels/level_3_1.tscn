@@ -41,7 +41,11 @@ pads = [ NodePath("../Pad3"), NodePath("../Pad4") ]
 [node name="LayerControls" parent="." index="13"]
 alignment = 2
 
+[node name="Layer2Button" parent="LayerControls" index="1"]
+visible = false
+
 [node name="Hint" parent="." index="15"]
+visible = true
 text = "hint_level_3_1"
 
 [editable path="Net1"]

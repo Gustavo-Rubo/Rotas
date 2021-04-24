@@ -6,27 +6,32 @@
 
 [node name="LevelNode" instance=ExtResource( 1 )]
 level_code = "2_2"
-goal_trace_length = 955.0
+goal_trace_length = 960.0
 max_trace_length = 20.0
 nets = [ NodePath("Net") ]
 
 [node name="Pad1" parent="." index="2" instance=ExtResource( 4 )]
+position = Vector2( 512, 96 )
 grid_x = 16
 grid_y = 3
 
 [node name="Pad2" parent="." index="3" instance=ExtResource( 4 )]
+position = Vector2( 704, 256 )
 grid_x = 22
 grid_y = 8
 
 [node name="Pad3" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 640, 480 )
 grid_x = 20
 grid_y = 15
 
 [node name="Pad4" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( 384, 480 )
 grid_x = 12
 grid_y = 15
 
 [node name="Pad5" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( 320, 256 )
 grid_x = 10
 grid_y = 8
 

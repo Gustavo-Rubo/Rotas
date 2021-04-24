@@ -169,4 +169,5 @@ func check_click(mouse_click):
 	return false
 			
 func on_click(segment : int, global_position : Vector2, offset : float) -> void:
-	print("The Line was clicked in segment %s (offset: %s) and global position - %s" % [segment, offset, global_position])
+#	print("The Line was clicked in segment %s (offset: %s) and global position - %s" % [segment, offset, global_position])
+	pass

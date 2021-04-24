@@ -1,4 +1,4 @@
-tool
+#tool
 
 extends Node2D
 
@@ -22,11 +22,11 @@ var circle_points = PoolVector2Array()
 # 5 - star
 
 # Called when the node enters the scene tree for the first time.
-func _ready():		
+func _ready():
 	set_as_toplevel(true)
 	
 	radius = Globals.GRID_SIZE * 0.8
-	position = Globals.GRID_SIZE * Vector2(grid_x, grid_y)
+#		position = Globals.GRID_SIZE * Vector2(grid_x, grid_y)
 	$Area2D/CollisionShape2D.shape.set("radius", radius)
 	
 	for i in range(0, 20):
@@ -35,10 +35,10 @@ func _ready():
 	var options_panel = get_tree().get_root().find_node("OptionsPanel",true,false)
 	options_panel.connect("change_color", self, "_on_change_color")
 
-func _process(delta):
+#func _process(_delta):
 	# Position in the correct place. Functions only inside the editor.
-	if Engine.editor_hint:
-		position = 32 * Vector2(grid_x, grid_y)
+#	if Engine.editor_hint:
+#		position = 32 * Vector2(grid_x, grid_y)
 	
 func _on_change_color():
 	update()

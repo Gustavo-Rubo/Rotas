@@ -11,14 +11,17 @@ max_trace_length = 20.0
 nets = [ NodePath("Net0") ]
 
 [node name="Pad1" parent="." index="2" instance=ExtResource( 4 )]
+position = Vector2( 512, 128 )
 grid_x = 16
 grid_y = 4
 
 [node name="Pad2" parent="." index="3" instance=ExtResource( 4 )]
+position = Vector2( 640, 384 )
 grid_x = 20
 grid_y = 12
 
 [node name="Pad3" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 384, 384 )
 grid_x = 12
 grid_y = 12
 

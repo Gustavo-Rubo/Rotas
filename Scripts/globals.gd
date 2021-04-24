@@ -8,7 +8,8 @@ var levels = {
 	"1_4": { "next_level_code": "2_1" },
 	"2_1": { "next_level_code": "2_2" },
 	"2_2": { "next_level_code": "3_1" },
-	"3_1": { "next_level_code": null }
+	"3_1": { "next_level_code": "3_2" },
+	"3_2": { "next_level_code": null }
 }
 
 # Colors
@@ -22,11 +23,11 @@ enum {
 }
 
 var Colors = [
-	# https://coolors.co/0d1426-cc0000-6868ff-f0cf4a-00cc00-09099e-455ab0-c99206
+	# https://coolors.co/0d1426-cc0000-6868ff-f0cf4a-00cc00-119da4-455ab0-c99206
 	# Base colors (DARK_PALETTE)
 	{
 		base = [Color(0, 0.8, 0),
-				Color("#09099E"),
+				Color("#119da4"),
 				Color("#C99206")],
 		wrong = Color(0.8, 0, 0),
 		ratline = Color(0.4, 0.4, 1),
@@ -38,7 +39,8 @@ var Colors = [
 		white_button = Color(1, 1, 1),
 		gray_disabled = Color(0.3, 0.3, 0.3),
 		text1 = Color(0.95, 0.95, 0.95),
-		text2 = Color(0.66, 0.66, 0.66)
+		text2 = Color(0.66, 0.66, 0.66),
+		bloom = false
 	},
 	
 	# https://coolors.co/e6e6e6-33cc66-cc6633-6868ff-db169a-2cdbdb-d1d102-d17649
@@ -57,7 +59,8 @@ var Colors = [
 		white_button = Color(0.3, 0.3, 0.3),
 		gray_disabled = Color(0.7, 0.7, 0.7),
 		text1 = Color(0.3, 0.3, 0.3),
-		text2 = Color(0.5, 0.5, 0.5)
+		text2 = Color(0.5, 0.5, 0.5),
+		bloom = false
 	},
 	
 	# Monokai (PALETTE_MONOKAI)
@@ -75,9 +78,8 @@ var Colors = [
 		white_button = Color(1, 1, 1),
 		gray_disabled = Color(0.3, 0.3, 0.3),
 		text1 = Color(0.95, 0.95, 0.95),
-		text2 = Color(0.66, 0.66, 0.66)
-		# orange FD971F
-		# purple ae81ff
+		text2 = Color(0.66, 0.66, 0.66),
+		bloom = false
 	},
 	
 	# https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51-db5461-c94277-94524a
@@ -96,7 +98,8 @@ var Colors = [
 		white_button = Color(1, 1, 1),
 		gray_disabled = Color(0.3, 0.3, 0.3),
 		text1 = Color(0.95, 0.95, 0.95),
-		text2 = Color(0.66, 0.66, 0.66)
+		text2 = Color(0.66, 0.66, 0.66),
+		bloom = false
 	},
 	
 	# https://coolors.co/200933-fc199a-9963ff-61e2ff-ffcc00-f26419-fff9fb-dbdbdb
@@ -115,7 +118,8 @@ var Colors = [
 		white_button = Color(1, 1, 1),
 		gray_disabled = Color(0.3, 0.3, 0.3),
 		text1 = Color("#FFF9FB"),
-		text2 = Color("#61E2FF")
+		text2 = Color("#61E2FF"),
+		bloom = true
 	},
 ]
 

@@ -103,6 +103,8 @@ func _process(_delta):
 		AudioManager.stop_loop()
 
 func _on_change_color():
+	$Bloom.set_active(Globals.Colors[ConfigManager.color_palette].bloom)
+	
 	$MenuButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)
 	$ProgressBar.set_modulate(Globals.Colors[ConfigManager.color_palette].base[0])
 	$LblNumber.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
@@ -164,7 +166,7 @@ func check_level_solved():
 		
 	
 # Helper function for the recursive net checking.
-# Also does coloring of the traces.
+# Also does coloring of the wrong traces.
 func check_nets_solved():
 
 	for t in (traces + [current_trace]):
@@ -264,6 +266,7 @@ func deserialize_and_load_traces(traces_serial):
 		for p in trace_serial_data.points.size():
 			var pos = Vector2(trace_serial_data.points[p][0], trace_serial_data.points[p][1])
 			var load_bend_point = bend_point_resource.instance()
+			add_child(load_bend_point)
 			load_bend_point.position = pos
 			load_trace.add_point(pos)
 			load_trace.bend_points.append(load_bend_point)
@@ -440,8 +443,8 @@ func _on_EraseButton_pressed():
 		
 		trace_is_selected = false
 		is_first_section_of_trace = false
-#		for bp in current_trace.bend_points:
-#			get_node(".").remove_child(bp) 
+		for bp in current_trace.bend_points:
+			get_node(".").remove_child(bp) 
 		if current_bend_point != null:
 			remove_child(current_bend_point)
 		current_trace.get_parent().remove_child(current_trace)
@@ -531,6 +534,8 @@ func complete_level():
 
 func _on_EraseAllDialog_confirmed():
 	for t in traces:
+		for bp in t.bend_points:
+			bp.get_parent().remove_child(bp)
 		remove_child(t)
 	traces = []
 	$ControlButtons/EraseButton.disabled = true

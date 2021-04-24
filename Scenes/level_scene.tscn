@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/game_background.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/level_scene.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Sprites/advance.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/layer_square.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/layer_circle.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/bloom.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 52
@@ -276,6 +277,8 @@ margin_bottom = 238.0
 [node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer" index="1"]
 shortcut_in_tooltip = false
 clip_text = true
+
+[node name="Bloom" parent="." instance=ExtResource( 16 )]
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="LayerControls/Layer2Button" to="." method="_on_Layer2Button_pressed"]

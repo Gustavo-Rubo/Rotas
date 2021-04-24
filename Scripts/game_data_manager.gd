@@ -26,7 +26,7 @@ func save_data():
 	var err = file.open(path, File.WRITE)
 	
 	if err != OK:
-		print("Error in writing game data")
+#		print("Error in writing game data")
 		return
 	
 	file.store_var(level_info)
@@ -37,7 +37,7 @@ func load_data():
 	var err = file.open(path, File.READ)
 	
 	if err != OK:
-		print("Error in reading game data")
+#		print("Error in reading game data")
 		return default_level_info
 	
 	var read = {}

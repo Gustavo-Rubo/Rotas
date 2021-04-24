@@ -15,7 +15,7 @@ func _enter_tree():
 		if GameDataManager.level_info[level].score_goal_met:
 			stars += 1
 	
-	$StarCounter.set_text(String(stars) + "/5")
+	$StarCounter.set_text(String(stars) + "/" + String(Globals.levels.size()))
 	
 	# Mute the master bus according to the current config
 	AudioServer.set_bus_mute(1, !ConfigManager.audio_on)
@@ -24,7 +24,9 @@ func _ready():
 	# Palette coloring
 	_on_change_color()
 	
-	# Position the scroll container in the last position
+	$ScrollContainer/LevelSet.rect_min_size = Vector2(Globals.levels.size() * Globals.DISPLAY_WIDTH / 4, Globals.DISPLAY_HEIGHT)
+	
+	# Position the scroll container in the position left last time
 	yield(get_tree(), "idle_frame");
 	$ScrollContainer.set_h_scroll(ConfigManager.select_position)
 	
@@ -36,6 +38,8 @@ func _exit_tree():
 	ConfigManager.save_config()
 	
 func _on_change_color():
+	$Bloom.set_active(Globals.Colors[ConfigManager.color_palette].bloom)
+		
 	$Label.set_modulate(Globals.Colors[ConfigManager.color_palette].text1)
 	$Star.set_modulate(Globals.Colors[ConfigManager.color_palette].star_filled)
 	$ScoreButton.set_modulate(Globals.Colors[ConfigManager.color_palette].white_button)

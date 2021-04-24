@@ -17,8 +17,8 @@ func save_config():
 	config.set_value("cfg", "select_position", select_position)
 	
 	var err = config.save(path)
-	if err != OK:
-		print("Config save failed")
+#	if err != OK:
+#		print("Config save failed")
 
 func load_config():
 	var config = ConfigFile.new()
