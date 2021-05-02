@@ -23,12 +23,12 @@ enum {
 }
 
 var Colors = [
-	# https://coolors.co/0d1426-cc0000-6868ff-f0cf4a-00cc00-119da4-455ab0-c99206
+	# https://coolors.co/0d1426-cc0000-6868ff-f0cf4a-00cc00-e5dcc5-119da4-455ab0
 	# Base colors (DARK_PALETTE)
 	{
 		base = [Color(0, 0.8, 0),
 				Color("#119da4"),
-				Color("#C99206")],
+				Color("#E5DCC5")],
 		wrong = Color(0.8, 0, 0),
 		ratline = Color(0.4, 0.4, 1),
 		background = Color(0.05, 0.08, 0.15),
@@ -63,10 +63,11 @@ var Colors = [
 		bloom = false
 	},
 	
+	# https://coolors.co/0d1426-fa2673-66d6f0-fc961f-abe43a-fdc449-ae81ff-455ab0
 	# Monokai (PALETTE_MONOKAI)
 	{
 		base = [Color(0.65, 0.89, 0.18),
-				Color("#FD971F"),
+				Color("#FDC449"),
 				Color("#ae81ff")],
 		wrong = Color(0.98, 0.15, 0.45),
 		ratline = Color(0.40, 0.84, 0.94),
