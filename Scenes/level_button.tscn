@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/level_button.gd" type="Script" id=4]
@@ -73,11 +73,7 @@ tracks/1/keys = {
 "values": [ 0.0, 288.0 ]
 }
 
-[sub_resource type="Animation" id=6]
-length = 0.5
-
 [node name="LevelButton" type="Node2D"]
-z_index = 1
 script = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
@@ -112,14 +108,14 @@ texture = SubResource( 4 )
 
 [node name="Star" type="Sprite" parent="."]
 position = Vector2( 0, 59.6663 )
-scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 10 )
+
+[node name="WidthTween" type="Tween" parent="."]
+
+[node name="PosTween" type="Tween" parent="."]
 
 [node name="AnimationStar" type="AnimationPlayer" parent="."]
 anims/star_anim = SubResource( 5 )
 
-[node name="AnimationPath" type="AnimationPlayer" parent="."]
-method_call_mode = 1
-anims/path_anim = SubResource( 6 )
-
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="tween_step" from="PosTween" to="." method="_on_PosTween_tween_step"]

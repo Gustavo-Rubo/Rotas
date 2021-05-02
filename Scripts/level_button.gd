@@ -46,10 +46,9 @@ func _ready():
 			next_rats[next_level_code] = next_rat
 			
 			# Position the points so that they start and end on the borders of
-			next_path.points[0] = (next_level_pos - position).normalized() * 25
-			next_path.points[1] = (next_level_pos - position) - (next_level_pos - position).normalized() * 25
+			next_path.points[0] = (next_level_pos - position).normalized() * 30
+			next_path.points[1] = (next_level_pos - position) - (next_level_pos - position).normalized() * 30
 			
-#			next_path.points[1] = (next_level_pos - position)
 			next_rat.points[1] = (next_level_pos - position)
 			
 			$PathsLayer.add_child(next_rat)
@@ -61,7 +60,12 @@ func _ready():
 				next_path.visible = true
 				# If it's the first time the player sees the menu after the level has been unlocked
 				if GameDataManager.level_info[next_level_code].just_unlocked:
-					$AnimationPath.play("path_anim")
+					
+					$PosTween.interpolate_property(next_path, "points", next_path.points[0], next_path.points[1], 0.5, Tween.TRANS_QUAD)
+					$WidthTween.interpolate_property(next_path, "width", 0, 18, 0.5, Tween.TRANS_QUAD)
+					$PosTween.start()
+					$WidthTween.start()
+					
 					GameDataManager.level_info[next_level_code].just_unlocked = false
 					GameDataManager.save_data()
 			# If the next level exists but isn't unlocked
@@ -105,3 +109,6 @@ func _on_TextureButton_pressed():
 		AudioManager.play_button("confirm")
 		var _scene = get_tree().change_scene("Scenes/levels/level_" + level_code + ".tscn")
 
+
+func _on_PosTween_tween_step(object, _key, elapsed, value):
+	object.points[1] = value
