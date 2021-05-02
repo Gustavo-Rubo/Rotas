@@ -75,28 +75,21 @@ grid_x = 12
 grid_y = 11
 
 [node name="Net0" parent="." index="14" instance=ExtResource( 2 )]
-z_index = 2
 pads = [ NodePath("../Pad1"), NodePath("../Pad2"), NodePath("../Pad3") ]
 
 [node name="Net1" parent="." index="15" instance=ExtResource( 2 )]
-z_index = 2
 pads = [ NodePath("../Pad4"), NodePath("../Pad5"), NodePath("../Pad6"), NodePath("../Pad7") ]
 
 [node name="Net2" parent="." index="16" instance=ExtResource( 2 )]
-z_index = 2
 pads = [ NodePath("../Pad8"), NodePath("../Pad9") ]
 
 [node name="Net3" parent="." index="17" instance=ExtResource( 2 )]
-z_index = 2
 pads = [ NodePath("../Pad10"), NodePath("../Pad11"), NodePath("../Pad12") ]
 
 [node name="LayerControls" parent="." index="23"]
 alignment = 2
 
 [editable path="Net1"]
-
 [editable path="Net2"]
-
 [editable path="Net3"]
-
 [editable path="OptionsPanel"]

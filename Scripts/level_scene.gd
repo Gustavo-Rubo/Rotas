@@ -43,7 +43,7 @@ func _ready():
 			net.get_node(p).get_node("NetNumber").text = String(n)
 			
 	# Load the traces from previous solution
-	deserialize_and_load_traces(parse_json(GameDataManager.level_info[level_code].traces))
+#	deserialize_and_load_traces(parse_json(GameDataManager.level_info[level_code].traces))
 	
 	$LblNumber.set_text(tr("level_w_number") % Globals.level_code_to_text(level_code))
 	$ControlButtons/ConfirmButton.disabled = true

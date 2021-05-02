@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -44,11 +43,12 @@ pointing/emulate_touch_from_mouse=true
 fallback="pt_BR"
 translations=PoolStringArray( "res://locale/translations.pt_BR.translation", "res://locale/translations.en_GB.translation" )
 translation_remaps={
-
 }
 
 [rendering]
 
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
+quality/filters/msaa=1
 quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
+quality/2d/use_pixel_snap=true

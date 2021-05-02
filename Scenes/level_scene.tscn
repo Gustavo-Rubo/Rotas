@@ -236,6 +236,7 @@ __meta__ = {
 [node name="EraseAllDialog" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+rect_min_size = Vector2( 150, 52.5 )
 window_title = ""
 dialog_text = "erase_all"
 __meta__ = {
@@ -259,7 +260,6 @@ margin_bottom = 482.0
 
 [node name="ScrollContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer" index="1"]
 margin_bottom = 462.0
-scroll_vertical = 100
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
 margin_bottom = 238.0
@@ -279,6 +279,7 @@ shortcut_in_tooltip = false
 clip_text = true
 
 [node name="Bloom" parent="." instance=ExtResource( 16 )]
+
 [connection signal="gui_input" from="Background" to="." method="_on_Background_gui_input"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="LayerControls/Layer2Button" to="." method="_on_Layer2Button_pressed"]
