@@ -16,7 +16,7 @@ func save_config():
 	config.set_value("cfg", "color_palette", color_palette)
 	config.set_value("cfg", "select_position", select_position)
 	
-	var err = config.save(path)
+	var _err = config.save(path)
 #	if err != OK:
 #		print("Config save failed")
 

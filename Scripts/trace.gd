@@ -147,7 +147,7 @@ func check_click(mouse_click):
 	var squared_width : float = width*width
 	
 	# Because you also requested the offset, we can also calculate it
-	var offset : float = 0	
+	var offset : float = 0
 	
 	# Iterate every section (points - 1 sections)
 	for i in range(points.size()-1):
@@ -156,11 +156,10 @@ func check_click(mouse_click):
 		var closest_point : Vector2 = Geometry.get_closest_point_to_segment_2d(mouse_click, global_position + points[i], global_position + points[i+1])
 		# If the distance of the closest point and the mouse click is smaller or equal the mouse position, it was clicked within the line
 		if closest_point.distance_squared_to(mouse_click) <= squared_width:
-			# Do something on click
 			# To our offset we add the position of the click, relative to the first point of the click, closest click is global space, points local space, so we need to transform it again
 			offset += closest_point.distance_to(global_position + points[i])
 			
-			on_click(i, mouse_click, offset)
+#			on_click(i, mouse_click, offset)
 			return true
 		else:
 			# The click didn't happen here, meaning the entire line segmet is added to the offset
@@ -168,6 +167,6 @@ func check_click(mouse_click):
 	
 	return false
 			
-func on_click(segment : int, global_position : Vector2, offset : float) -> void:
+#func on_click(segment : int, global_position : Vector2, offset : float) -> void:
 #	print("The Line was clicked in segment %s (offset: %s) and global position - %s" % [segment, offset, global_position])
-	pass
+#	pass

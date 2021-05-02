@@ -30,7 +30,7 @@ var state_position = -1
 var layer_selected = 0
 
 # Called when the node enters the scene tree for the first time.
-func _ready():	
+func _ready():
 	trace_resource = load("res://Scenes/trace.tscn")
 	bend_point_resource = load("res://Scenes/bend_point.tscn")
 	
@@ -514,17 +514,18 @@ func complete_level():
 	GameDataManager.level_info[level_code].goal_trace_length = goal_trace_length
 	
 	# Next level is unlocked:
-	if !GameDataManager.level_info.has(Globals.levels[level_code].next_level_code):
-		GameDataManager.level_info[Globals.levels[level_code].next_level_code] = {
-			"just_unlocked": true,
-			"unlocked": true,
-			"solved": false,
-			"low_score": INF,
-			"goal_trace_length": 0,
-			"just_got_goal": false,
-			"score_goal_met": false,
-			"traces": to_json([])
-		}
+	for next_level_code in Globals.levels[level_code].next_level_codes:
+		if !GameDataManager.level_info.has(next_level_code):
+			GameDataManager.level_info[next_level_code] = {
+				"just_unlocked": true,
+				"unlocked": true,
+				"solved": false,
+				"low_score": INF,
+				"goal_trace_length": 0,
+				"just_got_goal": false,
+				"score_goal_met": false,
+				"traces": to_json([])
+			}
 		
 	GameDataManager.save_data()
 	

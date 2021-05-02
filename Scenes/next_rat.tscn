@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float length_line;
+
+// Usually takes a number between 0 and 2
+float kind_of_square_pulse(float s) {
+	float transition = 0.04;
+	if (s < transition) return s/transition;
+	else if (s >= transition && s < 1.0) return 1.0;
+	else if (s >= 1.0 && s < 1.0 + transition) return (-s + 1.0 + transition)/transition;
+	else if (s >= 1.0 + transition && s < 2.0) return 0.0;
+}
+
+float sawtooth(float x, float interval) {
+	return 2.0*mod(x, interval)/interval;
+}
+
+void fragment() {
+	// roughly the pixel interval of the repeating pattern
+	float interval = 12.0;
+	
+	vec2 coord = UV;
+	
+	float value = kind_of_square_pulse(sawtooth(coord.r, interval));
+//	float value = coord.x;
+	
+	COLOR = vec4(COLOR.rgb, value);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/length_line = 200.0
+
+[node name="NextRat" type="Line2D"]
+visible = false
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 0, 256, 0 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true

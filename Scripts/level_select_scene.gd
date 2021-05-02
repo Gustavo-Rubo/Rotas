@@ -5,10 +5,6 @@ onready var low_score_panel = $LowScorePanel
 
 var stars
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	pass # Replace with function body.
-
 func _enter_tree():
 	stars = 0
 	for level in GameDataManager.level_info:
@@ -52,7 +48,6 @@ func _on_OptionsButton_pressed():
 func _on_ScoreButton_pressed():
 	AudioManager.play_button("menu")
 	low_score_panel.slide_in()
-
 
 # Uncomment this function when you release for web
 func _on_ScrollContainer_gui_input(event):

@@ -43,5 +43,4 @@ visible = false
 text = "hint_level_1"
 
 [editable path="Net1"]
-
 [editable path="OptionsPanel"]

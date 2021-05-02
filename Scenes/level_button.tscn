@@ -1,52 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/level_button.gd" type="Script" id=4]
-[ext_resource path="res://Sprites/path.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/rat.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/level_button.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/star.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
-size = 42
+size = 25
 font_data = ExtResource( 1 )
 
 [sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-render_mode blend_mix;
-
-uniform float length_line;
-
-// Usually takes a number between 0 and 2
-float kind_of_square_pulse(float s) {
-	float transition = 0.04;
-	if (s < transition) return s/transition;
-	else if (s >= transition && s < 1.0) return 1.0;
-	else if (s >= 1.0 && s < 1.0 + transition) return (-s + 1.0 + transition)/transition;
-	else if (s >= 1.0 + transition && s < 2.0) return 0.0;
-}
-
-float sawtooth(float x, float interval) {
-	return 2.0*mod(x, interval)/interval;
-}
-
-void fragment() {
-	// roughly the pixel interval of the repeating pattern
-	float interval = 6.0;
-	
-	vec2 coord = UV;
-	
-	float value = kind_of_square_pulse(sawtooth(coord.r, interval));
-//	float value = coord.x;
-	
-	COLOR = vec4(COLOR.rgb, value);
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/length_line = 200.0
-
-[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
@@ -75,16 +38,15 @@ void fragment() {
 //	COLOR = mix(COLOR, vec4(1.0, 1.0, 1.0, COLOR.a), value);
 }"
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/frequency = 1.8
 
-[sub_resource type="StreamTexture" id=8]
+[sub_resource type="StreamTexture" id=4]
 flags = 4
 load_path = "res://.import/level_button.png-a456e52d1dce623cfd7d3373525b30ad.stex"
 
-[sub_resource type="Animation" id=4]
-resource_name = "star_anim"
+[sub_resource type="Animation" id=5]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Star:scale")
@@ -111,31 +73,18 @@ tracks/1/keys = {
 "values": [ 0.0, 288.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("NextPath:points")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ PoolVector2Array( 50, 0, 50, 0 ), PoolVector2Array( 50, 0, 256, 0 ) ]
-}
 
 [node name="LevelButton" type="Node2D"]
+z_index = 1
 script = ExtResource( 4 )
-previous_rat = ExtResource( 8 )
-previous_trace = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -45.1899
-margin_top = -138.326
+margin_top = -96.2812
 margin_right = 42.8101
-margin_bottom = -82.3258
+margin_bottom = -40.281
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "1"
@@ -145,34 +94,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextPath" type="Line2D" parent="."]
-visible = false
-points = PoolVector2Array( 50, 0, 256, 0 )
-width = 30.0
-default_color = Color( 1, 1, 1, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-antialiased = true
-
-[node name="NextRat" type="Line2D" parent="."]
-visible = false
-material = SubResource( 3 )
-points = PoolVector2Array( 50, 0, 256, 0 )
-width = 5.0
-default_color = Color( 1, 1, 1, 1 )
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-antialiased = true
+[node name="PathsLayer" type="Node2D" parent="."]
 
 [node name="TextureButton" type="TextureButton" parent="."]
 modulate = Color( 0.964706, 0, 0, 1 )
-margin_left = -70.0
-margin_top = -70.0
-margin_right = 70.0
-margin_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -180,23 +107,19 @@ __meta__ = {
 
 [node name="Highlight" type="Sprite" parent="."]
 visible = false
-material = SubResource( 7 )
-texture = SubResource( 8 )
-
-[node name="PreviousPath" type="Sprite" parent="."]
-visible = false
-position = Vector2( -160, 0 )
-texture = ExtResource( 8 )
+material = SubResource( 3 )
+texture = SubResource( 4 )
 
 [node name="Star" type="Sprite" parent="."]
-position = Vector2( 0, 96 )
-rotation = 5.02655
+position = Vector2( 0, 59.6663 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 10 )
 
 [node name="AnimationStar" type="AnimationPlayer" parent="."]
-anims/star_anim = SubResource( 4 )
+anims/star_anim = SubResource( 5 )
 
 [node name="AnimationPath" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/path_anim = SubResource( 5 )
+anims/path_anim = SubResource( 6 )
+
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

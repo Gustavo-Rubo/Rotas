@@ -8,18 +8,22 @@
 position = Vector2( 128, 320 )
 scale = Vector2( 0.8, 0.8 )
 level_to_load = "Scenes/levels/level.tscn"
+select_screen_pos = Vector2( 128, 320 )
 
 [node name="Level2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 384, 320 )
 scale = Vector2( 0.8, 0.8 )
 level_to_load = "Scenes/levels/level.tscn"
+select_screen_pos = Vector2( 384, 320 )
 
 [node name="Level3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 640, 320 )
 scale = Vector2( 0.8, 0.8 )
 level_to_load = "Scenes/levels/level.tscn"
+select_screen_pos = Vector2( 640, 320 )
 
 [node name="Level4" parent="." instance=ExtResource( 1 )]
 position = Vector2( 896, 320 )
 scale = Vector2( 0.8, 0.8 )
 level_to_load = "Scenes/levels/level.tscn"
+select_screen_pos = Vector2( 896, 320 )
