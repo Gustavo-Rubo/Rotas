@@ -110,5 +110,5 @@ func _on_TextureButton_pressed():
 		var _scene = get_tree().change_scene("Scenes/levels/level_" + level_code + ".tscn")
 
 
-func _on_PosTween_tween_step(object, _key, elapsed, value):
+func _on_PosTween_tween_step(object, _key, _elapsed, value):
 	object.points[1] = value

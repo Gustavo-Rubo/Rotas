@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Fonts/Consolas.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Sprites/close.png" type="Texture" id=2]
@@ -9,9 +9,11 @@
 [ext_resource path="res://Sprites/country-flags/png_64/united-kingdom-flag-country-nation-union-empire-33115.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/audio_on.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/audio_off.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/flag_select.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/PaletteButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Resources/panel_border.tres" type="StyleBox" id=12]
 [ext_resource path="res://Resources/panel_style.tres" type="StyleBox" id=13]
+[ext_resource path="res://Sprites/palette_select.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -49,10 +51,9 @@ transform = Transform2D( 1, 0, 0, 1, 0, -600 )
 script = ExtResource( 3 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-margin_left = -0.559448
-margin_top = 1.78814e-06
-margin_right = 1023.44
-margin_bottom = 576.0
+margin_top = -8.0
+margin_right = 1024.0
+margin_bottom = 568.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -195,6 +196,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SelectBox" type="Sprite" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Language/HBoxContainer"]
+texture = ExtResource( 10 )
+centered = false
+
 [node name="Color" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 60.0
 margin_right = 491.0
@@ -253,6 +258,10 @@ margin_left = 260.0
 margin_right = 310.0
 margin_bottom = 50.0
 palette_code = 4
+
+[node name="SelectBox" type="Sprite" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer"]
+texture = ExtResource( 14 )
+centered = false
 
 [node name="Audio" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 120.0
@@ -352,13 +361,11 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/slide_in_options = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="gui_input" from="CenterContainer" to="." method="_on_CenterContainer_gui_input"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Language/HBoxContainer/en_GB" to="." method="_on_en_GB_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Language/HBoxContainer/pt_BR" to="." method="_on_pt_BR_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer/PaletteButton" to="." method="_on_PaletteButton_pressed" binds= [ 0 ]]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer/PaletteButton2" to="." method="_on_PaletteButton_pressed" binds= [ 1 ]]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer/PaletteButton3" to="." method="_on_PaletteButton_pressed" binds= [ 2 ]]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer/PaletteButton4" to="." method="_on_PaletteButton_pressed" binds= [ 3 ]]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer/PaletteButton5" to="." method="_on_PaletteButton_pressed" binds= [ 4 ]]
 [connection signal="toggled" from="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Audio/ToggleAudio" to="." method="_on_HSlider_toggled"]

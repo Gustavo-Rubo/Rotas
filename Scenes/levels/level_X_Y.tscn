@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/level_scene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 52
+font_data = ExtResource( 2 )
 
 [node name="LevelNode" instance=ExtResource( 1 )]
 level_code = "X_Y"
@@ -11,23 +16,22 @@ max_trace_length = 1000.0
 margin_left = 0.0
 margin_right = 1024.0
 
-[node name="LblNumber" parent="." index="2"]
-visible = false
+[node name="Label" type="Label" parent="." index="2"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 60.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 1 )
+text = "Level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="MenuButton" parent="." index="3"]
+[node name="LblNumber" parent="." index="3"]
 visible = false
+text = "Level"
 
-[node name="ProgressBar" parent="." index="4"]
-visible = false
-
-[node name="GoalMet" parent="." index="6"]
-visible = false
-
-[node name="LayerControls" parent="." index="7"]
-visible = false
+[node name="LayerControls" parent="." index="8"]
 alignment = 2
-
-[node name="ControlButtons" parent="." index="8"]
-visible = false
 
 [editable path="OptionsPanel"]

@@ -2,14 +2,15 @@ extends Node
 
 # Dictionary with all levels, and what is their following level
 var levels = {
-	"1_1": { "screen_pos": Vector2(), "next_level_codes": ["1_2"] },
+	"1_1": { "next_level_codes": ["1_2"] },
 	"1_2": { "next_level_codes": ["1_3"] },
 	"1_3": { "next_level_codes": ["1_4"] },
 	"1_4": { "next_level_codes": ["2_1", "3_1"] },
 	"2_1": { "next_level_codes": ["2_2"] },
 	"2_2": { "next_level_codes": [] },
 	"3_1": { "next_level_codes": ["3_2"] },
-	"3_2": { "next_level_codes": [] }
+	"3_2": { "next_level_codes": [] },
+#	"X_Y": { "next_level_codes": [] }
 }
 
 # Colors
