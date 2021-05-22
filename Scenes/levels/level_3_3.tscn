@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/pad.tscn" type="PackedScene" id=3]
 
 [node name="LevelNode" instance=ExtResource( 1 )]
-level_code = "3_2"
+level_code = "3_3"
 goal_trace_length = 1590.0
 max_trace_length = 1000.0
 nets = [ NodePath("Net0"), NodePath("Net1"), NodePath("Net2"), NodePath("Net3") ]
@@ -15,62 +15,62 @@ margin_left = 0.0
 margin_right = 1024.0
 
 [node name="Pad1" parent="." index="2" instance=ExtResource( 3 )]
-position = Vector2( 320, 224 )
+position = Vector2( 128, 288 )
 grid_x = 12
 grid_y = 7
 
 [node name="Pad2" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 448, 352 )
+position = Vector2( 288, 288 )
 grid_x = 16
 grid_y = 11
 
 [node name="Pad3" parent="." index="4" instance=ExtResource( 3 )]
-position = Vector2( 576, 352 )
+position = Vector2( 608, 160 )
 grid_x = 22
 grid_y = 11
 
 [node name="Pad4" parent="." index="5" instance=ExtResource( 3 )]
-position = Vector2( 704, 224 )
+position = Vector2( 448, 96 )
 grid_x = 26
 grid_y = 7
 
 [node name="Pad5" parent="." index="6" instance=ExtResource( 3 )]
-position = Vector2( 512, 288 )
+position = Vector2( 320, 384 )
 grid_x = 18
 grid_y = 9
 
 [node name="Pad6" parent="." index="7" instance=ExtResource( 3 )]
-position = Vector2( 448, 224 )
+position = Vector2( 480, 416 )
 grid_x = 16
 grid_y = 7
 
 [node name="Pad7" parent="." index="8" instance=ExtResource( 3 )]
-position = Vector2( 256, 288 )
+position = Vector2( 800, 416 )
 grid_x = 10
 grid_y = 9
 
 [node name="Pad8" parent="." index="9" instance=ExtResource( 3 )]
-position = Vector2( 512, 160 )
+position = Vector2( 768, 96 )
 grid_x = 18
 grid_y = 5
 
 [node name="Pad9" parent="." index="10" instance=ExtResource( 3 )]
-position = Vector2( 512, 416 )
+position = Vector2( 544, 352 )
 grid_x = 18
 grid_y = 13
 
 [node name="Pad10" parent="." index="11" instance=ExtResource( 3 )]
-position = Vector2( 704, 352 )
+position = Vector2( 704, 96 )
 grid_x = 26
 grid_y = 11
 
 [node name="Pad11" parent="." index="12" instance=ExtResource( 3 )]
-position = Vector2( 576, 224 )
+position = Vector2( 544, 480 )
 grid_x = 22
 grid_y = 7
 
 [node name="Pad12" parent="." index="13" instance=ExtResource( 3 )]
-position = Vector2( 320, 352 )
+position = Vector2( 768, 320 )
 grid_x = 12
 grid_y = 11
 

@@ -49,7 +49,7 @@ load_path = "res://.import/level_button.png-a456e52d1dce623cfd7d3373525b30ad.ste
 [sub_resource type="Animation" id=5]
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Star:scale")
+tracks/0/path = NodePath("Desc/Star:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -61,7 +61,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Star:rotation_degrees")
+tracks/1/path = NodePath("Desc/Star:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -76,19 +76,26 @@ tracks/1/keys = {
 [node name="LevelButton" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = -45.1899
-margin_top = -96.2812
-margin_right = 42.8101
-margin_bottom = -40.281
+[node name="Desc" type="Node2D" parent="."]
+position = Vector2( 0, -76 )
+
+[node name="Label" type="Label" parent="Desc"]
+margin_left = -40.0
+margin_right = 10.0
+margin_bottom = 31.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "1"
+text = "2 - 2"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Star" type="Sprite" parent="Desc"]
+position = Vector2( 32, 14 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 10 )
 
 [node name="PathsLayer" type="Node2D" parent="."]
 
@@ -105,10 +112,6 @@ __meta__ = {
 visible = false
 material = SubResource( 3 )
 texture = SubResource( 4 )
-
-[node name="Star" type="Sprite" parent="."]
-position = Vector2( 0, 59.6663 )
-texture = ExtResource( 10 )
 
 [node name="WidthTween" type="Tween" parent="."]
 

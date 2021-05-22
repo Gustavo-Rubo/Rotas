@@ -26,19 +26,11 @@ func save_config():
 
 func load_config():
 	var config = ConfigFile.new()
-#	var default_options = {
-#		"audio": true,
-#		"color_palette": Globals.PALETTE_DARK,
-#		"palette_position": Vector2.ZERO,
-#		"language_position": Vector2.ZERO,
-#		"select_position": 0
-#	}
 	
-	var err = config.load(path)
+	var _err = config.load(path)
 #	if err != OK:
-#		return default_options
+#		pass
 	
-#	var options = {}
 	audio_on = config.get_value("cfg", "audio", true)
 	color_palette = config.get_value("cfg", "color_palette", Globals.PALETTE_DARK)
 	palette_position = config.get_value("cfg", "palette_position", Vector2.ZERO)

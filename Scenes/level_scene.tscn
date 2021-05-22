@@ -262,17 +262,14 @@ margin_bottom = 482.0
 margin_bottom = 462.0
 
 [node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
-margin_bottom = 238.0
+margin_bottom = 303.0
 
 [node name="Tutu" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="3"]
 visible = false
 
-[node name="Github" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="4"]
-visible = false
-
 [node name="PanelContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
-margin_top = 180.0
-margin_bottom = 238.0
+margin_top = 245.0
+margin_bottom = 303.0
 
 [node name="MenuButton" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer" index="1"]
 shortcut_in_tooltip = false

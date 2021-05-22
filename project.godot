@@ -40,15 +40,15 @@ pointing/emulate_touch_from_mouse=true
 
 [locale]
 
-fallback="pt_BR"
+fallback="en_GB"
 translations=PoolStringArray( "res://locale/translations.pt_BR.translation", "res://locale/translations.en_GB.translation" )
 translation_remaps={
 }
 
 [rendering]
 
-2d/snapping/use_gpu_pixel_snap=true
-quality/filters/msaa=1
-quality/depth/hdr=false
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
+quality/directional_shadow/size=1024
+quality/directional_shadow/size.mobile=512
 environment/default_environment="res://default_env.tres"
-quality/2d/use_pixel_snap=true

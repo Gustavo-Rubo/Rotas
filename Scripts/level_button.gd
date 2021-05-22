@@ -12,9 +12,9 @@ var next_rat_resource
 var next_paths = {}
 var next_rats = {}
 
-onready var level_label = $Label
+onready var level_label = $Desc/Label
 onready var button = $TextureButton
-onready var star = $Star
+onready var star = $Desc/Star
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

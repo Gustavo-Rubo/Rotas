@@ -10,6 +10,10 @@ goal_trace_length = 500.0
 max_trace_length = 1000.0
 nets = [ NodePath("Net0"), NodePath("Net1") ]
 
+[node name="Background" parent="." index="0"]
+margin_left = 0.0
+margin_right = 1024.0
+
 [node name="Pad1" parent="." index="2" instance=ExtResource( 3 )]
 position = Vector2( 352, 288 )
 grid_x = 11

@@ -5,11 +5,16 @@ var levels = {
 	"1_1": { "next_level_codes": ["1_2"] },
 	"1_2": { "next_level_codes": ["1_3"] },
 	"1_3": { "next_level_codes": ["1_4"] },
-	"1_4": { "next_level_codes": ["2_1", "3_1"] },
+	"1_4": { "next_level_codes": ["2_1", "3_1", '1_S'] },
+	"1_S": { "next_level_codes": [] },
 	"2_1": { "next_level_codes": ["2_2"] },
-	"2_2": { "next_level_codes": [] },
+	"2_2": { "next_level_codes": ["2_3"] },
+	"2_3": { "next_level_codes": ["4_1"] },
 	"3_1": { "next_level_codes": ["3_2"] },
-	"3_2": { "next_level_codes": [] },
+	"3_2": { "next_level_codes": ["3_3"] },
+	"3_3": { "next_level_codes": ["3_S", "4_1"] },
+	"3_S": { "next_level_codes": [] },
+	"4_1": { "next_level_codes": [] },
 #	"X_Y": { "next_level_codes": [] }
 }
 
@@ -75,12 +80,12 @@ var Colors = [
 		background = Color(0.15, 0.16, 0.13),
 		star_filled = Color(0.99, 0.59, 0.12),
 		star_blank = Color(0.61, 0.61, 0.61),
-		gray_dots = Color(0.7, 0.7, 0.7),
+		gray_dots = Color(0.6, 0.6, 0.6),
 		white_highlight = Color(1, 1, 1, 0.5),
 		white_button = Color(1, 1, 1),
 		gray_disabled = Color(0.3, 0.3, 0.3),
 		text1 = Color(0.95, 0.95, 0.95),
-		text2 = Color(0.66, 0.66, 0.66),
+		text2 = Color(0.68, 0.68, 0.68),
 		bloom = false
 	},
 	

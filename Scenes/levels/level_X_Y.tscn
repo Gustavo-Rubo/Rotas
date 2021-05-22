@@ -34,4 +34,11 @@ text = "Level"
 [node name="LayerControls" parent="." index="8"]
 alignment = 2
 
+[node name="VBoxContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" index="0"]
+margin_bottom = 303.0
+
+[node name="PanelContainer" parent="OptionsPanel/CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer" index="5"]
+margin_top = 245.0
+margin_bottom = 303.0
+
 [editable path="OptionsPanel"]

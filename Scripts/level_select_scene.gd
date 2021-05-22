@@ -20,7 +20,7 @@ func _ready():
 	# Palette coloring
 	_on_change_color()
 	
-	$ScrollContainer/LevelSet.rect_min_size = Vector2(Globals.levels.size() * Globals.DISPLAY_WIDTH / 4, Globals.DISPLAY_HEIGHT)
+#	$ScrollContainer/LevelSet.rect_min_size = Vector2(Globals.levels.size() * Globals.DISPLAY_WIDTH / 4, Globals.DISPLAY_HEIGHT)
 	
 	# Position the scroll container in the position left last time
 	yield(get_tree(), "idle_frame");

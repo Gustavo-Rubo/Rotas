@@ -59,10 +59,10 @@ __meta__ = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
-margin_left = 242.0
-margin_top = 11.0
-margin_right = 781.0
-margin_bottom = 565.0
+margin_left = 258.0
+margin_top = 139.0
+margin_right = 766.0
+margin_bottom = 719.0
 rect_min_size = Vector2( 500, 0 )
 custom_styles/panel = ExtResource( 12 )
 
@@ -70,15 +70,15 @@ custom_styles/panel = ExtResource( 12 )
 modulate = Color( 0.168627, 0.168627, 0.168627, 1 )
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 535.0
-margin_bottom = 550.0
+margin_right = 504.0
+margin_bottom = 576.0
 custom_styles/panel = ExtResource( 13 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 535.0
-margin_bottom = 550.0
+margin_right = 504.0
+margin_bottom = 576.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -90,8 +90,8 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 511.0
-margin_bottom = 526.0
+margin_right = 480.0
+margin_bottom = 552.0
 custom_constants/separation = 10
 alignment = 1
 __meta__ = {
@@ -99,7 +99,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
-margin_right = 491.0
+margin_right = 460.0
 margin_bottom = 52.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -114,7 +114,7 @@ text = "options_title"
 
 [node name="Container" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
 margin_left = 252.0
-margin_right = 437.0
+margin_right = 406.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -122,8 +122,8 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="TextureButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
-margin_left = 441.0
-margin_right = 491.0
+margin_left = 410.0
+margin_right = 460.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 50, 50 )
 texture_normal = ExtResource( 2 )
@@ -135,20 +135,20 @@ __meta__ = {
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer"]
 margin_top = 62.0
-margin_right = 491.0
-margin_bottom = 506.0
+margin_right = 460.0
+margin_bottom = 532.0
 rect_min_size = Vector2( 460, 400 )
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
-margin_right = 491.0
-margin_bottom = 444.0
+margin_right = 460.0
+margin_bottom = 470.0
 rect_min_size = Vector2( 460, 0 )
 custom_constants/separation = 10
 
 [node name="Language" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_right = 491.0
+margin_right = 460.0
 margin_bottom = 50.0
 custom_constants/separation = 15
 
@@ -161,7 +161,7 @@ text = "language"
 
 [node name="Container" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Language"]
 margin_left = 112.0
-margin_right = 333.0
+margin_right = 302.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -169,8 +169,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Language"]
-margin_left = 348.0
-margin_right = 491.0
+margin_left = 317.0
+margin_right = 460.0
 margin_bottom = 50.0
 custom_constants/separation = 15
 __meta__ = {
@@ -202,34 +202,35 @@ centered = false
 
 [node name="Color" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 60.0
-margin_right = 491.0
-margin_bottom = 110.0
+margin_right = 460.0
+margin_bottom = 175.0
 custom_constants/separation = 15
 
 [node name="Color" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color"]
-margin_top = 10.0
+margin_top = 43.0
 margin_right = 151.0
-margin_bottom = 39.0
+margin_bottom = 72.0
 custom_fonts/font = ExtResource( 5 )
 text = "color_scheme"
 
 [node name="Container" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color"]
 margin_left = 166.0
-margin_right = 166.0
-margin_bottom = 50.0
+margin_right = 200.0
+margin_bottom = 115.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color"]
-margin_left = 181.0
-margin_right = 491.0
-margin_bottom = 50.0
-custom_constants/separation = 15
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HBoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color"]
+margin_left = 215.0
+margin_right = 460.0
+margin_bottom = 115.0
+grow_horizontal = 0
+grow_vertical = 0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 4
 
 [node name="PaletteButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer" instance=ExtResource( 11 )]
 margin_right = 50.0
@@ -254,9 +255,9 @@ margin_bottom = 50.0
 palette_code = 3
 
 [node name="PaletteButton5" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer" instance=ExtResource( 11 )]
-margin_left = 260.0
-margin_right = 310.0
-margin_bottom = 50.0
+margin_top = 65.0
+margin_right = 50.0
+margin_bottom = 115.0
 palette_code = 4
 
 [node name="SelectBox" type="Sprite" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Color/HBoxContainer"]
@@ -264,9 +265,9 @@ texture = ExtResource( 14 )
 centered = false
 
 [node name="Audio" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 120.0
-margin_right = 491.0
-margin_bottom = 170.0
+margin_top = 185.0
+margin_right = 460.0
+margin_bottom = 235.0
 custom_constants/separation = 15
 
 [node name="Text" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Audio"]
@@ -278,7 +279,7 @@ text = "audio"
 
 [node name="Container2" type="Container" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Audio"]
 margin_left = 75.0
-margin_right = 426.0
+margin_right = 395.0
 margin_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -288,8 +289,8 @@ __meta__ = {
 }
 
 [node name="ToggleAudio" type="TextureButton" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/Audio"]
-margin_left = 441.0
-margin_right = 491.0
+margin_left = 410.0
+margin_right = 460.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 toggle_mode = true
@@ -298,9 +299,9 @@ texture_pressed = ExtResource( 9 )
 expand = true
 
 [node name="Tutu" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 180.0
-margin_right = 491.0
-margin_bottom = 337.0
+margin_top = 245.0
+margin_right = 460.0
+margin_bottom = 402.0
 custom_fonts/font = SubResource( 2 )
 text = "            .                
             |\\               
@@ -315,9 +316,10 @@ __meta__ = {
 }
 
 [node name="Github" type="Label" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 347.0
-margin_right = 491.0
-margin_bottom = 376.0
+visible = false
+margin_top = 412.0
+margin_right = 460.0
+margin_bottom = 441.0
 custom_fonts/font = ExtResource( 5 )
 text = "github"
 autowrap = true
@@ -326,9 +328,9 @@ __meta__ = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 386.0
-margin_right = 491.0
-margin_bottom = 444.0
+margin_top = 412.0
+margin_right = 460.0
+margin_bottom = 470.0
 rect_min_size = Vector2( 300, 50 )
 custom_styles/panel = ExtResource( 12 )
 
@@ -336,7 +338,7 @@ custom_styles/panel = ExtResource( 12 )
 modulate = Color( 0.168627, 0.168627, 0.168627, 1 )
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 487.0
+margin_right = 456.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 300, 50 )
 custom_styles/panel = ExtResource( 13 )
@@ -347,7 +349,7 @@ __meta__ = {
 [node name="MenuButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 487.0
+margin_right = 456.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 300, 50 )
 custom_fonts/font = ExtResource( 5 )
